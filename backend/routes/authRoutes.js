@@ -3,7 +3,7 @@ const router = express.Router()
 
 
 const {
-    register,
+    // register,
     login,
     verifypatient,
     verifydoctor,

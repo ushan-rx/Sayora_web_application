@@ -8,7 +8,8 @@ const navbar = () => {
             <div className="w-full border-b-2 border-gray-200">
               <div className="flex items-center justify-between h-16 px-0 mx-4">
                 
-                <div className="relative hidden max-w-xs ml-0 mr-auto lg:block">
+                {/* nav search bar */}
+                <div className="relative hidden max-w-xs ml-72 mr-auto lg:block">
                   <p className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <span className="flex items-center justify-center">
                       <span className="flex items-center justify-center">
@@ -22,6 +23,7 @@ const navbar = () => {
                   </p>
                   <input placeholder="Type to search" type="search" className="w-full px-3 py-2 pt-2 pb-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"/>
                 </div>
+
                 <div className="flex items-center justify-end ml-auto space-x-3 md:space-x-6">
                   <div className="relative">
                     <p className="pt-1 pb-1 pl-1 pr-1 text-gray-700 transition-all duration-200 bg-white rounded-full hover:text-gray-900 focus:outline-none hover:bg-gray-100">

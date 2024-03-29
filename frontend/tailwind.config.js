@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      
+      fontFamily: {
+        Montserrat: ["Montserrat", "sans-serif"],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -33,5 +37,6 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+            require('tailwind-scrollbar'),],
 }

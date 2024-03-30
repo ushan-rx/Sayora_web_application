@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 // Define the schema for the regPatient collection
-const regPatientSchema = new mongoose.Schema({
-    regPatientId: {
+const patientSchema = new mongoose.Schema({
+    patientId: {
         type: String,
         required: true,
         unique: true
@@ -82,6 +82,6 @@ const regPatientSchema = new mongoose.Schema({
 });
 
 // Create the patient model
-const Patient = mongoose.model('Patient', reg_patientSchema);
+const Patient = mongoose.model('Patient', patientSchema);
 
 module.exports = Patient;

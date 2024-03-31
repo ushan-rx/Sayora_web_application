@@ -2,27 +2,25 @@ import mongoose from "mongoose";
 
 // Define the feedback schema
 const feedbackSchema = new mongoose.Schema({
-    feedbackId: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    patientId: {
-        type: String,
-        required: true
-    },
-    treatmentId: {
-        type: String,
-        required: true
-    },
-    rating: {
-        type: Number,
-        required: true
-    },
-    comment: {
-        type: String,
-        required: true
-    }
+  feedbackId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  patientId: {
+    type: String,
+    required: true,
+  },
+  treatmentId: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+  },
+  comment: {
+    type: String,
+  },
 });
 
 // Create the feedback model

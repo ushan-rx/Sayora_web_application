@@ -40,12 +40,14 @@ const patientSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  allagies: [
+  allergies: [
     {
       type: String,
     },
   ],
+
   familyHistory: [{ name: { type: String }, relationship: { type: String } }],
+
   currentMedications: [
     {
       name: { type: String },
@@ -56,7 +58,7 @@ const patientSchema = new mongoose.Schema({
   surgicalProcedures: [{ name: { type: String }, date: { type: Date } }],
   vitals: [
     { checkdate: { type: Date } },
-    { height: { type: Number }, unit: { type: String } }, //meke hama ekatama string type eke sub field eka gane dapn unit eka thiyaganna
+    { height: { type: Number }, unit: { type: String } }, 
     { weight: { type: Number }, unit: { type: String } },
     { temperature: { type: Number }, unit: { type: String } },
     { bloodPressure: { type: String } },
@@ -64,16 +66,22 @@ const patientSchema = new mongoose.Schema({
     { respiratoryRate: { type: Number }, unit: { type: String } },
     { oxygenSaturation: { type: Number }, unit: { type: String } },
   ],
+
   treatmentHistory: [
     {
-      treatment: {
-        type: Schema.Types.ObjectId, // treatment referenced
-        ref: "Treatment",
-      },
-      date: {
-        type: Date,
-        required: true,
-      },
+      treatmentRecord: {
+        type: Schema.Types.ObjectId,     // treatmentHistory referenced
+        ref: "TreatmentHistory",
+      }
+    },
+  ],
+
+  prescriptions: [
+    {
+      prescriptionRecord: {
+        type: Schema.Types.ObjectId,     // prescriptions referenced
+        ref: "Prescription",
+      }
     },
   ],
 

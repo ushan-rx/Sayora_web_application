@@ -38,7 +38,6 @@ const dailyUpdatesSchema = new mongoose.Schema({
   },
   reports: [
     {
-      // me reference karala thiyenne report eka mevidiyatama dapn meka
       type: Schema.Types.ObjectId,
       ref: "Report",
     },

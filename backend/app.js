@@ -3,6 +3,7 @@ const connectDB = require('./db/connect');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+
 require('dotenv').config();
 
 const app = express();
@@ -24,11 +25,12 @@ app.use(cookieParser());
 // Routes
 const authRouter = require('./routes/authRoutes');
 const bookingRoute = require("./routes/booking.route.js");
+const doctorRoute = require('./routes/doctor.route.js');
 
 //use route
 app.use('/api/v1/auth', authRouter);
-app.use("/api/sayora_test/Booking_data", bookingRoute);
-
+app.use("/api/v1/Booking_data", bookingRoute);
+app.use('/api/v1/doctor', doctorRoute);
 
 
 

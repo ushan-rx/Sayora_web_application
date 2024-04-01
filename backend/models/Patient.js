@@ -56,6 +56,7 @@ const patientSchema = new mongoose.Schema({
     },
   ],
   surgicalProcedures: [{ name: { type: String }, date: { type: Date } }],
+  
   vitals: [
     { checkdate: { type: Date } },
     { height: { type: Number }, unit: { type: String } }, 

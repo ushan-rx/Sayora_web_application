@@ -18,34 +18,28 @@ const doctorSchema = new mongoose.Schema({
 	},
 	lName: {
 		type: String,
-		required: true,
+		required: true,d
 	},
-	contacts: [
-		{
-			phonePrimary: {
-				type: String,
-				required: true,
-			},
-			phoneSecondary: {
-				type: Number,
-				required: true,
-				min: 0,
-			},
+	contacts: {
+		phonePrimary: {
+			type: String,
+			required: true,
 		},
-	],
+		phoneSecondary: {
+			type: Number,
+			min: 0,
+		},
+	},
 
 	address: {
 		street: {
 			type: String,
-			required: true,
 		},
 		city: {
 			type: String,
-			required: true,
 		},
 		state: {
 			type: String,
-			required: true,
 		},
 		country: {
 			type: String,
@@ -55,47 +49,42 @@ const doctorSchema = new mongoose.Schema({
 
 	NIC: {
 		type: String,
-		required: true,
+		required: [true,'Please provide NIC']
 	},
 	gender: {
 		type: String,
-		required: true,
+		enum: ['Male', 'Female']
 	},
 
 	specialization: [  // doctor's specialization list
 		{
 			name: {
 				type: String,
-				required: true,
 			},
 		},
 	],
 
 	description: {
 		type: String,
+		maxlength: [1000, 'Description can not be more than 1000 characters'],
 	},
-
+ 
 	experience: {
 		type: Number,
-		required: true,
 	},
 	availability: {      // doctor is active or not
 		type: Boolean,
 		required: true,
+		default: true,
 	},
 
-	treatments: [        // treatment list
+	treatments: [        // treatment list        populate this
 		{
 			trName: {
 				type: String,
 				required: true,
 			},
 
-			// cost: {
-			//   type: Number,
-			//   required: true,
-			//   min: 0
-			// }
 		},
 	],
 
@@ -120,7 +109,8 @@ const doctorSchema = new mongoose.Schema({
 			},
 		},
 	],
-});
+},
+{ timestamps: true });
 
 const Doctor = mongoose.model("Doctor", doctorSchema);
 

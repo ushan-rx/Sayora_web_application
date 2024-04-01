@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Define the schema for the result reports model
-const resultReportsSchema = new mongoose.Schema({
+const reportsSchema = new mongoose.Schema({
   patientId: {
     type: String,
     required: true,
@@ -20,5 +20,5 @@ const resultReportsSchema = new mongoose.Schema({
 });
 
 // Create the result reports model
-const Report = mongoose.model("resultReports", resultReportsSchema);
+const Report = mongoose.model("Report", reportSchema);
 module.exports = Report;

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const doctorSchema = new mongoose.Schema({
     
     doctorId: {
-        type: String,
+        type: String,     
         required: true,
     },
     userId: {
@@ -26,7 +26,7 @@ const doctorSchema = new mongoose.Schema({
 			required: true,
 		},
 		phoneSecondary: {
-			type: Number,
+			type: String,
 			min: 0,
 		},
 	},
@@ -105,6 +105,10 @@ const doctorSchema = new mongoose.Schema({
 			},
 		},
 	],
+	status: {                       //for delete purpose
+		type: Boolean,
+		default: true,
+	}
 },
 { timestamps: true });
 
@@ -119,19 +123,17 @@ doctorSchema.pre('validate', async function (next) {
 	const MyModel = this.constructor; 
 	// Find the last document with a custom ID starting with the provided prefix
 	let lastDoc = await MyModel.find().sort({ _id: -1 }).limit(1);
-	console.log(lastDoc[0].doctorId);
 	// Generate the new custom ID
 	let newId = customIdPrefix;
 	if (lastDoc) {
 	  const currentNumber = parseInt(lastDoc[0].doctorId.slice(customIdPrefix.length));
 	  newId += String(currentNumber + 1).padStart(length, '0');
 	} else {
-	  newId += "0001";
+	  newId += "00001";
 	}
 	this.doctorId = newId;
 	console.log(newId);
 	next();
-
   });
 
 const Doctor = mongoose.model("Doctor", doctorSchema);

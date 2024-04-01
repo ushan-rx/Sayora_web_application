@@ -20,6 +20,7 @@ app.use(cors({
 
 app.use(express.static('./public'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Routes
@@ -27,12 +28,16 @@ const authRouter = require('./routes/authRoutes');
 const bookingRoute = require("./routes/booking.route.js");
 const doctorRoute = require('./routes/doctor.route.js');
 
+
 //use route
 app.use('/api/v1/auth', authRouter);
 app.use("/api/v1/Booking_data", bookingRoute);
 app.use('/api/v1/doctor', doctorRoute);
 
 
+
+const NotFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const start = async() => {
     try {

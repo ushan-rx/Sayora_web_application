@@ -19,12 +19,6 @@ const treatmentschema = new Schema({
         type: String,
         required: true
     },
-    doctors:[{
-	doctorId:{
-		type: String,
-	}
-    }],
-
 });
 
 const treatment = mongoose.model("Treatment", treatmentschema);

@@ -10,10 +10,10 @@ import ProtectedRoutesUser from '../utils/ProtectedRoutesUser'
 //pages import
 //doctor
 import Overview from '../pages/doctor/overviewDoctor'
-
+import ProfileDoctor from '../pages/doctor/profileDoctor'
 
 //patient
-import OverviewPatient from '../pages/patient/overviewPatient'
+
 
 
 
@@ -49,7 +49,7 @@ const Router = createBrowserRouter(
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
             //patient dashboard routes here
-            <Route path="overview" element={<OverviewPatient/> } exact/>
+          
 
           </Route>
 
@@ -57,7 +57,7 @@ const Router = createBrowserRouter(
             <Route index element={<Overview/> } exact/>
           //doctor dashboard routes here
               <Route path="overview" element={<Overview/> } exact/>
-          
+              <Route path="profile" element={<ProfileDoctor/> } exact/>
           </Route>
 
           

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 // Define the schema for the requesition model
 const requesition = new mongoose.Schema({
@@ -18,13 +18,12 @@ const requesition = new mongoose.Schema({
     required: true,
   },
   is_uploaded: {
-    type: boolean,
+    type: Boolean,
     default: false,
   },
   reports: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Report",
+      type: String
     },
   ],
 });

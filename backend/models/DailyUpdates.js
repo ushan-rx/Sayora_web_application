@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 // Define the schema for the daily updates model
 const dailyUpdatesSchema = new mongoose.Schema({
@@ -35,15 +35,9 @@ const dailyUpdatesSchema = new mongoose.Schema({
   },
   documentURL: {
     type: String,
-  },
-  reports: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Report",
-    },
-  ],
+  }
 });
 
 // Create the daily updates model
-const DailyUpdatesModel = mongoose.model("dailyUpdates", dailyUpdatesSchema);
+const DailyUpdatesModel = mongoose.model("DailyUpdates", dailyUpdatesSchema);
 module.exports = DailyUpdatesModel;

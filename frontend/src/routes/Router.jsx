@@ -13,7 +13,7 @@ import Overview from '../pages/doctor/overviewDoctor'
 
 
 //patient
-
+import OverviewPatient from '../pages/patient/overviewPatient'
 
 
 
@@ -49,7 +49,7 @@ const Router = createBrowserRouter(
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
             //patient dashboard routes here
-
+            <Route path="overview" element={<OverviewPatient/> } exact/>
 
           </Route>
 

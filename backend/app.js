@@ -25,7 +25,7 @@ app.use(cookieParser());
 // Routes
 const authRouter = require('./routes/authRoutes');
 const bookingRoute = require("./routes/booking.route.js");
-const doctorRoute = require('./routes/doctor.route.js');
+const doctorRoute = require("./routes/doctor.route.js");
 
 //use route
 app.use('/api/v1/auth', authRouter);

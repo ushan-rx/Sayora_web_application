@@ -33,6 +33,8 @@ const feedbackRoute = require('./routes/feedback.route.js');
 const dailyQuestionsRoute = require('./routes/dailyquestions.route.js');
 const daillyUpdateRoute = require('./routes/dailyupdate.route.js');
 const requesition = require('./routes/requesition.route.js');
+const productRouter = require('./routes/Product.route');
+
 
 //use route
 app.use('/api/v1/auth', authRouter);
@@ -43,7 +45,7 @@ app.use('/api/v1/feedback', feedbackRoute);
 app.use('/api/v1/dailyquestions', dailyQuestionsRoute);
 app.use('/api/v1/dailyupdate', daillyUpdateRoute);
 app.use('/api/v1/requesition', requesition);
-
+app.use(productRouter);
 
 
 const NotFoundMiddleware = require('./middleware/not-found');

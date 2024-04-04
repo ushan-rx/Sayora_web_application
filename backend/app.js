@@ -28,12 +28,22 @@ const bookingRoute = require("./routes/booking.route.js");
 const doctorRoute = require('./routes/doctor.route.js');
 const staffRoute = require('./routes/staff.route.js');
 
+const supplierRouter = require('./routes/Supplier.route');
+const appoinmentRouter = require('./routes/Appointment.route');
+const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
+
+
 
 //use route
 app.use('/api/v1/auth', authRouter);
 app.use("/api/v1/Booking_data", bookingRoute);
 app.use('/api/v1/doctor', doctorRoute);
 app.use('/api/v1/staff', staffRoute);
+
+app.use(supplierRouter);
+
+app.use(appoinmentRouter);
+app.use('/doctortime' ,doctorTimeRouter);
 
 
 
@@ -48,3 +58,4 @@ const start = async() => {
 
 // Start the server
 start();
+

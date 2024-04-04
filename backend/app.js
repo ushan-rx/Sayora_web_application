@@ -34,6 +34,10 @@ const dailyQuestionsRoute = require('./routes/dailyquestions.route.js');
 const daillyUpdateRoute = require('./routes/dailyupdate.route.js');
 const requesition = require('./routes/requesition.route.js');
 const productRouter = require('./routes/Product.route');
+const appoinmentRouter = require('./routes/Appointment.route');
+const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
+
+
 
 
 //use route
@@ -46,6 +50,9 @@ app.use('/api/v1/dailyquestions', dailyQuestionsRoute);
 app.use('/api/v1/dailyupdate', daillyUpdateRoute);
 app.use('/api/v1/requesition', requesition);
 app.use(productRouter);
+app.use(appoinmentRouter);
+app.use('/doctortime' ,doctorTimeRouter);
+
 
 
 const NotFoundMiddleware = require('./middleware/not-found');
@@ -62,3 +69,4 @@ const start = async() => {
 
 // Start the server
 start();
+

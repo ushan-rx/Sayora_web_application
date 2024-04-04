@@ -41,7 +41,7 @@ function PatientMenu() {
     <>
         {/* include single menu items here */}
         <li>
-            <NavLink to={path + "/dummy"} className="link">
+            <NavLink to={path + "/overview"} className="link">
                 <AiOutlineAppstore size={23} className="min-w-max" />
                 Overview
             </NavLink>

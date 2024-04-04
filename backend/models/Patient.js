@@ -7,7 +7,14 @@ const patientSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  name: {
+  userId: {
+    type: String,
+  },
+  fname: {
+    type: String,
+    required: true,
+  },
+  lname: {
     type: String,
     required: true,
   },
@@ -29,14 +36,6 @@ const patientSchema = new mongoose.Schema({
     required: true,
   },
   bloodGroup: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  nic: {
     type: String,
     required: true,
   },

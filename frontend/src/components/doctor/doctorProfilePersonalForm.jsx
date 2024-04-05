@@ -1,8 +1,12 @@
 import React from "react";
 
+import { useUserStore } from "../../store/user.store";
+import Cookies from "js-cookie";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +20,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
+
 
 const phoneRegex = new RegExp(
 	/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -45,7 +51,17 @@ const formSchema = z.object({
 	}),
 });
 
-function doctorProfilePersonalForm() {
+function doctorProfilePersonalForm({change}) {
+
+	//get the doctore id from the store
+	
+	const docId = Cookies.get("doctorId");
+
+	//to hold the form submit state
+	const [isSubmitting, setIsSubmitting] = React.useState(false);  
+	
+	
+	// react hook form init with zod resolver
 	const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -58,10 +74,37 @@ function doctorProfilePersonalForm() {
 		},
 	});
 
-	function onSubmitPersonal(values) {
+	//on submit function
+	async function onSubmitPersonal(values) {
+		setIsSubmitting(true);
+		console.log(docId);
+		const url = "http://localhost:5000/api/v1/doctor/"+docId+"";
 		// Do something with the form values.
-		console.log("")
-		console.log(values.fName);
+		await axios.put(url, {
+			fName: values.fName,
+			lName: values.lName,
+			phone: values.phone,
+			address: {
+				street: values.street,
+				city: values.city,
+				state: values.state,
+			}
+		})
+		.then((res) => {
+			if(res.status === 200){
+				setIsSubmitting(false);
+				change(true);
+				return;
+			}else{
+				setIsSubmitting(false);
+				change(false);
+				return;
+			}
+			setIsSubmitting(false);
+			change(false);
+		});
+		console.log(values.city)
+		
 	}
 
 	return (
@@ -229,7 +272,7 @@ function doctorProfilePersonalForm() {
 						</div>
 						
 					</div>
-					<Button type="submit" class="float-end bg-teal-500 rounded-lg p-2 mt-2 font-medium text-white border shadow-md">Update</Button>
+					<Button type="submit" disabled={isSubmitting} class="float-end bg-teal-500 rounded-lg p-2 mt-2 font-medium text-white border shadow-md">Update</Button>
 				</form>
 			</Form>
 		</>

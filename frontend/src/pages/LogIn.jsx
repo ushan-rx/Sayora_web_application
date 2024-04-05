@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import {Link,useNavigate} from "react-router-dom";
 
+import { useUserStore } from "../store/user.store";
+
 
 function LogIn(){
         const [email, setEmail] = useState();
@@ -23,7 +25,9 @@ function LogIn(){
           axios.post('http://localhost:5000/api/v1/auth/login',{email,password})
           .then(res=>{
             if(res.data.Status === "Success"){
+              // set user login status to local storage
               window.localStorage.setItem("isLogedIn", true);
+              // redirect to user dashboard
             if (res.data.role === "patient") {
               navigate('/patient');
             } else if (res.data.role === "doctor") {

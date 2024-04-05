@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 // Define the schema for the result reports model
 const reportsSchema = new mongoose.Schema({
@@ -20,5 +20,5 @@ const reportsSchema = new mongoose.Schema({
 });
 
 // Create the result reports model
-const Report = mongoose.model("Report", reportSchema);
+const Report = mongoose.model("Report", reportsSchema);
 module.exports = Report;

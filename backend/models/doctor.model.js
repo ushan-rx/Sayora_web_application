@@ -7,8 +7,7 @@ const doctorSchema = new mongoose.Schema({
         required: true,
     },
     userId: {
-        type: String,
-        
+        type: String,   
     },
     
     //personal details
@@ -20,15 +19,9 @@ const doctorSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	contacts: {
-		phonePrimary: {
+	phone: {
 			type: String,
 			required: true,
-		},
-		phoneSecondary: {
-			type: String,
-			min: 0,
-		},
 	},
 
 	address: {
@@ -41,15 +34,6 @@ const doctorSchema = new mongoose.Schema({
 		state: {
 			type: String,
 		},
-		country: {
-			type: String,
-			required: true,
-		},
-	},
-
-	NIC: {
-		type: String,
-		required: [true,'Please provide NIC']
 	},
 	gender: {
 		type: String,
@@ -68,7 +52,7 @@ const doctorSchema = new mongoose.Schema({
 		type: String,
 		maxlength: [1000, 'Description can not be more than 1000 characters'],
 	},
- 
+
 	experience: {
 		type: Number,
 	},
@@ -77,34 +61,19 @@ const doctorSchema = new mongoose.Schema({
 		required: true,
 		default: true,
 	},
-
 	treatments: [        // treatment list        populate this
 		{
-			trName: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Treatment',
-			},
-
-		},
-	],
-
-	appointments: [             // doctor's regular appointment dates
-		{
-			day: {
+			treatmentId: {
 				type: String,
-			},
-			StartTime: {
-				type: String,
-			},
-			EndTime: {
-				type: String,
-			},
-			maxPatients: {
-				type: Number,
-				min: 0,
 			},
 		},
 	],
+	appointmentPrice: {
+		type: String,
+	},
+	profilePic: {
+		type: String,
+	},
 	status: {                       //for delete purpose
 		type: Boolean,
 		default: true,
@@ -125,14 +94,13 @@ doctorSchema.pre('validate', async function (next) {
 	let lastDoc = await MyModel.find().sort({ _id: -1 }).limit(1);
 	// Generate the new custom ID
 	let newId = customIdPrefix;
-	if (lastDoc) {
+	if (lastDoc[0]) {
 	  const currentNumber = parseInt(lastDoc[0].doctorId.slice(customIdPrefix.length));
 	  newId += String(currentNumber + 1).padStart(length, '0');
 	} else {
 	  newId += "00001";
 	}
 	this.doctorId = newId;
-	console.log(newId);
 	next();
   });
 

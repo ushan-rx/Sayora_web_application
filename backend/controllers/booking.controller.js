@@ -1,5 +1,6 @@
 const Booking_data = require("../models/booking.model.js");
-
+const { StatusCodes } = require('http-status-codes');
+const CustomError = require('../errors');
 
 //find all bookings
 const getBookings = async(req, res) => {
@@ -33,8 +34,9 @@ const getBooking = async(req, res) => {
 //create booking
 const createBooking = async(req, res) => {
     try {
-        const booking_data = await Booking_data.create(req.body);
-        res.status(200).json({ booking_data });
+        const booking = new Booking_data(req.body);
+        const newBooking = await booking.save();
+        res.status(StatusCodes.CREATED).json(newBooking);
     } catch (error) {
         console.error(error);
         res.status(500).json("Error in creating product");

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {toast, Toaster} from "react-hot-toast";
 
 import DoctorProfilePersonalForm from "@/components/doctor/doctorProfilePersonalForm";
 
@@ -25,12 +26,17 @@ const formSchema = z.object({
 });
 
 function profileDoctor() {
-	// const form = useForm({
-	// 	resolver: zodResolver(formSchema),
-	// 	defaultValues: {
-	// 		username: "",
-	// 	},
-	// });
+
+  const [isPersonalSubmitted, setIsPersonalSubmitted] = useState(false);  // for personal details form submission
+  // do things according to the form submission
+  const changePersonalState = (value) => {         
+    if(value){
+      toast.success("Personal details updated successfully");
+    } else {
+      toast.error("Failed to update personal details");
+    }
+    setIsPersonalSubmitted(!isPersonalSubmitted);     // to update doctor details
+  }
 
   const form2 = useForm({
 		resolver: zodResolver(formSchema),
@@ -47,6 +53,8 @@ function profileDoctor() {
 
 	return (
 		<div>
+      {/* toast component */}
+      <div><Toaster position="bottom-right"/></div> 
 			<div className="flex-grow mx-4 gap-1 my-6">
 				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3 ">
 					<div className="py-4 rounded-lg bg-gray-600">
@@ -68,7 +76,7 @@ function profileDoctor() {
 					<div className="px-6 py-8 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4 bg-teal-50 lg:col-span-2">
 						{/* from */}
 
-            <DoctorProfilePersonalForm />
+            <DoctorProfilePersonalForm  change={changePersonalState}/>
 
             
 

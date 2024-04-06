@@ -51,34 +51,40 @@ const formSchema = z.object({
 	}),
 });
 
-function doctorProfilePersonalForm({change}) {
+function doctorProfilePersonalForm({doctor,change}) {
 
 	//get the doctore id from the store
 	
-	const docId = Cookies.get("doctorId");
+	const docId = Cookies.get("roleId");
 
 	//to hold the form submit state
 	const [isSubmitting, setIsSubmitting] = React.useState(false);  
-	
-	
+
+	//default values for the form
+	let defaultValues = {
+		fName: `${doctor?.fName  || ""}`,
+		lName: `${doctor?.lName  || ""}`,
+		phone: `${doctor?.phone  || ""}`,
+		street:`${doctor.address?.street || ""}`,
+		city: `${doctor.address?.city || ""}`,
+		state: `${doctor.address?.state || ""}`,
+	}
+
 	// react hook form init with zod resolver
 	const form = useForm({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			fName: "",
-			lName: "",
-			phone: "",
-			street: "",
-			city: "",
-			state: "",
-		},
+		values: defaultValues,                // to update values in the form based on state props(changes)
+		resetOptions: {
+			keepDirtyValues: true, // user-interacted input will be retained
+		}
 	});
 
 	//on submit function
 	async function onSubmitPersonal(values) {
 		setIsSubmitting(true);
 		console.log(docId);
-		const url = "http://localhost:5000/api/v1/doctor/"+docId+"";
+		console.log(doctor.address?.city)
+		const url = `http://localhost:5000/api/v1/doctor/${docId}`;
 		// Do something with the form values.
 		await axios.put(url, {
 			fName: values.fName,
@@ -100,8 +106,6 @@ function doctorProfilePersonalForm({change}) {
 				change(false);
 				return;
 			}
-			setIsSubmitting(false);
-			change(false);
 		});
 		console.log(values.city)
 		
@@ -128,7 +132,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="John"
+												placeholder={doctor.fName}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
@@ -150,7 +154,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="doel"
+												placeholder={doctor.lName}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
@@ -175,7 +179,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="0xxxxxxxxx"
+												placeholder={doctor.phone}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
@@ -201,7 +205,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="90210"
+												placeholder={doctor.address?.street || ""}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
@@ -223,7 +227,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="Colombo"
+												placeholder={doctor.address?.city || ""}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
@@ -260,7 +264,7 @@ function doctorProfilePersonalForm({change}) {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="western"
+												placeholder={doctor.address?.state || ""}
 												{...field}
 												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>

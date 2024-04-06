@@ -39,6 +39,8 @@ const reportRoute = require('./routes/report.route');
 const productRouter = require('./routes/Product.route');
 
 const supplierRouter = require('./routes/Supplier.route');
+const itemRouter = require('./routes/Inventory_Item.route');
+
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
 
@@ -61,6 +63,7 @@ app.use('/doctortime' ,doctorTimeRouter);
 app.use(productRouter);
 
 app.use(supplierRouter);
+app.use(itemRouter);
 
 app.use(appoinmentRouter);
 app.use('/doctortime' ,doctorTimeRouter);

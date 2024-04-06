@@ -1,15 +1,26 @@
 import React from "react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { NavLink } from "react-router-dom";
+
 const navbar = () => {
+  const path = window.location.pathname;
   return (
-    <div>
+    <div >
         <div className="bg-[#e0eff1]">
           <div className="flex flex-col">
             <div className="w-full border-b-2 border-gray-200">
               <div className="flex items-center justify-between h-16 px-0 mx-4">
                 
                 {/* nav search bar */}
-                <div className="relative hidden max-w-xs ml-72 mr-auto lg:block">
+                <div className="relative hidden max-w-xs  mr-auto md:block">
                   <p className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <span className="flex items-center justify-center">
                       <span className="flex items-center justify-center">
@@ -43,9 +54,22 @@ const navbar = () => {
                   absolute -top-px -right-1">2</p>
                   </div>
                   <div className="relative flex items-center justify-center">
-                    <img src="https://static01.nyt.com/images/2019/11/08/world/08quebec/08quebec-superJumbo.jpg"
-                      className="object-cover mr-2 bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
-                    <p className="text-sm font-semibold">Marrie Currie</p>
+                  <DropdownMenu className="p-0">
+                      <DropdownMenuTrigger asChild>
+                        <img src="https://static01.nyt.com/images/2019/11/08/world/08quebec/08quebec-superJumbo.jpg"
+                      className="object-cover  bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild><NavLink to={"profile"}>Profile</NavLink></DropdownMenuItem>
+                        {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
+                        {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
+                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                      </DropdownMenuContent>
+                  </DropdownMenu>
+  
+                    <p className="text-sm font-semibold ml-4">Marrie Currie</p>
                   </div>
                 </div>
               </div>

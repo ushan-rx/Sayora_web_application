@@ -29,7 +29,7 @@ const SubMenu = ({data}) => {
       {
         data.menus?.map((menu) => (
           <li key={menu}>
-            <NavLink to={`/${data.name}/${menu.subPath}`} className="link !bg-transparent capitalize">{menu.subName}</NavLink>
+            <NavLink to={`${data.name}/${menu.subPath}`} className="link !bg-transparent capitalize">{menu.subName}</NavLink>
           </li>
         ))
       }

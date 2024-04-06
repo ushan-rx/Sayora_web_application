@@ -10,7 +10,7 @@ import ProtectedRoutesUser from '../utils/ProtectedRoutesUser'
 //pages import
 //doctor
 import Overview from '../pages/doctor/overviewDoctor'
-
+import ProfileDoctor from '../pages/doctor/profileDoctor'
 
 //patient
 
@@ -24,7 +24,7 @@ import Overview from '../pages/doctor/overviewDoctor'
 
 //website
 import Home from '../pages/website/Home'
-
+import ServiceMgt from '../pages/website/OverviewService'
 
 //set routing
 const Router = createBrowserRouter(
@@ -34,30 +34,33 @@ const Router = createBrowserRouter(
         
         <Route path = "/" element ={<WebsiteLayout />}exact >
           <Route index element={<Home/> } exact/>
-          // webiste routes here
+          {/*webiste routes here*/}
           <Route path="home" element={<Home/> } exact/>
+          <Route path="service" element={<ServiceMgt/> } exact/>
 
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
-          //staff dashboard routes here
+          {/*staff dashboard routes here*/}
 
 
         </Route>
 
-          //protected routes
+          {/*protected routes*/}
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
+
             //patient dashboard routes here
+          
 
 
           </Route>
 
           <Route path="/doctor" element={<DoctorDashboard /> } exact>
             <Route index element={<Overview/> } exact/>
-          //doctor dashboard routes here
+          {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
-          
+              <Route path="profile" element={<ProfileDoctor/> } exact/>
           </Route>
 
           

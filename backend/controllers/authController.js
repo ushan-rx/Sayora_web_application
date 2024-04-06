@@ -24,7 +24,7 @@ const login = async (req,res)=>{
                 const doctor = await Doctor.findOne({userId:userId});    // get user details using user id
                 if(doctor && doctor.status === true){                   // set cookies and send data
                   res.cookie('token',token);
-                  res.cookie('roleId',doctor.doctorId, { httpOnly: true });
+                  res.cookie('roleId',doctor.doctorId);        // { httpOnly: true }
                   return res.json({Status:"Success", role:user.role});
                 }else{
                   return res.status(StatusCodes.NOT_FOUND).json("The doctor is not active");
@@ -41,10 +41,6 @@ const login = async (req,res)=>{
                   return res.status(StatusCodes.NOT_FOUND).json("The patient is not active")
                 }
               }
-
-              // res.cookie('token',token)
-              // res.cookie('role',user.role)
-              // return res.json({Status:"Success", role:user.role, user: user})
           }else{
             return res.json("The Password is incorrect")  // custom error
           }
@@ -116,8 +112,7 @@ const logout = (req,res)=>{
     res.cookie('token','',{maxAge:1})
     res.cookie('role','',{maxAge:1})
     res.cookie('user','',{maxAge:1})
-    res.cookie('doctorId','',{maxAge:1})
-    res.cookie('patientId','',{maxAge:1})
+    res.cookie('roleId','',{maxAge:1})
     return res.json("Logout")
   }
 

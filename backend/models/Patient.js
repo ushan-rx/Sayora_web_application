@@ -10,17 +10,16 @@ const patientSchema = new mongoose.Schema({
   userId: {
     type: String,
   },
-  fname: {
+  fName: {
     type: String,
     required: true,
   },
-  lname: {
+  lName: {
     type: String,
     required: true,
   },
   dob: {
     type: Date,
-    required: true,
   },
   gender: {
     type: String,
@@ -32,12 +31,18 @@ const patientSchema = new mongoose.Schema({
     required: true,
   },
   address: {
-    type: String,
-    required: true,
-  },
+		street: {
+			type: String,
+		},
+		city: {
+			type: String,
+		},
+		state: {
+			type: String,
+		},
+	},
   bloodGroup: {
-    type: String,
-    required: true,
+    type: String
   },
   allergies: [
     {

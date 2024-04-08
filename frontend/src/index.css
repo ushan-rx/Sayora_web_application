@@ -11,10 +11,12 @@
     }
     body {
       background: white;
+      overflow: hidden;
     }
     h1 {
       @apply text-xl font-medium capitalize;
     }
+    
   }
   
   .link {

@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import {toast, Toaster} from "react-hot-toast";
 
 import DoctorProfilePersonalForm from "@/components/doctor/doctorProfilePersonalForm";
+import DoctorProfileSecondaryForm from "@/components/doctor/doctorProfileSecondaryForm";
 
 const formSchema = z.object({
 	username: z.string().min(2, {
@@ -150,7 +151,8 @@ function profileDoctor() {
 						<span className="text-2xl font-bold">Personal Details</span>
 						{doctorDetails == {} && <><br/><span className="text-2xl font-normal">Loading...</span></>}
 						{doctorDetails != undefined && <DoctorProfilePersonalForm  doctor = {doctorDetails} change={changePersonalState}/>}
-            
+						<span className="text-2xl mt-6 col-span-2 font-bold">Professional and Profile Details</span>
+						{doctorDetails != undefined && <DoctorProfileSecondaryForm  doctor = {doctorDetails} change={changePersonalState}/>}
 
 						{/* from end */}
 					</div>

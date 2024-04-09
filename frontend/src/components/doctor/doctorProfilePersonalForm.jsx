@@ -53,8 +53,7 @@ const formSchema = z.object({
 
 function doctorProfilePersonalForm({doctor,change}) {
 
-	//get the doctore id from the store
-	
+	//get the doctore id from cookie
 	const docId = Cookies.get("roleId");
 
 	//to hold the form submit state
@@ -73,6 +72,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 	// react hook form init with zod resolver
 	const form = useForm({
 		resolver: zodResolver(formSchema),
+		defaultValues: defaultValues,
 		values: defaultValues,                // to update values in the form based on state props(changes)
 		resetOptions: {
 			keepDirtyValues: true, // user-interacted input will be retained
@@ -134,7 +134,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.fName}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />
@@ -156,7 +156,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.lName}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />
@@ -181,7 +181,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.phone}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />
@@ -207,7 +207,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.address?.street || ""}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />
@@ -229,7 +229,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.address?.city || ""}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />
@@ -266,7 +266,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 											<Input
 												placeholder={doctor.address?.state || ""}
 												{...field}
-												class="appearance-none block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />

@@ -23,7 +23,7 @@ function DoctorDashboard(){
     },[])
 
     return(
-        <div className="flex">
+        <div className="flex ">
             <Sidebar role={"doc"}/>
             <main className="flex-1 py-0 mx-auto max-w-8xl">
                 <Navbar />

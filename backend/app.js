@@ -40,6 +40,7 @@ const productRouter = require('./routes/Product.route');
 
 const supplierRouter = require('./routes/Supplier.route');
 const itemRouter = require('./routes/Inventory_Item.route');
+const orderRouter = require('./routes/Inventory_Order.route');
 
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
@@ -64,6 +65,7 @@ app.use(productRouter);
 
 app.use(supplierRouter);
 app.use(itemRouter);
+app.use('/Inventory' , orderRouter);
 
 app.use(appoinmentRouter);
 app.use('/doctortime' ,doctorTimeRouter);

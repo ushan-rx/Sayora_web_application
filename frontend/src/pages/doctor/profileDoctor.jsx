@@ -33,6 +33,7 @@ const formSchema = z.object({
 function profileDoctor() {
   const docId = Cookies.get("roleId");  // get the doctor id from the store
   const [isPersonalSubmitted, setIsPersonalSubmitted] = useState(false);  // for personal details form submission
+  const [isSecondarySubmitted, setIsSecondarySubmitted] = useState(false);  // for Secondary details form submission
   const [doctorDetails, setDoctorDetails] = useState({});  // to store doctor details
 
   	// get doctor details from the backend
@@ -49,7 +50,7 @@ function profileDoctor() {
   useEffect(() => {
 	// get doctor details from the backend
 	getDoctor(docId);
-  }, [isPersonalSubmitted]);  // to update doctor details
+  }, [isPersonalSubmitted, isSecondarySubmitted]);  // to update doctor details
 
   // do things according to the form submission
   const changePersonalState = (value) => {         
@@ -61,20 +62,14 @@ function profileDoctor() {
     setIsPersonalSubmitted(!isPersonalSubmitted);     // to update doctor details
   }
 
-  const form2 = useForm({
-		resolver: zodResolver(formSchema),
-		defaultValues: {
-			username: "",
-		},
-	});
-
-	function onSubmitPersonal(values) {
-		// Do something with the form values.
-
-		// console.log(values);
-	}
-
-	console.log(doctorDetails.specialization);
+  const changeSecondaryState = (value) => {         
+    if(value){
+      toast.success("Profile details updated successfully");
+    } else {
+      toast.error("Failed to update Profile details");
+    }
+    setIsSecondarySubmitted(!isSecondarySubmitted);     // to update doctor details
+  }
 
 	return (
 		<div className="overflow-hidden">
@@ -83,21 +78,11 @@ function profileDoctor() {
 			<div className="flex-grow mx-4 gap-1 my-6">
 				<div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
 					<div className="py-4 rounded-lg bg-cyan-800 hidden lg:flex flex-col">
-			
+						{/* display profile image */}
 						<div class="w-24 h-24 mt-2 bg-indigo-100 mx-auto rounded-full shadow-2xl flex items-center justify-center text-indigo-500">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-18 w-18"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-									clip-rule="evenodd"
-								/>
-							</svg>
+							<img src={doctorDetails.profilePic} alt="" srcset="" />
 						</div>
+
 						{/* display profile details section */}
 						<div className="mt-4 mx-20 text-center rounded-md font-bold text-lg text-gray-300">Profile</div>
 						{/* profile details*/}
@@ -152,7 +137,7 @@ function profileDoctor() {
 						{doctorDetails == {} && <><br/><span className="text-2xl font-normal">Loading...</span></>}
 						{doctorDetails != undefined && <DoctorProfilePersonalForm  doctor = {doctorDetails} change={changePersonalState}/>}
 						<span className="text-2xl mt-6 col-span-2 font-bold">Professional and Profile Details</span>
-						{doctorDetails != undefined && <DoctorProfileSecondaryForm  doctor = {doctorDetails} change={changePersonalState}/>}
+						{doctorDetails != undefined && <DoctorProfileSecondaryForm  doctor = {doctorDetails} change={changeSecondaryState}/>}
 
 						{/* from end */}
 					</div>

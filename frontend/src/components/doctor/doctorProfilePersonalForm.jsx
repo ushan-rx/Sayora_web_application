@@ -82,7 +82,7 @@ function doctorProfilePersonalForm({doctor,change}) {
 	//on submit function
 	async function onSubmitPersonal(values) {
 		setIsSubmitting(true);
-		console.log(docId);
+		console.log(values);
 		console.log(doctor.address?.city)
 		const url = `http://localhost:5000/api/v1/doctor/${docId}`;
 		// Do something with the form values.
@@ -107,7 +107,6 @@ function doctorProfilePersonalForm({doctor,change}) {
 				return;
 			}
 		});
-		console.log(values.city)
 		
 	}
 

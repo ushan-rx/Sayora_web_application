@@ -22,17 +22,17 @@ import {
 import {Input} from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from "@/components/ui/switch";
+import { uploadImage } from '@/utils/imageUpload';
 
 //form schema
 const formSchema = z.object({
-    experinece: z.number({
+    experience: z.number({
         required_error: 'Experience is required.',
         }).int({message: 'Experience must be an integer number.'}),
     description: z.string().max(1000, {message: 'Description can not be more than 1000 characters.'}),
     appointmentPrice: z.string({required_error: 'Appointment price is required.'}),
-    profilePic: z.string({invalid_type_error: 'Something wrong with the profile picture. Please re-upload'}),
-    availability: z.boolean({required_error: 'Availability is required.',
-                            invalid_type_error: 'Something wrong with the input. Please try again.'}),
+    // profilePic: z.string({invalid_type_error: 'Something wrong with the profile picture. Please re-upload'}),
+    availability: z.boolean().default(false).optional(),
     specialization: z.array(
         z.object({
             name: z.string({required_error: 'Specialization name is required.'}).min(2, {message: "Specialization must be at least 2 characters"})
@@ -42,19 +42,19 @@ const formSchema = z.object({
 
 
 function doctorProfileSecondaryForm({doctor,change}) {
-
     const docId = Cookies.get('roleId');
-
+    
     //to hold the form submit state
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [image, setImage] = useState(null);
+
         //default values for the form from the doctor prop
     let defaultValues = {
-        experience: `${doctor?.experience || ''}`,
+        experience: doctor?.experience || 0,
         description: `${doctor?.description || ''}`,
         appointmentPrice: `${doctor?.appointmentPrice || ''}`,
-        profilePic: `${doctor?.profilePic || ''}`,
-        availability: `${doctor?.availability || ''}`,
+        availability: Boolean(doctor?.availability) || false,
         specialization: doctor?.specialization || []
     }
 
@@ -68,7 +68,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
         }
     });
 
-    const { fields, append, remove } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({  // hook to handle array fields(specialization)
         name: "specialization",
         control: form.control,
       })
@@ -76,15 +76,33 @@ function doctorProfileSecondaryForm({doctor,change}) {
     //on form submit
     const onSubmitSecondary = async (data) => {
         setIsSubmitting(true);
-        const url = `http://localhost:5000/api/v1/doctor/${docId}`;
-        await axios.put(url, {
+        let imageURL = "";     // profule picture url
+
+        let updatedData = {
             experience: data.experience,
             description: data.description,
             appointmentPrice: data.appointmentPrice,
-            profilePic: data.profilePic,
             availability: data.availability,
             specialization: data.specialization
-        })
+        }
+
+        if(image){     // if there is an image input
+            imageURL = await uploadImage(image)      // upload the image to the firebase storage and get the url
+            updatedData = {...updatedData, profilePic: imageURL}    // add image url to the updated data
+        }
+
+        const url = `http://localhost:5000/api/v1/doctor/${docId}`;  // backend url to update the doctor details
+        let res = await axios.put(url, updatedData); // send the updated data to the backend
+		if(res.status === 200){
+            setIsSubmitting(false);
+            change(true);
+            return;
+        }else{
+            setIsSubmitting(false);
+            change(false);
+            return;
+        }	
+		
     }
 
     return(
@@ -95,6 +113,38 @@ function doctorProfileSecondaryForm({doctor,change}) {
 					class="w-full rounded-lg p-4 border-2 h-fit border-gray-200 bg-white shadow-sm col-span-2"
 				>
 					{/* long input */}
+                    <div class="flex flex-wrap -mx-3 mb-6">
+						{/* profile photo input*/}
+						<div class="w-full px-3">
+							<FormField
+								control={form.control} 
+								name="profilePic"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+											Profile Photo
+										</FormLabel>
+                                        <FormDescription>
+                                        Select a photo to set as profile picture.
+                                        </FormDescription>
+										<FormControl>
+											<Input
+												{...field}
+												type="file"
+                                                accept="image/*"
+                                                onChange={(event) => {
+                                                    setImage(event.target.files[0]);
+                                                  }}
+												class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+											/>
+										</FormControl>
+										<FormMessage class="text-red-500 text-xs italic" />
+									</FormItem>
+								)}
+							/>
+						</div>
+					</div>
+
 					<div class="flex flex-wrap -mx-3 mb-6">
 						{/* experience*/}
 						<div class="w-full px-3">
@@ -130,6 +180,9 @@ function doctorProfileSecondaryForm({doctor,change}) {
 										<FormLabel class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
 											Appointment Price (Rs.)
 										</FormLabel>
+                                        <FormDescription>
+                                            Price per an appointment.
+                                        </FormDescription>
 										<FormControl>
 											<Input
 												placeholder={doctor.appointmentPrice || "Rs."}
@@ -205,7 +258,6 @@ function doctorProfileSecondaryForm({doctor,change}) {
                                                 Remove
                                             </Button>
                                             </FormItem>
-                                            
                                         )}
                                     />
                                 
@@ -242,6 +294,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
                                             onCheckedChange={field.onChange}
                                             />
                                         </FormControl>
+                                        <FormMessage className="w-full"/>
                                     </FormItem>
                                 )}
                             />

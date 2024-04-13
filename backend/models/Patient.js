@@ -31,18 +31,21 @@ const patientSchema = new mongoose.Schema({
     required: true,
   },
   address: {
-		street: {
-			type: String,
-		},
-		city: {
-			type: String,
-		},
-		state: {
-			type: String,
-		},
-	},
+    street: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+  },
+  profilePic: {
+    type: String,
+  },
   bloodGroup: {
-    type: String
+    type: String,
   },
   allergies: [
     {
@@ -62,14 +65,15 @@ const patientSchema = new mongoose.Schema({
   surgicalProcedures: [{ name: { type: String }, date: { type: Date } }],
 
   vitals: {
-     checkdate: { type: Date},
-     height: { type: Number },
-     weight: { type: Number },
-     temperature: { type: Number },
-     bloodPressure: { type: String },
-     pulseRate: { type: Number },
-     respiratoryRate: { type: Number }, unit: { type: String },
-     oxygenSaturation: { type: Number }, unit: { type: String },
+    checkdate: { type: Date },
+    height: { type: Number },
+    weight: { type: Number },
+    temperature: { type: Number },
+    bloodPressure: { type: String },
+    pulseRate: { type: Number },
+    respiratoryRate: { type: Number },
+    unit: { type: String },
+    oxygenSaturation: { type: Number },
   },
 
   treatmentHistory: [
@@ -97,10 +101,11 @@ const patientSchema = new mongoose.Schema({
       mark: { type: Number },
     },
   ],
-  status: {                       //for delete purpose
-		type: Boolean,
-		default: true,
-	}
+  status: {
+    //for delete purpose
+    type: Boolean,
+    default: true,
+  },
 });
 
 //for id generation

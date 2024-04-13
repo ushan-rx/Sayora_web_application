@@ -6,8 +6,13 @@ const dailyUpdatesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  reportName: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
+    default: Date.now,
     required: true,
   },
   temperature: {
@@ -15,14 +20,13 @@ const dailyUpdatesSchema = new mongoose.Schema({
   },
   symptoms: [
     {
-      type: String,
-      required: true,
+      type: String
     },
   ],
   medications: [
     {
       type: { type: String },
-      messure: { type: String },
+      messure: { type: String }
     },
   ],
   additionalNotes: {
@@ -30,8 +34,7 @@ const dailyUpdatesSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Pending", "Approved", "Rejected"],
-    required: true,
+    enum: ["Pending", "Approved", "Rejected"]
   },
   documentURL: {
     type: String,

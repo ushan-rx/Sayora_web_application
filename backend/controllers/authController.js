@@ -35,7 +35,6 @@ const login = async (req,res)=>{
                 if(patient && patient.status === true){
                   res.cookie('token',token);
                   res.cookie('roleId',patient.patientId);
-                  user.roleId = patient.patientId;
                   return res.json({Status:"Success", role:user.role})
                 }else{
                   return res.status(StatusCodes.NOT_FOUND).json("The patient is not active")

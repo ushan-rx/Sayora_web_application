@@ -124,7 +124,7 @@ const Sidebar = ({role}) => {
               <li>
                 <NavLink to={"/settings"} className="link">
                   <SlSettings size={23} className="min-w-max" />
-                  Topic 4
+                  Settings
                 </NavLink>
               </li>
 

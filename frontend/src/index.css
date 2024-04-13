@@ -26,3 +26,14 @@
   .active {
     @apply text-blue-600 bg-blue-100;
   }
+
+  .desktop-view-only {
+    display: none; /* Hide by default */
+  }
+  
+  @media (min-width: 768px) {
+    .desktop-view-only {
+      display: block; /* Show on desktop (screen width >= 768px) */
+    }
+  }
+  

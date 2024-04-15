@@ -225,7 +225,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
                         </div>
 
                         <div class="w-full mt-6 px-3 ">
-                            <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            <p className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
                                     Specializations
                             </p>
                             <p className="tracking-wide text-[0.8rem] text-slate-500 dark:text-slate-400 mb-4">
@@ -233,13 +233,13 @@ function doctorProfileSecondaryForm({doctor,change}) {
                             </p>
 
                             {fields.map((field, index) => (
-                                <div className='my-1 w-full'>
+                                <div className='w-full my-1'>
                                     <FormField
                                         control={form.control}
                                         key={field.id}
                                         name={`specialization.${index}.name`}
                                         render={({ field }) => (
-                                            <FormItem className="space-y-0 w-full flex">
+                                            <FormItem className="flex w-full space-y-0">
                                             <div className='flex-1 mr-2'>
                                                 <FormControl>
                                                     <Input {...field} />
@@ -268,7 +268,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
                                 type="button"
                                 variant="outline"
                                 size="sm"
-                                className="mt-2 bg-slate-600 text-white"
+                                className="mt-2 text-white bg-slate-600"
                                 onClick={() => append({ name: "" })}
                             >
                                 Add New
@@ -280,7 +280,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
                                 control={form.control}
                                 name="availability"
                                 render={({ field }) => (
-                                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                    <FormItem className="flex flex-row items-center justify-between p-3 border rounded-lg shadow-sm">
                                         <div className="space-y-0.5">
                                             <FormLabel>Availability</FormLabel>
                                             <FormDescription>

@@ -50,6 +50,10 @@ const BookingSchema = mongoose.Schema({
         type: Number,
         required: [true, "Please provide participant count"],
         default: 0
+    },
+    serviceId: {
+        type: String,
+        required: [true, "Please provide session id"]
     }
 }, {
     timestamps: true

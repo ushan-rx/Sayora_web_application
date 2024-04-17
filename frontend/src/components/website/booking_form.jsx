@@ -1,4 +1,3 @@
-import React from "react";
 import { create as createZustand } from "zustand";
 import axios from "axios";
 
@@ -15,6 +14,7 @@ const useStore = createZustand((set, get) => ({
   organizationName: "",
   venue: "",
   participantCount: "",
+  serviceId: (sessionStorage.getItem('selectedServiceId') || "") + "- Awareness Program",
   setFirstName: (firstName) => set({ firstName }),
   setLastName: (lastName) => set({ lastName }),
   setNic: (nic) => set({ nic }),
@@ -26,6 +26,8 @@ const useStore = createZustand((set, get) => ({
   setOrganizationName: (organizationName) => set({ organizationName }),
   setVenue: (venue) => set({ venue }),
   setParticipantCount: (participantCount) => set({ participantCount }),
+  setServiceId: (serviceId) => set({ serviceId: serviceId }),
+  
   validate: () => {
     const {
       firstName,
@@ -60,7 +62,7 @@ const useStore = createZustand((set, get) => ({
       alert("Please enter a valid email");
       return false;
     }
-    if (nic.length !== 12 || !nic.endsWith("V")) {
+    if (!(nic.length === 12 || (isNaN(nic) || nic.endsWith("V")))) {
       alert("Please enter a valid NIC");
       return false;
     }
@@ -70,6 +72,11 @@ const useStore = createZustand((set, get) => ({
     }
     if (!/^\d{10}$/.test(phoneNumber02)) {
       alert("Please enter a valid Phone Number 02");
+      return false;
+    }
+
+    if (phoneNumber01 === phoneNumber02) {
+      alert("Phone Number 01 and Phone Number 02 cannot be the same");
       return false;
     }
 
@@ -105,6 +112,7 @@ const BookingForm = () => {
     organizationName,
     venue,
     participantCount,
+    serviceId,
     setFirstName,
     setLastName,
     setNic,
@@ -116,6 +124,7 @@ const BookingForm = () => {
     setOrganizationName,
     setVenue,
     setParticipantCount,
+    setServiceId,
     validate,
     clearForm
   } = useStore();
@@ -138,7 +147,8 @@ const BookingForm = () => {
       time,
       organizationName,
       venue,
-      participantCount
+      participantCount,
+      serviceId
     };
 
     console.log("Data to be sent:", data);
@@ -169,7 +179,13 @@ const BookingForm = () => {
         onSubmit={handleSubmit}
         className="relative w-full max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto bg-white p-8 mt-36 mb-24 m-4 rounded shadow-md"
       >
-        <h2 className="mt-8  text-2xl font-bold text-center">Book a Service</h2>
+        <h2 className="mt-8  text-2xl font-bold text-center"> {serviceId}</h2>
+        <input
+                type="hidden"
+                value={serviceId}
+                onChange={(e) => setServiceId(e.target.value)}
+              />
+        
         <fieldset className="mb-4 p-4 border-2 rounded">
           <legend className="text-gray-400 font-bold mb-2">
             Personal Details

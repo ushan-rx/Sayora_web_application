@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
 import SubMenu from "./SubMenu";
 
 //icons
@@ -9,69 +9,66 @@ import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
 
-
 function PatientMenu() {
-    const path = "/patient";
+  const path = "/patient";
 
-    // items with sub menus
-    const subMenusList = [
-        {
-            name: "ddd",           //display name
-            path: "/ddd",          // main path
-            icon: RiBuilding3Line,
-            menus: [
-              {subName: "overview", subPath: "/overview"},
-              {subName: "sub 1.2", subPath: "/sub1.2"},
-            ],
-          },
-  
-          {
-            name: "Sub Topic 2",    
-            path: "/subtopic2",    
-            icon: TbReportAnalytics,
-            menus: [
-              {subName: "overview", subPath: "overview"},  //sub menu diplay name and path(dont add / before path)
-              {subName: "sub 1.2", subPath: "sub1.2"},
-            ],
-          },
-      ];
+  // items with sub menus
+  const subMenusList = [
+    {
+      name: "treatments", //display name
+      path: "/treatments", // main path
+      icon: RiBuilding3Line,
+      menus: [
+        { subName: "my tretments", subPath: "mytretments" },
+        { subName: "new schedule", subPath: "newshedule" },
+      ],
+    },
 
+    {
+      name: "myrecords",
+      path: "/myrecords",
+      icon: TbReportAnalytics,
+      menus: [
+        { subName: "test reports", subPath: "reportpatient" }, //sub menu diplay name and path(dont add / before path)
+        { subName: "daily uploads", subPath: "dailyuploads" },
+      ],
+    },
+  ];
 
   return (
     <>
-        {/* include single menu items here */}
-        <li>
-            <NavLink to={path + "/overview"} className="link">
-                <AiOutlineAppstore size={23} className="min-w-max" />
-                Overview
-            </NavLink>
-        </li>
+      {/* include single menu items here */}
+      <li>
+        <NavLink to={path + "/overview"} className="link">
+          <AiOutlineAppstore size={23} className="min-w-max" />
+          Home
+        </NavLink>
+      </li>
 
-        <li>
-            <NavLink to={path + "/authentication"} className="link">
-                <BsPerson size={23} className="min-w-max" />
-                Medical Records
-            </NavLink>
-        </li>
+      <li>
+        <NavLink to={path + "/prescription"} className="link">
+          <BsPerson size={23} className="min-w-max" />
+          Prescription
+        </NavLink>
+      </li>
 
-        <li>
-            <NavLink to={path + "/stroage"} className="link">
-                <HiOutlineDatabase size={23} className="min-w-max" />
-                Topic 3
-            </NavLink>    
-        </li>
+      <li>
+        <NavLink to={path + "/appoinmet_path"} className="link">
+          <HiOutlineDatabase size={23} className="min-w-max" />
+          Appoinments
+        </NavLink>
+      </li>
 
-        {/* attach sub menu items  */}
-        <div name='submenu-items'>
-            {subMenusList?.map((menu) => (
-                <div key={menu.name} className="flex flex-col gap-1">
-                <SubMenu data={menu} />
-                </div>
-            ))}
-        </div>
-
+      {/* attach sub menu items  */}
+      <div name="submenu-items">
+        {subMenusList?.map((menu) => (
+          <div key={menu.name} className="flex flex-col gap-1">
+            <SubMenu data={menu} />
+          </div>
+        ))}
+      </div>
     </>
-  )
+  );
 }
 
-export default PatientMenu
+export default PatientMenu;

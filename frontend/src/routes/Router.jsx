@@ -13,7 +13,11 @@ import Overview from '../pages/doctor/overviewDoctor'
 import ProfileDoctor from '../pages/doctor/profileDoctor'
 
 //patient
-
+import ProfilePatient from '../pages/patient/overviewPatient'
+import PrescriptionPatient from '../pages/patient/prescriptionPatient'
+import ReportPatients from '../pages/patient/reportsPatient'
+import DailyUploads from '../pages/patient/dailyUploads'
+import UserProfilePatient from '../pages/patient/profilePatient'
 
 
 
@@ -51,6 +55,11 @@ const Router = createBrowserRouter(
           <Route path="/patient" element={<PatientDashboard /> } exact >
 
             //patient dashboard routes here
+            <Route path="overview" element={<ProfilePatient/> } exact/>
+            <Route path="prescription" element={<PrescriptionPatient/> } exact/>
+            <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>
+            <Route path="myrecords/dailyuploads" element={<DailyUploads/> } exact/>
+            <Route path="profile" element={<UserProfilePatient/> } exact/>
           
 
 

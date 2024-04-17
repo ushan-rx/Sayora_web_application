@@ -6,10 +6,10 @@ const CustomError = require('../errors')
 
 const getAllDoctors = async (req, res) => {
     try {
-      const doctors = await Doctor.find({status: true}).populate('treatments');       // status: true comes only if there is a status field for delete purposes
+      const doctors = await Doctor.find({status: true});       // status: true comes only if there is a status field for delete purposes
       res.status(StatusCodes.OK).json({doctors, count: doctors.length});
     } catch (err) {
-      res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 
@@ -27,15 +27,14 @@ const getAllDoctors = async (req, res) => {
   // get doctor using doctor id
   const getSingleDoctor = async (req, res) => {
     const { id: doctorId } = req.params;
-    console.log(doctorId);
     try {
-      const doctor = await Doctor.findOne({ doctorId: doctorId }).populate('treatments');
+      const doctor = await Doctor.findOne({ doctorId: doctorId });
       if (!doctor) {
         throw new CustomError.NotFoundError(`No doctor with id : ${req.params.id}`);
       }
       res.status(StatusCodes.OK).json({doctor});
     } catch (err) {
-      res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 
@@ -81,11 +80,10 @@ const getAllDoctors = async (req, res) => {
       doctor.status = false;
       doctor = await Doctor.findOneAndUpdate({ doctorId: doctorId }, doctor);
       res.status(StatusCodes.OK).json({doctor});
-  } catch (err) {
-    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+    } catch (err) {
+      res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+    }
   }
-
-}
 
 
 

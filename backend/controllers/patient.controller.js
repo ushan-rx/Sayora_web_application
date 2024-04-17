@@ -19,9 +19,7 @@ const getSinglePatient = async (req, res) => {
   const { id: patientId } = req.params;
   console.log(patientId);
   try {
-    const patient = await Patient.findOne({ patientId: patientId }).populate(
-      "treatments"
-    );
+    const patient = await Patient.findOne({ patientId: patientId });
     if (!patient) {
       throw new CustomError.NotFoundError(
         `No patient with id : ${req.params.id}`

@@ -23,4 +23,20 @@ const getAllDailyUpdates = async (req, res) => {
   }
 };
 
-module.exports = { createDailyUpdate, getAllDailyUpdates};
+const getManyDailyUpdate = async (req, res) => {
+  const {id: patientId} = req.params;
+  console.log(patientId);
+  try {
+    const dailyUpdates = await DailyUpdate.find({patientId: patientId});
+    if (!dailyUpdates) {  
+      throw new CustomError.NotFoundError(
+        `No daily updates for patient with id : ${req.params.id}`
+      );
+    }
+    res.status(StatusCodes.OK).json({ dailyUpdates });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
+module.exports = { createDailyUpdate, getAllDailyUpdates, getManyDailyUpdate};

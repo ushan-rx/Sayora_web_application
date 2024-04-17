@@ -11,6 +11,8 @@ import ProtectedRoutesUser from '../utils/ProtectedRoutesUser'
 //doctor
 import Overview from '../pages/doctor/overviewDoctor'
 import ProfileDoctor from '../pages/doctor/profileDoctor'
+import ExaminationList from '@/pages/doctor/examinationList'
+import ExaminationContainer from '../pages/doctor/examinationContainer'
 
 //patient
 import ProfilePatient from '../pages/patient/overviewPatient'
@@ -29,6 +31,7 @@ import UserProfilePatient from '../pages/patient/profilePatient'
 //website
 import Home from '../pages/website/Home'
 import ServiceMgt from '../pages/website/OverviewService'
+
 
 //set routing
 const Router = createBrowserRouter(
@@ -70,6 +73,11 @@ const Router = createBrowserRouter(
           {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
               <Route path="profile" element={<ProfileDoctor/> } exact/>
+              <Route path="examination">
+                {/*examination routes here*/}
+                <Route path=':id' element={<ExaminationContainer/>}></Route>
+                <Route path='' element={<ExaminationList/>} exact></Route>
+              </Route>
           </Route>
 
           

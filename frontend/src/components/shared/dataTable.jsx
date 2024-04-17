@@ -24,13 +24,13 @@ import {
    
     return (
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+        <Table >
+          <TableHeader >
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="font-bold bg-slate-200">
                       {header.isPlaceholder
                         ? null
                         : flexRender(

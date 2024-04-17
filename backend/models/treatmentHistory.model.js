@@ -10,13 +10,17 @@ const treatmentHistorySchema = new mongoose.Schema({
           type: Date,
           required: true,
         },
-        patient: {
+        patientId: {
             type: String,
             required: true,
         },
         doctor: {
             type: String,
             required: true,
+        },
+        isComplete:{
+            type: Boolean,
+            default: false,
         },
       
 });

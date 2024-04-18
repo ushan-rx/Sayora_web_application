@@ -26,7 +26,7 @@ app.use(cookieParser());
 // Routes
 const authRouter = require('./routes/authRoutes');
 const bookingRoute = require("./routes/booking.route.js");
-
+const serviceRoute = require('./routes/serviceAdding.route.js');
 const doctorRoute = require('./routes/doctor.route.js');
 const patientRoute = require('./routes/patient.route.js');
 const feedbackRoute = require('./routes/feedback.route.js');
@@ -56,7 +56,7 @@ app.use('/api/v1/feedback', feedbackRoute);
 app.use('/api/v1/dailyquestions', dailyQuestionsRoute);
 app.use('/api/v1/dailyupdate', daillyUpdateRoute);
 app.use('/api/v1/requesition', requesition);
-
+app.use('/api/v1/serviceAdding', serviceRoute);
 app.use('/api/v1/report', reportRoute);
 
 app.use('/doctortime' ,doctorTimeRouter);

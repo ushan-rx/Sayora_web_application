@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import {toast, Toaster} from "react-hot-toast";
 
 import PatientProfilePersonalForm from "@/components/patient/PatientProfilePersonalForm";
+import PatientProfileSecondaryForm from "@/components/patient/patientProfileSecondaryForm";
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -59,6 +60,15 @@ function profilrPatient() {
         setIsPersonalSubmitted(!isPersonalSubmitted);     // to update patient details
     }
 
+    const changeSecondaryState = (value) => {         
+        if(value){
+          toast.success("Profile details updated successfully");
+        } else {
+          toast.error("Failed to update Profile details");
+        }
+        setIsSecondarySubmitted(!isSecondarySubmitted);     // to update doctor details
+      }
+
     const form2 = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -80,7 +90,7 @@ function profilrPatient() {
 					<div className="flex-col hidden py-4 rounded-lg bg-cyan-800 lg:flex">
 			
 						<div class="w-24 h-24 mt-2 bg-indigo-100 mx-auto rounded-full shadow-2xl flex items-center justify-center text-indigo-500">
-                            <img src={patientDetails.profilePic} alt="" srcset="" />
+                            <img src={patientDetails.profilePic} alt="" srcset="" className='rounded-full'/>
 						</div>
 						{/* display profile details section */}
 						<div className="mx-20 mt-4 text-lg font-bold text-center text-gray-300 rounded-md">Profile</div>
@@ -111,7 +121,8 @@ function profilrPatient() {
 						<span className="text-2xl font-bold">Personal Details</span>
 						{patientDetails == {} && <><br/><span className="text-2xl font-normal">Loading...</span></>}
 						{patientDetails != undefined && <PatientProfilePersonalForm  doctor = {patientDetails} change={changePersonalState}/>}
-            
+                        <span className="col-span-2 mt-6 text-2xl font-bold">Professional and Profile Details</span>
+                        {patientDetails != undefined && <PatientProfileSecondaryForm  doctor = {patientDetails} change={changeSecondaryState}/>}
 
 						{/* from end */}
 					</div>

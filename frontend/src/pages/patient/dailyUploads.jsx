@@ -46,6 +46,9 @@ const formSchema = z.object({
       type: z.string().min(2, {
         message: "type must be at least 2 characters.",
       }),
+      messure: z.string().min(2, {
+        message: "messure must be at least 2 characters.",
+      }),
     })
   ),
   symptoms: z.array(
@@ -70,7 +73,7 @@ export default function DailyUploads() {
     defaultValues: {
       reportName: "",
       temperature: 0,
-      medications: [{ type: "" }],
+      medications: [{ type: "", messure: "" }],
       symptoms: [""],
     },
   });
@@ -93,7 +96,6 @@ export default function DailyUploads() {
       data = { ...data, documentURL: imageURL }; // add image url to the updated data
     }
 
-    
     console.log(data);
 
     try {
@@ -217,25 +219,40 @@ export default function DailyUploads() {
                                 <Input {...field} />
                               </FormControl>
                               <FormMessage className="w-full" />
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                className={cn(
-                                  fields.length > 1
-                                    ? "bg-red-500 text-white h-9 m-0"
-                                    : "hidden"
-                                )}
-                                onClick={() => {
-                                  remove(index);
-                                }}
-                              >
-                                Remove
-                              </Button>
                             </div>
                           </FormItem>
                         )}
                       />
+                      <FormField
+                        control={form.control}
+                        key={field.id}
+                        name={`medications.${index}.messure`}
+                        render={({ field }) => (
+                          <FormItem className="flex w-64 space-y-0">
+                            <div className="flex-1 mr-2">
+                              <FormControl>
+                                <Input {...field} />
+                              </FormControl>
+                              <FormMessage className="w-full" />
+                            </div>
+                          </FormItem>
+                        )}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className={cn(
+                          fields.length > 1
+                            ? "bg-red-500 text-white h-9 m-0"
+                            : "hidden"
+                        )}
+                        onClick={() => {
+                          remove(index);
+                        }}
+                      >
+                        Remove
+                      </Button>
                     </div>
                   ))}
                   {/* button to add new fields */}

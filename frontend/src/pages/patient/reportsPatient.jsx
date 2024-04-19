@@ -96,10 +96,10 @@ const ReportCard = () => {
                         {report.medications.map((medication) => (
                           <div key={medication.index}>
                             <span className="text-black">
-                              {medication.type + " "}
+                              {medication.type + " - "}
                             </span>
                             <span className="text-black">
-                              {medication.measure + " "}
+                              {medication.messure + " "}
                             </span>{" "}
                             {/* //this measure is not defined in the report schema */}
                           </div>
@@ -133,6 +133,13 @@ const ReportCard = () => {
                               </div>
                               <p>Additional Notes: {report.additionalNotes}</p>
                               <p>Time: {formattedTime}</p>
+                              <div class="w-64 h-64 mt-2  flex items-center justify-center text-indigo-500">
+                                <img
+                                  src={report.documentURL}
+                                  alt=""
+                                  srcset=""
+                                />
+                              </div>
                             </div>
                           </div>
                         </DialogContent>
@@ -161,7 +168,5 @@ const ReportCard = () => {
 };
 
 export default ReportCard;
-
-
 
 // note -stop working on this page until filter by patient id

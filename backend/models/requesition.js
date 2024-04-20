@@ -21,11 +21,6 @@ const requesition = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  reports: [
-    {
-      type: String
-    },
-  ],
 });
 
 // Create the requesition model

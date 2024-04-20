@@ -14,7 +14,7 @@ export const usePatientStore = create((set) => ({
         familyHistory: [],
         currentMedications: [],
         surgicalProcedures: [],
-        vitals: {},
+        vitals: [{}],
         treatmentHistory: [],
         prescriptions: [],
         dailyQuestions: [],
@@ -29,7 +29,7 @@ export const usePatientStore = create((set) => ({
     set({ loading: true, error: false, errorData: null, success: false })
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/patient/PAT00001`) // replace with your actual API call
+      const response = await axios.get(`http://localhost:5000/api/v1/patient/${patientId}`) // replace with your actual API call
       set({ patient: response?.data.patient, loading: false, success: true })
       options.onSuccess?.(response)
     } catch (error) {

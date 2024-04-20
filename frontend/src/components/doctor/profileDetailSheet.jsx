@@ -26,7 +26,6 @@ export default function profileDeatailSheet() {
             allergies,
             vitals,
             } = usePatientStore(state => ({
-  // individual setters
                 patientId: state.patient.patientId,
                 fName: state.patient.fName,
                 lName: state.patient.lName,
@@ -38,10 +37,8 @@ export default function profileDeatailSheet() {
         }))
 
         let age = (new Date().getFullYear() - new Date(dob).getFullYear())  // calculate age
-        console.log(age)
 
-
-
+        console.log(vitals)
     return(
         <Sheet>
             <SheetTrigger asChild>
@@ -123,42 +120,42 @@ export default function profileDeatailSheet() {
                                         Height
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {vitals.height} cm
+                                        : {vitals[0].height} cm
                                     </Label>
 
                                     <Label className="text-left col-span-1 text-slate-600 font-bold">
                                         Weight
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {vitals.weight} kg
+                                        : {vitals[0].weight} kg
                                     </Label>
 
                                     <Label className="text-left col-span-1 text-slate-600 font-bold">
                                         Blood Pressure
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {vitals.bloodPressure} mmHg
+                                        : {vitals[0].bloodPressure} mmHg
                                     </Label>
 
                                     <Label className="text-left col-span-1 text-slate-600 font-bold">
                                         Pulse Rate
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {vitals.pulseRate} bpm
+                                        : {vitals[0].pulseRate} bpm
                                     </Label>
 
                                     <Label className="text-left col-span-1 text-slate-600 font-bold">
                                         Temperature
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {vitals.temperature} °C
+                                        : {vitals[0].temperature} °C
                                     </Label>
 
                                     <Label className="text-left col-span-1 text-slate-600 font-bold">
                                         Last Checked
                                     </Label>
                                     <Label  className="text-left col-span-2">
-                                        : {new Date(vitals.checkdate).toLocaleDateString()}
+                                        : {new Date(vitals[0].checkdate).toLocaleDateString()}
                                     </Label>
                                     
                                 </div>

@@ -1,9 +1,11 @@
-// store state related to the examination panel
+// store state related to the examination panel and apointment list
 //(to update the patient details state according to new submits)
 
 import { create } from 'zustand'
 
 export const useExaminationStore = create((set) => ({
     isRefetchNeeded: false,
-    setRefetchNeeded: () => set({ isRefetchNeeded: !isRefetchNeeded }),
+    isRefetchExaminationNeeded: false,
+    setRefetchNeeded: () => set((state) => ({ isRefetchNeeded: !state.isRefetchNeeded })),
+    setRefetchExaminationNeeded: () => set((state) => ({ isRefetchExaminationNeeded: !state.isRefetchExaminationNeeded })),
 }))

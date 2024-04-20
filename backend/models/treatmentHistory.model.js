@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 const treatmentHistorySchema = new mongoose.Schema({
         treatment: {
-          type: Schema.Types.ObjectId, // treatment referenced
-          ref: "Treatment",
+          type: mongoose.Schema.Types.ObjectId, 
+          ref: 'Treatment'
         },
         date: {
           type: Date,
@@ -14,11 +14,14 @@ const treatmentHistorySchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        doctor: {
+        doctorId: {
             type: String,
             required: true,
         },
-        isComplete:{
+        appointmentId: {           
+          type: String,
+        },
+        isComplete:{            
             type: Boolean,
             default: false,
         },

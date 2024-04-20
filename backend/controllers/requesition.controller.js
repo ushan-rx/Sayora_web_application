@@ -23,4 +23,24 @@ const getAllRequesitions = async (req, res) => {
   }
 };
 
-module.exports = { createRequesition, getAllRequesitions};
+const getRequesitionsByPatient = async (req, res) => {
+  const { id: patientId } = req.params;
+  try {
+    const requesitions = await Requesition.find({ patientId: patientId });
+    res.status(StatusCodes.OK).json({ requesitions, count: requesitions.length });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
+const deleteRequesition = async (req, res) => {
+  const { id: _id } = req.params;
+  try {
+    const requesition = await Requesition.findByIdAndDelete({ _id: _id });
+    res.status(StatusCodes.OK).json({ requesition, count: requesition.length });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
+module.exports = { createRequesition, getAllRequesitions, getRequesitionsByPatient, deleteRequesition};

@@ -58,7 +58,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
         specialization: doctor?.specialization || []
     }
 
-        // react hook form init with zod resolver
+    // react hook form init with zod resolver
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: defaultValues,
@@ -76,7 +76,7 @@ function doctorProfileSecondaryForm({doctor,change}) {
     //on form submit
     const onSubmitSecondary = async (data) => {
         setIsSubmitting(true);
-        let imageURL = "";     // profule picture url
+        let imageURL = "";     // profile picture url
 
         let updatedData = {
             experience: data.experience,
@@ -157,10 +157,11 @@ function doctorProfileSecondaryForm({doctor,change}) {
 											Experience (Yrs)
 										</FormLabel>
 										<FormControl>
-											<Input
+											<Input type = "number"
 												placeholder={doctor.experience || "Yrs"}
 												{...field}
 												class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
+                                                onChange={(event) => field.onChange(+event.target.value)}
 											/>
 										</FormControl>
 										<FormMessage class="text-red-500 text-xs italic" />

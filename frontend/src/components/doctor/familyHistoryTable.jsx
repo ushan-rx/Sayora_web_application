@@ -8,7 +8,7 @@ function currentMedicationTable(data) {
     return (
         <div>
             <div className="container p-6">
-                <h1 className='py-4 font-semibold'>Current Medications</h1>
+                <h1 className='py-4 font-semibold'>Family History</h1>
                 <div className="table-container">
                     <DataTable columns={familyHistoryColumns} data={data.tableData} />
                 </div>

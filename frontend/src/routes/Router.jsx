@@ -24,7 +24,7 @@ import UserProfilePatient from '../pages/patient/profilePatient'
 
 
 //staff
-
+import AwarnessPrograms from '../pages/staff/addServices';
 
 
 
@@ -32,6 +32,8 @@ import UserProfilePatient from '../pages/patient/profilePatient'
 import Home from '../pages/website/Home'
 import ServiceMgt from '../pages/website/OverviewService'
 
+import ServiceHome from '../pages/website/HomeNavService'
+import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
 
 //set routing
 const Router = createBrowserRouter(
@@ -43,13 +45,15 @@ const Router = createBrowserRouter(
           <Route index element={<Home/> } exact/>
           {/*webiste routes here*/}
           <Route path="home" element={<Home/> } exact/>
-          <Route path="service" element={<ServiceMgt/> } exact/>
+          <Route path="serviceForm" element={<ServiceMgt/> } exact/>
+          <Route path="service" element={<ServiceHome/> } exact/>
+          <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
 
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
           {/*staff dashboard routes here*/}
-
+<Route path = "addAwarnessSer" element ={<AwarnessPrograms />}exact />
 
         </Route>
 

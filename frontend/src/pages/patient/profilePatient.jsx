@@ -80,18 +80,7 @@ function profilrPatient() {
 					<div className="flex-col hidden py-4 rounded-lg bg-cyan-800 lg:flex">
 			
 						<div class="w-24 h-24 mt-2 bg-indigo-100 mx-auto rounded-full shadow-2xl flex items-center justify-center text-indigo-500">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-18 w-18"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-									clip-rule="evenodd"
-								/>
-							</svg>
+                            <img src={patientDetails.profilePic} alt="" srcset="" />
 						</div>
 						{/* display profile details section */}
 						<div className="mx-20 mt-4 text-lg font-bold text-center text-gray-300 rounded-md">Profile</div>

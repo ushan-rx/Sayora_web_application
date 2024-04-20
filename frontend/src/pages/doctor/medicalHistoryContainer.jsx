@@ -1,8 +1,8 @@
 import React from 'react'
 
-import SurgicalProcedureTable from '@/components/shared/surgicalProcedureTable'
-import CurrentMedicationTable from '@/components/shared/currentMedicationTable'
-import FamilyHistoryTable from '@/components/shared/familyHistoryTable'
+import SurgicalProcedureTable from '@/components/doctor/surgicalProcedureTable'
+import CurrentMedicationTable from '@/components/doctor/currentMedicationTable'
+import FamilyHistoryTable from '@/components/doctor/familyHistoryTable'
 
 import { usePatientStore } from '@/store/patient.store'
 
@@ -13,7 +13,7 @@ function medicalHistoryContainer() {
     console.log(surgicalProcedures)
   return (
     <div>
-        <div className='grid grid-flow-row w-full h-full'>
+        <div className='grid grid-flow-row h-[80vh] overflow-auto -mr-24'>
             <div className='grid grid-flow-col grid-cols-2'>
                 <div className='m-4 bg-slate-50 rounded-lg'><SurgicalProcedureTable tableData={surgicalProcedures} /></div>
                 <div className='m-4 bg-slate-50 rounded-lg'><FamilyHistoryTable tableData={familyHistory} /></div>

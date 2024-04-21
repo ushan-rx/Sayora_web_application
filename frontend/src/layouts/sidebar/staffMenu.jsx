@@ -75,6 +75,20 @@ function staffMenu() {
           {subName: "sub 1.2", subPath: "sub1.2"},
         ],
       },
+
+      {
+        name: "Product",    
+        path: "/product",    
+        icon: TbReportAnalytics,
+        menus: [
+          {subName: "Product List", subPath: "viewProduct"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "Orders", subPath: "adminOrder"},
+         
+          
+        ],
+      },
   ];
 
 

@@ -29,6 +29,7 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "firebase": "^10.11.0",
+    "formik": "^2.4.5",
     "framer-motion": "^11.0.14",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
@@ -46,6 +47,7 @@
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
+    "yup": "^1.4.0",
     "zod": "^3.22.4",
     "zustand": "^4.5.2"
   },

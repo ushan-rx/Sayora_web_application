@@ -59,6 +59,16 @@ function PatientMenu() {
         </NavLink>
       </li>
 
+      <li>
+        <NavLink to={path + "/product"} className="link">
+          <HiOutlineDatabase size={23} className="min-w-max" />
+          Ayurvedic Products
+        </NavLink>
+      </li>
+
+     
+
+      
       {/* attach sub menu items  */}
       <div name="submenu-items">
         {subMenusList?.map((menu) => (

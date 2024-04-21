@@ -38,7 +38,7 @@ const reportRoute = require('./routes/report.route');
 const PrescriptionRouter = require('./routes/prescription.route');
 
 const productRouter = require('./routes/Product.route');
-
+const ProductOrderRouter = require('./routes/ProductOrder.route');
 const supplierRouter = require('./routes/Supplier.route');
 const itemRouter = require('./routes/Inventory_Item.route');
 const orderRouter = require('./routes/Inventory_Order.route');
@@ -70,7 +70,7 @@ app.use('/api/v1/prescription', PrescriptionRouter);
 app.use('/doctortime' ,doctorTimeRouter);
 
 app.use(productRouter);
-
+app.use(ProductOrderRouter);
 app.use(supplierRouter);
 app.use(itemRouter);
 app.use('/Inventory' , orderRouter);

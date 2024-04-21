@@ -83,7 +83,7 @@ app.use('/api/v1/staff', staffRoute);
 app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
 
-app.use('/api/v1/Email_data', emailRouter);
+// app.use('/api/v1/Email_data', emailRouter);
 
 const NotFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');

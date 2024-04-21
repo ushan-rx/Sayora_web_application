@@ -41,7 +41,7 @@ import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
 
 import ServiceHome from '../pages/website/HomeNavService'
-import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
+import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
 
 //set routing
 const Router = createBrowserRouter(
@@ -62,6 +62,7 @@ const Router = createBrowserRouter(
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
           <Route path="viewBookedServices" element={<BookedServices/> } exact/>
+         
           {/*staff dashboard routes here*/}
           <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>

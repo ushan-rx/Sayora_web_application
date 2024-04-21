@@ -30,6 +30,12 @@
   .desktop-view-only {
     display: none; /* Hide by default */
   }
+
+  .hidden-space {
+    width: 50px; /* Adjust the width as needed */
+    overflow: hidden;
+    white-space: nowrap;
+  }
   
   @media (min-width: 768px) {
     .desktop-view-only {

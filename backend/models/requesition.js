@@ -4,18 +4,15 @@ const mongoose = require("mongoose");
 const requesition = new mongoose.Schema({
   patientId: {
     type: String,
-    required: true,
   },
   doctorId: {
     type: String,
-    required: true,
   },
   testName: {
     type: String,
   },
   reqDate: {
     type: Date,
-    required: true,
   },
   is_uploaded: {
     type: Boolean,

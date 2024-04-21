@@ -31,6 +31,7 @@ function PatientMenu() {
       menus: [
         { subName: "test reports", subPath: "reportpatient" }, //sub menu diplay name and path(dont add / before path)
         { subName: "daily uploads", subPath: "dailyuploads" },
+        { subName: "My care profile", subPath: "mycareprofile" },
       ],
     },
   ];
@@ -56,6 +57,13 @@ function PatientMenu() {
         <NavLink to={path + "/appoinmet_path"} className="link">
           <HiOutlineDatabase size={23} className="min-w-max" />
           Appoinments
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink to={path + "/requesition"} className="link">
+          <HiOutlineDatabase size={23} className="min-w-max" />
+          Requesition
         </NavLink>
       </li>
 

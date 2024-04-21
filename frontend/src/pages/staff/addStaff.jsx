@@ -8,7 +8,7 @@ import { FaUserTie } from "react-icons/fa";
 const schema = z.object({
   name: z.string().min(1, 'Please enter a name'),
   email: z.string().email('Invalid email address'),
-  userRole: z.enum(['doctor', 'systemadmin', 'medicalsecretary', 'staffmanager']),
+  userRole: z.enum(['doctor','systemadmin','medicalsecretary','staffmanager','appointmentmanager','servicehandler','productmanager','inventorymanager']),
   userType: z.enum(['doctor', 'staff']),
 });
 
@@ -76,6 +76,10 @@ function AddStaff() {
             <option value="systemadmin">System Admin</option>
             <option value="medicalsecretary">Medical Secretary</option>
             <option value="staffmanager">Staff Manager</option>
+            <option value="appointmentmanager">Appointment Manager</option>
+            <option value="inventorymanager">Inventory Manager</option>
+            <option value="productmanager">Product Manager</option> 
+            <option value="servicehandler">Service Handler</option>  
           </select>
         </div>
         

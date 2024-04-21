@@ -25,7 +25,7 @@ const getAllDailyUpdates = async (req, res) => {
 
 const getManyDailyUpdate = async (req, res) => {
   const {id: patientId} = req.params;
-  console.log(patientId);
+  //console.log(patientId);
   try {
     const dailyUpdates = await DailyUpdate.find({patientId: patientId});
     if (!dailyUpdates) {  
@@ -39,4 +39,17 @@ const getManyDailyUpdate = async (req, res) => {
   }
 };
 
-module.exports = { createDailyUpdate, getAllDailyUpdates, getManyDailyUpdate};
+// Delete a report by ID
+const deleteDailyUpdate = async (req, res) => {
+  try {
+    const dailyUpdates = await DailyUpdate.findByIdAndDelete(req.params.id);
+    if (!dailyUpdates) {
+        throw new CustomError.NotFoundError(`No report with id : ${req.params.id}`);
+    }
+    res.status(StatusCodes.OK).json({dailyUpdates});
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
+module.exports = { createDailyUpdate, getAllDailyUpdates, getManyDailyUpdate, deleteDailyUpdate};

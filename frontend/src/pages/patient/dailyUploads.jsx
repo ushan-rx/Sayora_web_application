@@ -78,9 +78,22 @@ export default function DailyUploads() {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const {
+    fields: medicationFields,
+    append: medicationAppend,
+    remove: medicationRemove,
+  } = useFieldArray({
+    // hook to handle array fields(specialization)
     name: "medications",
     control: form.control,
+  });
+
+  const {
+    fields: allergyFields,
+    append: allergyAppend,
+    remove: allergyRemove,
+  } = useFieldArray({
+    // hook to handle array fields(specialization)
     name: "symptoms",
     control: form.control,
   });
@@ -136,22 +149,29 @@ export default function DailyUploads() {
                       </FormItem>
                     )}
                   />
-                  {/* 
-              twmparature
-              <FormField
-                control={form.control}
-                name="temperature"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>What is your body tempareture now?</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
+                  {/* temparature */}
+                  <FormField
+                    control={form.control}
+                    name="temperature"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          What is your body tempareture now?
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(+event.target.value)
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
+                <br />
 
                 {/* Additional note */}
                 <FormField
@@ -167,6 +187,7 @@ export default function DailyUploads() {
                     </FormItem>
                   )}
                 />
+                <br />
 
                 {/* long input */}
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -204,114 +225,128 @@ export default function DailyUploads() {
 
               <div className="p-4 bg-white md:w-2/5">
                 <div className="grid grid-cols-1 gap-4">
-                  {/* Medications */}
-                  <FormLabel>Did you get any medications?</FormLabel>
-                  {fields.map((field, index) => (
-                    <div className="w-full my-1">
-                      <FormField
-                        control={form.control}
-                        key={field.id}
-                        name={`medications.${index}.type`}
-                        render={({ field }) => (
-                          <FormItem className="flex w-64 space-y-0">
-                            <div className="flex-1 mr-2">
-                              <FormControl>
-                                <Input {...field} />
-                              </FormControl>
-                              <FormMessage className="w-full" />
-                            </div>
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        key={field.id}
-                        name={`medications.${index}.messure`}
-                        render={({ field }) => (
-                          <FormItem className="flex w-64 space-y-0">
-                            <div className="flex-1 mr-2">
-                              <FormControl>
-                                <Input {...field} />
-                              </FormControl>
-                              <FormMessage className="w-full" />
-                            </div>
-                          </FormItem>
-                        )}
-                      />
+                  {/* Currunt medication */}
+                  <p className="block ml-6 text-xs font-bold tracking-wide text-gray-700 uppercase">
+                    Current medications
+                  </p>
+
+                  <div className="w-full ml-6">
+                    {medicationFields.map((field, index) => (
+                      <div className="flex w-full ">
+                        <FormField
+                          control={form.control}
+                          name={`medications.${index}.type`}
+                          render={({ field }) => (
+                            <FormItem className="flex w-full space-y-2">
+                              <div className="flex-1 pr-2">
+                                <FormControl>
+                                  <Input {...field} />
+                                </FormControl>
+                                <FormMessage className="w-full" />
+                              </div>
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name={`medications.${index}.messure`}
+                          render={({ field }) => (
+                            <FormItem className="flex w-full space-y-0">
+                              <div className="flex-1 pr-2">
+                                <FormControl>
+                                  <Input {...field} />
+                                </FormControl>
+                                <FormMessage className="w-full" />
+                              </div>
+                            </FormItem>
+                          )}
+                        />
+
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className={cn("text-red-500 h-9 mr-4 text-xl")}
+                          onClick={() => {
+                            medicationRemove(index);
+                          }}
+                        >
+                          <BiX />
+                        </Button>
+                      </div>
+                    ))}
+                    {/* button to add new fields */}
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="mt-2 text-white bg-slate-600"
+                      onClick={() =>
+                        medicationAppend({
+                          name: "",
+                          dosage: "",
+                          frequency: "",
+                          reason: "",
+                        })
+                      }
+                    >
+                      Add New
+                    </Button>
+                  </div>
+
+
+                  {/* symptoms */}
+                  <div class="w-full m-6 md:w-4/5">
+                    <p className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
+                      What are the Symptoms?
+                    </p>
+
+                    <div className="w-full">
+                      {allergyFields.map((field, index) => (
+                        <div className="flex w-full my-1 ">
+                          <FormField
+                            control={form.control}
+                            key={field.id}
+                            name={`symptoms.${index}`}
+                            render={({ field }) => (
+                              <FormItem className="flex w-full space-y-0">
+                                <div className="flex-1">
+                                  <FormControl>
+                                    <Input {...field} />
+                                  </FormControl>
+                                  <FormMessage className="w-full" />
+                                </div>
+                              </FormItem>
+                            )}
+                          />
+
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className={cn("text-red-500 h-9 ml-4 text-xl")}
+                            onClick={() => {
+                              allergyRemove(index);
+                            }}
+                          >
+                            <BiX />
+                          </Button>
+                        </div>
+                      ))}
+                      {/* button to add new fields */}
                       <Button
                         type="button"
                         variant="outline"
                         size="sm"
-                        className={cn(
-                          fields.length > 1
-                            ? "bg-red-500 text-white h-9 m-0"
-                            : "hidden"
-                        )}
-                        onClick={() => {
-                          remove(index);
-                        }}
+                        className="mt-2 text-white bg-slate-600"
+                        onClick={() => allergyAppend({ name: "" })}
                       >
-                        Remove
+                        Add New
                       </Button>
                     </div>
-                  ))}
-                  {/* button to add new fields */}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="w-32 mt-2 text-white bg-slate-600"
-                    onClick={() => append({ name: "" })}
-                  >
-                    Add New1
-                  </Button>
+                  </div>
 
-                  {/* Symptomps */}
-                  <FormLabel>Did you get any medications?</FormLabel>
-                  {fields.map((field, index) => (
-                    <div className="w-full my-1">
-                      <FormField
-                        control={form.control}
-                        key={field.id}
-                        name={`symptoms.${index}`}
-                        render={({ field }) => (
-                          <FormItem className="flex w-full space-y-0">
-                            <div className="flex-1 mr-2">
-                              <FormControl>
-                                <Input {...field} />
-                              </FormControl>
-                              <FormMessage className="w-full" />
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                className={cn(
-                                  fields.length > 1
-                                    ? "bg-red-500 text-white h-9 m-0"
-                                    : "hidden"
-                                )}
-                                onClick={() => {
-                                  remove(index);
-                                }}
-                              >
-                                Remove
-                              </Button>
-                            </div>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  ))}
-                  {/* button to add new fields */}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="w-32 mt-2 text-white bg-slate-600"
-                    onClick={() => append({ name: "" })}
-                  >
-                    Add New
-                  </Button>
+                  <br />
                   <Button
                     type="submit"
                     disabled={isSubmitting}

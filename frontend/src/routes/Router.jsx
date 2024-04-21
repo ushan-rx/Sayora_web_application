@@ -21,11 +21,20 @@ import PrescriptionPatient from '../pages/patient/prescriptionPatient'
 import ReportPatients from '../pages/patient/reportsPatient'
 import DailyUploads from '../pages/patient/dailyUploads'
 import UserProfilePatient from '../pages/patient/profilePatient'
+import MyCareProfile  from '../pages/patient/myCare'
+import PatientTreatment from '../pages/patient/treatmentHistoryPatient'
+import Requesition from '../pages/patient/requesition'
 
 
 
 //staff
 import AwarnessPrograms from '../pages/staff/addServices';
+import AddTreatment from '@/pages/Cashier/AddTreatment'
+import Cashier from '@/pages/Cashier/Cashier'
+import CashierTable from '@/pages/Cashier/CashierTable'
+import EditTreatment from '@/pages/Cashier/EditTreatment'
+import FetchTreatment from '@/pages/Cashier/FetchTreatment'
+import UpdateCashier from '@/pages/Cashier/UpdateCashier'
 
 
 
@@ -42,6 +51,7 @@ import MyLeaves from '@/pages/staff/myLeaves'
 
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
+import ManageDoctor from '@/pages/staff/manageDoctor'
 
 import ProductHome from '@/pages/Product/ProductHome'
 import AddProduct from '@/pages/Product/AddProduct'
@@ -71,7 +81,9 @@ const Router = createBrowserRouter(
         </Route>
         <Route path = "staff" element ={<StaffDashboard />}exact >
           {/*staff dashboard routes here*/}
-          <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
+          {/*AROSHANA-START*/}
+          ManageDoctor
+            <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
             <Route path="ManagePatient/add" element={<AddStaff/> } exact/>
             <Route path="ManagePatients/overview" element={<ManagePatient/> } exact/>
@@ -79,6 +91,30 @@ const Router = createBrowserRouter(
             <Route path="ManageLeaves/overview" element={<StaffLeaves/> } exact/>
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
+            <Route path="ManageDoctor/overview" element={<ManageDoctor/> } exact/>
+           {/*AROSHANA-END*/}
+            {/* kaumal */}
+
+            <Route path='treatment'>
+                <Route index element={<FetchTreatment/> } exact/>
+                <Route path="addTreat" element={<AddTreatment/> } exact/>
+                <Route path="viewTreat" element={<FetchTreatment/> } exact/>
+            </Route>
+            <Route path='cashier'>
+                <Route index element={<Cashier/>} exact/>
+                <Route path="cashier" element={<Cashier/> } exact/>
+                <Route path="viewCash" element={<CashierTable/> } exact/>
+
+            </Route>
+            {/* kaumal */}
+
+           
+          {/* kawmal paths  */}
+          <Route path="updatex/:id" element={<EditTreatment />} />
+          {/* <Route path="updateCash/:id" element={<UpdateCashier />} /> */}
+          <Route path="Cashier/viewCash/staff/updateCash/:id" element={<UpdateCashier />} />
+          <Route path="viewCash" element={<viewCash/> } exact/>
+          {/* end */}
 
             <Route path = "product">
             <Route index element ={<ViewProducts/>}exact/>
@@ -103,6 +139,9 @@ const Router = createBrowserRouter(
             <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>
             <Route path="myrecords/dailyuploads" element={<DailyUploads/> } exact/>
             <Route path="profile" element={<UserProfilePatient/> } exact/>
+            <Route path="myrecords/mycareprofile" element={<MyCareProfile/>} exact/>
+            <Route path="treatments/mytretments" element={<PatientTreatment/>} exact/>
+            <Route path="requesition" element={<Requesition/>} exact/>
           
             <Route path = "product">
             <Route index element ={<ProductHome/>}></Route>

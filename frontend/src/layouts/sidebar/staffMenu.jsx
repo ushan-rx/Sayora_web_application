@@ -11,6 +11,9 @@ import { RiBuilding3Line } from "react-icons/ri";
 import { FaUserMd } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa";
 import { FaUserInjured } from "react-icons/fa";
+import { ImAirplane } from "react-icons/im";
+import { FaUserDoctor } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
 
 function staffMenu() {
   const path = "/staff";
@@ -30,9 +33,21 @@ function staffMenu() {
       },
 
       {
+        name: "ManageDoctor",           //display name
+        path: "/managedoctor",          // main path
+        icon: FaUserDoctor,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Add Doctor", subPath: "add"},
+        ],
+
+        
+      },
+
+      {
         name: "ManagePatients",           //display name
         path: "/managepatient",          // main path
-        icon: FaUserInjured,
+        icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},
           {subName: "Add Patient", subPath: "add"},
@@ -44,10 +59,10 @@ function staffMenu() {
       {
         name: "ManageLeaves",           //display name
         path: "/manageleaves",          // main path
-        icon: FaUserInjured,
+        icon: ImAirplane,
         menus: [
           {subName: "Overview", subPath: "overview"},
-          {subName: "Add Patient", subPath: "add"},
+          
         ],
 
         
@@ -56,7 +71,7 @@ function staffMenu() {
       {
         name: "StaffProfile",           //display name
         path: "/manageleaves",          // main path
-        icon: FaUserInjured,
+        icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},
           {subName: "Apply Leave", subPath: "leaves/apply"},
@@ -66,28 +81,28 @@ function staffMenu() {
        
       },
 
+      //kaumal
       {
-        name: "Sub Topic 2",    
-        path: "/subtopic2",    
-        icon: TbReportAnalytics,
+        name: "Treatment",           //display name
+        path: "/treatment",          // main path
+        icon: FaUserInjured,
         menus: [
-          {subName: "overview", subPath: "overview"},  //sub menu diplay name and path(dont add / before path)
-          {subName: "sub 1.2", subPath: "sub1.2"},
-        ],
-      },
-
-      {
-        name: "Product",    
-        path: "/product",    
-        icon: TbReportAnalytics,
-        menus: [
-          {subName: "Product List", subPath: "viewProduct"},
-          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
-          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
-          {subName: "Orders", subPath: "adminOrder"},
-         
+          {subName: "Add Treatmenet", subPath: "addTreat"},
+          {subName: "Manage Treatment", subPath: "viewTreat"},
           
         ],
+
+      },
+      {
+        name: "Cashier",           //display name
+        path: "/cashier",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Invoice", subPath: "cashier"},
+          {subName: "Manage Invoice", subPath: "viewCash"},
+          
+        ],
+
       },
   ];
 
@@ -102,19 +117,9 @@ return (
         </NavLink>
     </li>
 
-    <li>
-        <NavLink to={path + "/authentication"} className="link">
-            <BsPerson size={23} className="min-w-max" />
-            Medical Records
-        </NavLink>
-    </li>
 
-    <li>
-        <NavLink to={path + "/stroage"} className="link">
-            <HiOutlineDatabase size={23} className="min-w-max" />
-            Topic 3
-        </NavLink>    
-    </li>
+
+  
 
     {/* attach sub menu items  */}
     <div name='submenu-items'>

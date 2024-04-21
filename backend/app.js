@@ -46,11 +46,13 @@ const orderRouter = require('./routes/Inventory_Order.route');
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
 
+
 const staffRoute = require('./routes/staff.route.js');
 const tempUserRoute = require('./routes/tempUser.route.js');
 const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
 
-const treatmentRoutes = require('./routes/treatment')
+const cashierRoutes  = require('./routes/cashierRoutes.js')
+const treatmentRoutes = require('./routes/treatment.js')
 
 
 //use route
@@ -77,6 +79,7 @@ app.use('/Inventory' , orderRouter);
 
 app.use(appoinmentRouter);
 app.use('/doctortime' ,doctorTimeRouter);
+app.use('/cashier', cashierRoutes);
 app.use('/treatment', treatmentRoutes);
 
 app.use('/api/v1/staff', staffRoute);

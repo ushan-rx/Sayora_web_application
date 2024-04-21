@@ -66,6 +66,23 @@ const getAllTreatmentHistory = async (req, res) => {
       }
   }
 
+  const getManyTreatmentHistory = async (req, res) => {
+    const {id: patientId} = req.params;
+    //console.log(patientId);
+    try {
+      const tHistory = await TreatmentHistory.find({patientId: patientId}).populate('treatment').exec();
+      if (!tHistory) {  
+        throw new CustomError.NotFoundError(
+          `No daily updates for patient with id : ${req.params.id}`
+        );
+      }
+      res.status(StatusCodes.OK).json({ tHistory });
+    } catch (err) {
+      res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+    }
+  };
+
+
 
 
   module.exports = {
@@ -73,5 +90,6 @@ const getAllTreatmentHistory = async (req, res) => {
     createTreatmentHistory,
     getSingleTreatmentHistory,
     deleteTreatmentHistory,
-    getFilteredTreatmentHistory
+    getFilteredTreatmentHistory,
+    getManyTreatmentHistory
   }

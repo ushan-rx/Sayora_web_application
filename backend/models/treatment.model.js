@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const treatmentschema = new Schema({
     treatmentId:{
-	type: String,
+	    type: String,
         required: true
     },
     name : {

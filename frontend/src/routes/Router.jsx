@@ -21,6 +21,9 @@ import PrescriptionPatient from '../pages/patient/prescriptionPatient'
 import ReportPatients from '../pages/patient/reportsPatient'
 import DailyUploads from '../pages/patient/dailyUploads'
 import UserProfilePatient from '../pages/patient/profilePatient'
+import MyCareProfile  from '../pages/patient/myCare'
+import PatientTreatment from '../pages/patient/treatmentHistoryPatient'
+import Requesition from '../pages/patient/requesition'
 
 
 
@@ -117,6 +120,9 @@ const Router = createBrowserRouter(
             <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>
             <Route path="myrecords/dailyuploads" element={<DailyUploads/> } exact/>
             <Route path="profile" element={<UserProfilePatient/> } exact/>
+            <Route path="myrecords/mycareprofile" element={<MyCareProfile/>} exact/>
+            <Route path="treatments/mytretments" element={<PatientTreatment/>} exact/>
+            <Route path="requesition" element={<Requesition/>} exact/>
           
 
 

@@ -23,12 +23,10 @@ const dailyUpdatesSchema = new mongoose.Schema({
       type: String
     },
   ],
-  medications: [
-    {
-      type: { type: String },
-      messure: { type: String }
-    },
-  ],
+  medications: [{
+    type: {type: String,},
+    messure: {type: String,}
+  }],
   additionalNotes: {
     type: String,
   },

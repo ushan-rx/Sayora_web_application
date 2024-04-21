@@ -47,9 +47,9 @@ function DoctorMenu() {
             </NavLink>
         </li>
         <li>
-            <NavLink to={path + "/authentication"} className="link">
+            <NavLink to={path + "/examination"} className="link">
                 <BsPerson size={23} className="min-w-max" />
-                Topic 2
+                Examination
             </NavLink>
         </li>
         <li>

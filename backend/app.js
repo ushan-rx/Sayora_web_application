@@ -26,15 +26,16 @@ app.use(cookieParser());
 // Routes
 const authRouter = require('./routes/authRoutes');
 const bookingRoute = require("./routes/booking.route.js");
-
+const serviceRoute = require('./routes/serviceAdding.route.js');
 const doctorRoute = require('./routes/doctor.route.js');
 const patientRoute = require('./routes/patient.route.js');
 const feedbackRoute = require('./routes/feedback.route.js');
 const dailyQuestionsRoute = require('./routes/dailyquestions.route.js');
 const daillyUpdateRoute = require('./routes/dailyupdate.route.js');
 const requesition = require('./routes/requesition.route.js');
-
+const treatmentHistory = require('./routes/treatmentHistory.route.js')
 const reportRoute = require('./routes/report.route');
+const PrescriptionRouter = require('./routes/prescription.route');
 
 const productRouter = require('./routes/Product.route');
 
@@ -44,6 +45,12 @@ const orderRouter = require('./routes/Inventory_Order.route');
 
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
+
+const staffRoute = require('./routes/staff.route.js');
+const tempUserRoute = require('./routes/tempUser.route.js');
+const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
+
+const treatmentRoutes = require('./routes/treatment')
 
 
 //use route
@@ -55,8 +62,10 @@ app.use('/api/v1/feedback', feedbackRoute);
 app.use('/api/v1/dailyquestions', dailyQuestionsRoute);
 app.use('/api/v1/dailyupdate', daillyUpdateRoute);
 app.use('/api/v1/requesition', requesition);
-
+app.use('/api/v1/serviceAdding', serviceRoute);
+app.use('/api/v1/treatmentHistory', treatmentHistory)
 app.use('/api/v1/report', reportRoute);
+app.use('/api/v1/prescription', PrescriptionRouter);
 
 app.use('/doctortime', doctorTimeRouter);
 
@@ -68,6 +77,11 @@ app.use('/Inventory', orderRouter);
 
 app.use(appoinmentRouter);
 app.use('/doctortime', doctorTimeRouter);
+app.use('/treatment', treatmentRoutes);
+
+app.use('/api/v1/staff', staffRoute);
+app.use('/staff/leaves', StaffLeavesRoute);
+app.use('/api/v1/add-user', tempUserRoute);
 
 app.use('/api/v1/Email_data', emailRouter);
 

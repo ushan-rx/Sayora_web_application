@@ -22,7 +22,7 @@ import UserProfilePatient from '../pages/patient/profilePatient'
 
 
 //staff
-
+import BookedServices from '../pages/staff/servicesView'
 
 
 
@@ -45,6 +45,7 @@ const Router = createBrowserRouter(
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
+          <Route path="viewBookedServices" element={<BookedServices/> } exact/>
           {/*staff dashboard routes here*/}
 
 
@@ -54,7 +55,7 @@ const Router = createBrowserRouter(
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
 
-            //patient dashboard routes here
+        {/* patient dashboard routes here */}
             <Route path="overview" element={<ProfilePatient/> } exact/>
             <Route path="prescription" element={<PrescriptionPatient/> } exact/>
             <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>

@@ -46,7 +46,6 @@ const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
 
 
-
 //use route
 app.use('/api/v1/auth', authRouter);
 app.use("/api/v1/Booking_data", bookingRoute);
@@ -59,17 +58,18 @@ app.use('/api/v1/requesition', requesition);
 
 app.use('/api/v1/report', reportRoute);
 
-app.use('/doctortime' ,doctorTimeRouter);
+app.use('/doctortime', doctorTimeRouter);
 
 app.use(productRouter);
 
 app.use(supplierRouter);
 app.use(itemRouter);
-app.use('/Inventory' , orderRouter);
+app.use('/Inventory', orderRouter);
 
 app.use(appoinmentRouter);
-app.use('/doctortime' ,doctorTimeRouter);
+app.use('/doctortime', doctorTimeRouter);
 
+app.use('/api/v1/Email_data', emailRouter);
 
 const NotFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -85,4 +85,3 @@ const start = async() => {
 
 // Start the server
 start();
-

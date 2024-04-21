@@ -65,6 +65,24 @@ const login = async (req,res)=>{
   //         }).catch(err => res.status(400).json(err));
   // }
 
+  // register controller
+const register1 = async (req, res) => {
+  try {
+      const { firstName,lastName, email, userType, role, password } = req.body;
+      if (!firstName || !lastName || !email || !userType || !role || !password) {
+          return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      const hash = await bcrypt.hash(password, 10);
+      const user = await UserModel.create({ firstName, lastName, email, userType, role, password: hash });
+      res.status(201).json({ status: 'ok', message: 'Success', user });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 
 const verifypatient = (req,res,next)=>{
     const token = req.cookies.token;
@@ -123,6 +141,7 @@ const logout = (req,res)=>{
 
   module.exports = {
     // register,
+    register1,
     login,
     verifypatient,
     verifydoctor,

@@ -8,7 +8,9 @@ import { BsPerson } from "react-icons/bs";
 import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
-
+import { FaUserMd } from "react-icons/fa";
+import { FaUserTie } from "react-icons/fa";
+import { FaUserInjured } from "react-icons/fa";
 
 function staffMenu() {
   const path = "/staff";
@@ -16,13 +18,52 @@ function staffMenu() {
   // items with sub menus
   const subMenusList = [
     {
-        name: "ddd",           //display name
-        path: "/ddd",          // main path
-        icon: RiBuilding3Line,
+        name: "ManageStaff",           //display name
+        path: "/manage",          // main path
+        icon: FaUserTie,
         menus: [
-          {subName: "overview", subPath: "/overview"},
-          {subName: "sub 1.2", subPath: "/sub1.2"},
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Add Staff", subPath: "add"},
         ],
+
+        
+      },
+
+      {
+        name: "ManagePatients",           //display name
+        path: "/managepatient",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Add Patient", subPath: "add"},
+        ],
+
+        
+      },
+
+      {
+        name: "ManageLeaves",           //display name
+        path: "/manageleaves",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Add Patient", subPath: "add"},
+        ],
+
+        
+      },
+
+      {
+        name: "StaffProfile",           //display name
+        path: "/manageleaves",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Apply Leave", subPath: "leaves/apply"},
+          {subName: "My Leaves", subPath: "leaves/my"},
+        ],
+
+       
       },
 
       {

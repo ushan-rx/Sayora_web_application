@@ -82,8 +82,8 @@ function doctorProfilePersonalForm({doctor,change}) {
 	//on submit function
 	async function onSubmitPersonal(values) {
 		setIsSubmitting(true);
-		console.log(values);
-		console.log(doctor.address?.city)
+		//console.log(values);
+		//console.log(doctor.address?.city)
 		const url = `http://localhost:5000/api/v1/patient/${patId}`;
 		// Do something with the form values.
 		await axios.put(url, {

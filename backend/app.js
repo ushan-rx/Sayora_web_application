@@ -33,9 +33,9 @@ const feedbackRoute = require('./routes/feedback.route.js');
 const dailyQuestionsRoute = require('./routes/dailyquestions.route.js');
 const daillyUpdateRoute = require('./routes/dailyupdate.route.js');
 const requesition = require('./routes/requesition.route.js');
+const PrescriptionRouter = require('./routes/prescription.route');
 const treatmentHistory = require('./routes/treatmentHistory.route.js')
 const reportRoute = require('./routes/report.route');
-const PrescriptionRouter = require('./routes/prescription.route');
 
 const productRouter = require('./routes/Product.route');
 

@@ -26,6 +26,12 @@ import UserProfilePatient from '../pages/patient/profilePatient'
 
 //staff
 import AwarnessPrograms from '../pages/staff/addServices';
+import AddTreatment from '@/pages/Cashier/AddTreatment'
+import Cashier from '@/pages/Cashier/Cashier'
+import CashierTable from '@/pages/Cashier/CashierTable'
+import EditTreatment from '@/pages/Cashier/EditTreatment'
+import FetchTreatment from '@/pages/Cashier/FetchTreatment'
+import UpdateCashier from '@/pages/Cashier/UpdateCashier'
 
 
 
@@ -70,6 +76,29 @@ const Router = createBrowserRouter(
             <Route path="ManageLeaves/overview" element={<StaffLeaves/> } exact/>
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
+
+            {/* kaumal */}
+
+            <Route path='treatment'>
+                <Route index element={<FetchTreatment/> } exact/>
+                <Route path="addTreat" element={<AddTreatment/> } exact/>
+                <Route path="viewTreat" element={<FetchTreatment/> } exact/>
+            </Route>
+            <Route path='cashier'>
+                <Route index element={<Cashier/>} exact/>
+                <Route path="cashier" element={<Cashier/> } exact/>
+                <Route path="viewCash" element={<CashierTable/> } exact/>
+
+            </Route>
+            {/* kaumal */}
+
+           
+          {/* kawmal paths  */}
+          <Route path="updatex/:id" element={<EditTreatment />} />
+          {/* <Route path="updateCash/:id" element={<UpdateCashier />} /> */}
+          <Route path="Cashier/viewCash/staff/updateCash/:id" element={<UpdateCashier />} />
+          <Route path="viewCash" element={<viewCash/> } exact/>
+          {/* end */}
 
 
         </Route>

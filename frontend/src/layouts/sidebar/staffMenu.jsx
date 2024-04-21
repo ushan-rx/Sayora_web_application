@@ -66,6 +66,31 @@ function staffMenu() {
        
       },
 
+      //kaumal
+      {
+        name: "Treatment",           //display name
+        path: "/treatment",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Add Treatmenet", subPath: "addTreat"},
+          {subName: "Manage Treatment", subPath: "viewTreat"},
+          
+        ],
+
+      },
+      {
+        name: "Cashier",           //display name
+        path: "/cashier",          // main path
+        icon: FaUserInjured,
+        menus: [
+          {subName: "Invoice", subPath: "cashier"},
+          {subName: "Manage Invoice", subPath: "viewCash"},
+          
+        ],
+
+      },
+
+       //kaumal
       {
         name: "Sub Topic 2",    
         path: "/subtopic2",    

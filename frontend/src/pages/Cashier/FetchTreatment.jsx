@@ -140,7 +140,7 @@ const FetchTreatment = () => {
                             <td className="px-4 py-2 border">{record.description}</td>
                             <td className="px-4 py-2 border">{record.price}</td>
                             <td className="px-4 py-2 border">
-                                <Link to={`/updatex/${record.treatmentId}`} className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-yellow-500 rounded hover:bg-yellow-700">Edit</Link>
+                                <Link to={`/staff/updatex/${record.treatmentId}`} className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-yellow-500 rounded hover:bg-yellow-700">Edit</Link>
                                 <button onClick={() => deleteTreatment(record._id)} className="inline-block px-2 py-1 font-bold text-white bg-red-500 rounded hover:bg-red-700">Delete</button>
                             </td>
                         </tr>

@@ -207,7 +207,7 @@ function UpdateCashier() {
         const { patientId, docFee, treatmentFee, discount, total } = cashierData;
         const data = [
             [`Patient ID: ${patientId}`, 10, 20],
-            [`Doctor Fee: ${docFee}`, 10, 30],
+            // [`Doctor Fee: ${docFee}`, 10, 30],
             [`Treatment Fee: ${treatmentFee}`, 10, 40],
             [`Discount: ${discount}`, 10, 50],
             [`Total: ${total}`, 10, 60]

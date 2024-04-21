@@ -27,7 +27,6 @@ function examinationContainer() {
 
   // get AppointmentId from query params
   const {id} = useParams();
-  console.log(id)
   const getAppointmentDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/getappointments/${id}`)

@@ -38,7 +38,6 @@ export default function profileDeatailSheet() {
 
         let age = (new Date().getFullYear() - new Date(dob).getFullYear())  // calculate age
 
-        console.log(vitals)
     return(
         <Sheet>
             <SheetTrigger asChild>

@@ -9,7 +9,7 @@ const ManageStaff = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [membersPerPage] = useState(10); // Adjust number of members per page as needed
+  const [membersPerPage] = useState(10); 
 
   // State for managing modals
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -107,9 +107,13 @@ const ManageStaff = () => {
           className="border-2 border-gray-300 p-2 rounded ml-2"
         >
           <option value="">All Roles</option>
-          <option value="staffmanager">Staff Manager</option>
-          <option value="medicalsecratary">Medical Secretary</option>
           <option value="systemadmin">System Admin</option>
+          <option value="medicalsecretary">Medical Secretary</option>
+          <option value="staffmanager">Staff Manager</option>
+          <option value="appointmentmanager">Appointment Manager</option>
+          <option value="inventorymanager">Inventory Manager</option>
+          <option value="productmanager">Product Manager</option> 
+          <option value="servicehandler">Service Handler</option> 
         </select>
       </div>
       <table className="min-w-full bg-white shadow overflow-hidden rounded-lg">
@@ -127,13 +131,13 @@ const ManageStaff = () => {
         <tbody>
           {currentMembers.map((member) => (
             <tr key={member.staffId}>
-              <td>{member.staffId}</td>
-              <td>{member.userId}</td>
-              <td>{`${member.fName} ${member.lName}`}</td>
-              <td>{member.Status}</td>
-              <td>{member.JobRole}</td>
-              <td>{member.phone}</td>
-              <td>
+              <td className="text-center">{member.staffId}</td>
+              <td className="text-center">{member.userId}</td>
+              <td className="text-center">{`${member.fName} ${member.lName}`}</td>
+              <td className="text-center">{member.Status}</td>
+              <td className="text-center">{member.JobRole}</td>
+              <td className="text-center">{member.phone}</td>
+              <td className="text-center">
                 <button onClick={() => openEditModal(member)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Edit
                 </button>

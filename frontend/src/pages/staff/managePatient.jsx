@@ -102,15 +102,20 @@ const ManagePatient = () => {
           onChange={(e) => setsearchByIDTerm(e.target.value)}
           className="border-2 border-gray-300 p-2 rounded"
         />
-        <button onClick={() => alert('Add Patient')} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-          Add Patient
-        </button>
+   
+
+        <a href="http://localhost:5173/staff/ManagePatients/add" className="ml-2 inline-block bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+  Add Patient
+</a>
+
       </div>
       <table className="min-w-full bg-white shadow overflow-hidden rounded-lg">
         <thead>
           <tr className="bg-cyan-500 text-white">
+          <th className="py-2 px-4">Pic</th>
             <th className="py-2 px-4">Patient ID</th>
             <th className="py-2 px-4">User ID</th>
+           
             <th className="py-2 px-4">Name</th>
             <th className="py-2 px-4">Phone</th>
             <th className="py-2 px-4">Status</th>
@@ -120,12 +125,32 @@ const ManagePatient = () => {
         <tbody>
           {currentPatients.map((patient) => (
             <tr key={patient.patientId}>
-              <td>{patient.patientId}</td>
-              <td>{patient.userId}</td>
-              <td>{`${patient.fName} ${patient.lName}`}</td>
-              <td>{patient.phone}</td>
-              <td>{patient.status ? 'Active' : 'Inactive'}</td>
-              <td>
+ <td className="text-center">
+  <div className="inline-block rounded-full overflow-hidden w-10 h-10">
+    {patient.profilePic ? (
+      <img
+        src={patient.profilePic}
+        alt="Profile Pic"
+        className="object-cover w-full h-full"
+      />
+    ) : (
+      <img
+        src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" 
+        alt="Default Profile Pic"
+        className="object-cover w-full h-full"
+      />
+    )}
+  </div>
+</td>
+
+              <td className="text-center">{patient.patientId}</td>
+              <td className="text-center">{patient.userId}</td>
+             
+             
+              <td className="text-center">{`${patient.fName} ${patient.lName}`}</td>
+              <td className="text-center">{patient.phone}</td>
+              <td className="text-center">{patient.status ? 'Active' : 'Inactive'}</td>
+              <td className="text-center">
                 <button onClick={() => openEditModal(patient)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Edit
                 </button>

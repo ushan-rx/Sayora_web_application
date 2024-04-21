@@ -6,9 +6,9 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-// Define the schema using Zod
+
 const schema = z.object({
-  staffId: z.string(), // Add staffId to the validation schema
+  staffId: z.string(), 
   staffName: z.string(),
   JobRole: z.string(),
   reason: z.string().min(10, "Reason must be at least 10 characters long."),
@@ -21,9 +21,9 @@ const ApplyLeave = () => {
   const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      staffId: "STF00011", // Hardcoded staff ID
-      staffName: "Kamal Silva", // Predefined staff name
-      JobRole: "Staff" // Predefined job role
+      staffId: "STF00011", 
+      staffName: "Kamal Silva", 
+      JobRole: "Staff" 
     }
   });
 
@@ -44,7 +44,7 @@ const ApplyLeave = () => {
       <form className="space-y-6 w-full max-w-4xl bg-white p-8 shadow rounded-lg" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-2xl font-semibold text-center text-gray-900">Apply for Leave</h2>
 
-        <input type="hidden" {...register('staffId')} /> // Hidden field for staffId
+        <input type="hidden" {...register('staffId')} /> 
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Reason for Leave</label>

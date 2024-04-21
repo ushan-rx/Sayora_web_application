@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
 
     const newUser = await user.save();
 
-    // Prepare the common data for the userType-specific models
+    // Prepare the common data for the userType specific models
     const commonData = {
       userId: newUser.userId,
       fName: firstName,
@@ -47,6 +47,8 @@ const registerUser = async (req, res) => {
      
     };
 
+    const JobRole = tempUser.userRole;
+
     // Based on userType, call the respective function from the controllers
     switch (tempUser.userType) {
       case 'doctor':
@@ -55,7 +57,7 @@ const registerUser = async (req, res) => {
         break;
       case 'staff':
    
-        req.body = { ...commonData, ...req.body };
+        req.body = { ...commonData,JobRole,...req.body };
         staffController.createStaff(req, res);
         break;
       case 'patient':

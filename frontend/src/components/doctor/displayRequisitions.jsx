@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 import { useExaminationStore } from '@/store/examination.store';
 import { usePatientStore } from '@/store/patient.store';
@@ -33,8 +34,8 @@ function displayRequisitions() {
     return (
     <div>
         <div className="container p-4">
-                <h1 className='py-2 font-semibold uppercase text-gray-700'>Requisitions</h1>
-                <div className="table-container">
+        <h1 class="block uppercase my-2 text-gray-700 text-lg font-semibold">Requisitions</h1>
+                <div className="table-container pt-2">
                     <DataTable columns={requesitionColumns} data={requisitions} />
                 </div>
             </div>

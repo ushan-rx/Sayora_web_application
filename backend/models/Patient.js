@@ -89,10 +89,11 @@ const patientSchema = new mongoose.Schema({
   ],
 
   prescriptions: {
-    doctorId: { type: String },
-    medications: [{ medication: { type: String }, dosage: { type: String } }],
-    instructions: { type: String },
-    date: { type: Date, default: Date.now },
+    doctorId: {type: String,},
+    medications: [{medication: {type: String,},dosage: {type: String,}}],
+    instructions: {type: String,},
+    disease: {type: String,},
+    date: {type: Date,default: Date.now}
   },
 
   dailyQuestions: [
@@ -102,6 +103,7 @@ const patientSchema = new mongoose.Schema({
       mark: { type: Number },
     },
   ],
+  
   status: {
     //for delete purpose
     type: Boolean,

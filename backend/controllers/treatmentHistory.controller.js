@@ -83,6 +83,16 @@ const getAllTreatmentHistory = async (req, res) => {
   };
 
 
+  const getTreatmentHistoryByPatient = async(req, res) =>{
+    const { id: patientId } = req.params;
+    try {
+        const tHistory = await TreatmentHistory.find({patientId: patientId}).populate('treatment').exec();  
+        res.status(StatusCodes.OK).json({tHistory});
+      } catch (err) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message });
+      }
+  }
+
 
 
   module.exports = {
@@ -91,5 +101,6 @@ const getAllTreatmentHistory = async (req, res) => {
     getSingleTreatmentHistory,
     deleteTreatmentHistory,
     getFilteredTreatmentHistory,
+    getTreatmentHistoryByPatient,
     getManyTreatmentHistory
   }

@@ -6,6 +6,7 @@ const { getAllTreatmentHistory,
      getSingleTreatmentHistory,
      deleteTreatmentHistory,
      getFilteredTreatmentHistory,
+     getTreatmentHistoryByPatient,
      getManyTreatmentHistory
     } = require('../controllers/treatmentHistory.controller');
 
@@ -16,6 +17,8 @@ router.route('/:id').get(getSingleTreatmentHistory).delete(deleteTreatmentHistor
 
 // get all treatments using appointment id
 router.route('/filter/:id').get(getFilteredTreatmentHistory)
+// get all treatments using patient id
+router.route('/patient/:id').get(getTreatmentHistoryByPatient)
 
 // get all treatments using patient id
 router.route('/patient/:id').get(getManyTreatmentHistory)

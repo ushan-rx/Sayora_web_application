@@ -22,32 +22,35 @@ const appointmentSchema = new mongoose.Schema({
   doctorID: {
     type: String,
     required: true
-},
-patientName: {
+  },
+  patientId:{          
+    type:String
+  },
+  patientName: {
+      type: String,
+      required: true
+  },
+  patientAddress: {
+      type: String,
+      required: true
+  },
+  patientContact: {
+      type: String,
+      required: true
+  },
+  patientGender: {
+      type: String,
+      required: true
+  },
+  patientemail: {
     type: String,
     required: true
-},
-patientAddress: {
+  },
+  status: {
     type: String,
-    required: true
-},
-patientContact: {
-    type: String,
-    required: true
-},
-patientGender: {
-    type: String,
-    required: true
-},
-patientemail: {
-  type: String,
-  required: true
-},
-status: {
-  type: String,
-  enum: ['Pending', 'Approved', 'Cancle', 'Completed'], 
-  default: 'Pending'
-}
+    enum: ['Pending', 'Approved', 'Cancle', 'Completed'],
+    default: 'Pending'
+  }
 });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);

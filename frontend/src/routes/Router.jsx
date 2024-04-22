@@ -53,6 +53,7 @@ import MyLeaves from '@/pages/staff/myLeaves'
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
 import ManageDoctor from '@/pages/staff/manageDoctor'
+import StaffLogIn from '@/pages/staff/StaffLogin'
 
 //set routing
 const Router = createBrowserRouter(
@@ -60,6 +61,7 @@ const Router = createBrowserRouter(
     <>   
         <Route path = "/login" element ={<LogIn />}exact />
         <Route path = "/register/:tempId" element ={<RegistrationForm />}exact />
+        <Route path="/stafflogin" element={<StaffLogIn/> } exact/>
         
         <Route path = "/" element ={<WebsiteLayout />}exact >
           <Route index element={<Home/> } exact/>
@@ -71,7 +73,7 @@ const Router = createBrowserRouter(
 
 
         </Route>
-        <Route path = "/staff" element ={<StaffDashboard />}exact >
+        <Route path = "/staff" element ={<StaffDashboard/>}exact >
           {/*staff dashboard routes here*/}
                     {/*AROSHANA-START*/}
           ManageDoctor
@@ -84,6 +86,8 @@ const Router = createBrowserRouter(
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
             <Route path="ManageDoctor/overview" element={<ManageDoctor/> } exact/>
+            
+            
            {/*AROSHANA-END*/}
             {/* kaumal */}
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 
-function LogIn() {
+function StaffLogIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -20,17 +20,17 @@ function LogIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post('http://localhost:5000/api/v1/auth/login', { email, password })
+    axios.post('http://localhost:5000/api/v1/staffAuth/staff/login', { email, password })
     .then(res => {
+        console.log("API Response:", res);
       if (res.data.Status === "Success") {
         window.localStorage.setItem("isLogedIn", true);
         setMessage("Login successful!");
         setTimeout(() => {
-          if (res.data.role === "patient") {
-            navigate('/patient');
-          } else if (res.data.role === "doctor") {
-            navigate('/doctor');
-          }
+        console.log("Checking user type for redirection:", res.data.type);
+          if (res.data.type === "staff") {
+            navigate('/staff');
+          } 
         }, 1000);
       } else {
         setMessage("The Password is incorrect");
@@ -98,4 +98,4 @@ function LogIn() {
   );
 };
 
-export default LogIn;
+export default StaffLogIn;

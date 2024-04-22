@@ -42,5 +42,39 @@ const deleteRequesition = async (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
   }
 };
+const updateRequesition = async (req, res) => {
+  const { id: _id } = req.params;
+  try {
+    const requesition = await Requesition.findByIdAndUpdate(_id, {
+      is_uploaded: true,
+    });
+    res.status(StatusCodes.OK).json({ requesition, count: requesition.length });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
 
-module.exports = { createRequesition, getAllRequesitions, getRequesitionsByPatient, deleteRequesition};
+const getManyRequesition = async (req, res) => {
+  const { id: patientId } = req.params;
+  //console.log(patientId);
+  try {
+    const requesitions = await Requesition.find({ patientId: patientId });
+    if (!requesitions) {
+      throw new CustomError.NotFoundError(
+        `No daily updates for patient with id : ${req.params.id}`
+      );
+    }
+    res.status(StatusCodes.OK).json({ requesitions });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
+module.exports = {
+  createRequesition,
+  getAllRequesitions,
+  getRequesitionsByPatient,
+  deleteRequesition,
+  getManyRequesition,
+  updateRequesition,
+};

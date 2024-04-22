@@ -99,9 +99,9 @@ function doctorRequisitionForm({change}) {
     <div className="h-[50vh] overflow-auto scrollbar-thin">   
 	<Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-6 m-6">
-		<FormLabel class="block uppercase  text-gray-700 text-lg font-semibold">Make Requisitions</FormLabel>
-		<FormDescription className= "text-base font-semibold uppercase">Add test names
-			<Button type="submit" disabled={isSubmitting} class="float-end text-sm bg-teal-500 rounded-lg p-2 mr-1 my-4 font-medium text-white border shadow-md">
+		<h1 class="block uppercase  text-gray-700 text-lg font-semibold">Make Requisitions</h1>
+		<FormDescription className= "text-md text-base">Insert Test Names
+			<Button type="submit" disabled={isSubmitting} class="float-end text-sm bg-teal-500 rounded-lg p-2 mr-1 -mt-1 font-medium text-white border shadow-md">
 				Submit
 			</Button>	
 		</FormDescription>

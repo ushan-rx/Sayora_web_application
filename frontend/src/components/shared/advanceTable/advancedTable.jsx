@@ -96,7 +96,7 @@ export default function advancedTable({columns, data, filterColumn}) {
 
         </div>
         {/* table container */}
-        <div className="rounded-md border h-[65vh] overflow-auto">               
+        <div className="rounded-md  h-[50vh] overflow-auto">               
                 <Table className="rounded-md border" >
                     <TableHeader className="border-y-2 bg-slate-200">
                         {table.getHeaderGroups().map((headerGroup) => (

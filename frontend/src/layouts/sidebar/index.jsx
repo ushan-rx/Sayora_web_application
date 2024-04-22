@@ -82,7 +82,7 @@ const Sidebar = ({role}) => {
 
 
   return (
-    <div className="fixed">
+    <div className="fixed md:relative">
       <div
         onClick={() => setOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
@@ -124,7 +124,7 @@ const Sidebar = ({role}) => {
               <li>
                 <NavLink to={"/settings"} className="link">
                   <SlSettings size={23} className="min-w-max" />
-                  Topic 4
+                  Settings
                 </NavLink>
               </li>
 

@@ -20,8 +20,8 @@ function DoctorMenu() {
           path: "/ddd",          // main path
           icon: RiBuilding3Line,
           menus: [
-            {subName: "overview", path: "/overview"},
-            {subName: "sub 1.2", path: "/sub1.2"},
+            {subName: "overview", subPath: "/overview"},
+            {subName: "sub 1.2", subPath: "/sub1.2"},
           ],
         },
 
@@ -30,8 +30,8 @@ function DoctorMenu() {
           path: "/subtopic2",    
           icon: TbReportAnalytics,
           menus: [
-            {subName: "overview", path: "overview"},  //sub menu diplay name and path(dont add / before path)
-            {subName: "sub 1.2", path: "sub1.2"},
+            {subName: "overview", subPath: "overview"},  //sub menu diplay name and path(dont add / before path)
+            {subName: "sub 1.2", subPath: "sub1.2"},
           ],
         },
 
@@ -47,9 +47,9 @@ function DoctorMenu() {
             </NavLink>
         </li>
         <li>
-            <NavLink to={path + "/authentication"} className="link">
+            <NavLink to={path + "/examination"} className="link">
                 <BsPerson size={23} className="min-w-max" />
-                Topic 2
+                Examination
             </NavLink>
         </li>
         <li>

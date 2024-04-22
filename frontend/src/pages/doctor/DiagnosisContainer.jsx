@@ -14,18 +14,18 @@ function diagnosisContainer({change}) {
             {/* add requisitions */}
             <DoctorRequisitionForm change={change}/>
           </div>
-          <div className='m-4 bg-slate-50 rounded-lg'>
+          {/* <div className='m-4 bg-slate-50 rounded-lg'>
           sdsds
-          </div>
+          </div> */}
         </div>
         <div className=' grid grid-rows-2'>
           <div className='m-4 bg-slate-50 rounded-lg '>
               {/* display requisitions*/}
               <DisplayRequisitions />
           </div>
-          <div className='m-4 bg-slate-50 rounded-lg'>
+          {/* <div className='m-4 bg-slate-50 rounded-lg'>
             dsds
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

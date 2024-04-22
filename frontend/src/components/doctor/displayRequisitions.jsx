@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 import { useExaminationStore } from '@/store/examination.store';
 import { usePatientStore } from '@/store/patient.store';

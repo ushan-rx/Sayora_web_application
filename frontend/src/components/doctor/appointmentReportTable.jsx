@@ -33,11 +33,9 @@ import { RxCross2 } from "react-icons/rx";
 
 import { DataTablePagination } from "../shared/advanceTable/data-table-pagination"
 
-export default function advancedTable({columns, data, filterColumn}) {
+export default function treatmentReportTable({columns, data, filterColumn}) {
 
-  const [columnFilters, setColumnFilters] = React.useState(
-    []
-  )
+  const [columnFilters, setColumnFilters] = React.useState([])
 
   const [sorting, setSorting] = React.useState([]);
 
@@ -80,7 +78,7 @@ export default function advancedTable({columns, data, filterColumn}) {
         {/* filtering (searching) */}
       <div className="flex flex-1 items-center space-x-4">
         <Input
-          placeholder="Filter tasks..."
+          placeholder="Filter..."
           value={(table.getColumn(filter)?.getFilterValue()) ?? ""}
           onChange={(event) =>
             table.getColumn(filter)?.setFilterValue(event.target.value)
@@ -107,13 +105,13 @@ export default function advancedTable({columns, data, filterColumn}) {
 
         </div>
         {/* table container */}
-        <div className="rounded-md border h-[65vh] overflow-auto ">
+        <div className="rounded-md  h-[60vh] overflow-auto ">
             <div ref={componentRef}>   
                 <style>{`@page { margin: 6rem 2rem 2rem 2rem !important; }`}</style>
                 {/* decerative section with title only visibke in report pdf */}
                 <div className="hidden" id="reportHeader"> 
                 <div className="font-bold bg-teal-100 text-center my-6 p-2">
-                    Report
+                    Appointment Report
                 </div>  
                 </div>   
                 
@@ -136,7 +134,7 @@ export default function advancedTable({columns, data, filterColumn}) {
                         </TableRow>
                         ))}
                     </TableHeader>
-                    <TableBody>
+                    <TableBody className=" ">
                         {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <TableRow

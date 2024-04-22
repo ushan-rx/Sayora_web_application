@@ -58,9 +58,9 @@ function treatmentHistoryForm({change}) {
   const {patientId} = usePatientStore(state => ({
 		patientId: state.patient.patientId,
 	}));
-  //to hold the time
-  const [date, setDate] = React.useState(new Date())
-  //to hold the form submit state
+  // //to hold the time
+  // const [date, setDate] = React.useState(new Date())
+  // //to hold the form submit state
   const [isSubmitting, setIsSubmitting] = useState(false);
   // to get treatments from backend
   const [treatmentDetails, setTreatmentDetails] = useState([]);

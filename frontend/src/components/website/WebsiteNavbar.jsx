@@ -8,7 +8,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
 	{ name: "Home", href: "home" },
 	{ name: "Appointments", href: "/appointment" },
-	{ name: "Marketplace", href: "#" },
+	// { name: "Marketplace", href: "#" },
 	{ name: "Services", href: "/service" },
 ];
 
@@ -18,7 +18,7 @@ function websiteNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="absolute inset-x-0 top-0 z-50 backdrop-blur-2xl bg-white/10">
     <nav
       className="flex items-center justify-between p-6 lg:px-8"
       aria-label="Global"

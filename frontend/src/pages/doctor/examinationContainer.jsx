@@ -12,6 +12,7 @@ import ProfileDeatailSheet from "@/components/doctor/profileDetailSheet";
 import MedicalHistoryContainer from './medicalHistoryContainer';
 import DiagnosisContainer from './DiagnosisContainer';
 import PrescriptionContainer from './prescribeContainer';
+import ReportsContainer from './reportsContainer';
 
 import axios from 'axios';
 
@@ -71,7 +72,7 @@ function examinationContainer() {
     <div><Toaster position="bottom-right"/></div> 
     {windowWidth < 1200 ? <div className='flex h-dvh items-center bg-slate-300 font-bold justify-center text-2xl'>Please maximize the page to operate</div> : 
       <div className='flex flex-row'>
-          <Tabs Tabs defaultValue="prescribe" className="w-full mt-2 mx-2">
+          <Tabs Tabs defaultValue="medical" className="w-full mt-2 mx-2">
             <TabsList className="grid w-full grid-cols-4 h-10 bg-slate-100 text-slate-700">
               <TabsTrigger value="medical">Medical History</TabsTrigger>
               <TabsTrigger value="reports">Reports</TabsTrigger>
@@ -82,7 +83,7 @@ function examinationContainer() {
               <MedicalHistoryContainer />
             </TabsContent>
             <TabsContent value="reports">
-              weew
+              <ReportsContainer />
             </TabsContent>
             <TabsContent value="diagnosis">
             <DiagnosisContainer change={handleFormSubmits}/>

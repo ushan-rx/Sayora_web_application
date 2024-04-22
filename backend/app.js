@@ -33,9 +33,9 @@ const feedbackRoute = require('./routes/feedback.route.js');
 const dailyQuestionsRoute = require('./routes/dailyquestions.route.js');
 const daillyUpdateRoute = require('./routes/dailyupdate.route.js');
 const requesition = require('./routes/requesition.route.js');
+const PrescriptionRouter = require('./routes/prescription.route');
 const treatmentHistory = require('./routes/treatmentHistory.route.js')
 const reportRoute = require('./routes/report.route');
-const PrescriptionRouter = require('./routes/prescription.route');
 
 const productRouter = require('./routes/Product.route');
 
@@ -45,7 +45,14 @@ const orderRouter = require('./routes/Inventory_Order.route');
 
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
-const treatmentRoutes = require('./routes/treatment')
+
+
+const staffRoute = require('./routes/staff.route.js');
+const tempUserRoute = require('./routes/tempUser.route.js');
+const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
+
+const cashierRoutes  = require('./routes/cashierRoutes.js')
+const treatmentRoutes = require('./routes/treatment.js')
 
 
 //use route
@@ -72,7 +79,12 @@ app.use('/Inventory' , orderRouter);
 
 app.use(appoinmentRouter);
 app.use('/doctortime' ,doctorTimeRouter);
+app.use('/cashier', cashierRoutes);
 app.use('/treatment', treatmentRoutes);
+
+app.use('/api/v1/staff', staffRoute);
+app.use('/staff/leaves', StaffLeavesRoute);
+app.use('/api/v1/add-user', tempUserRoute);
 
 
 const NotFoundMiddleware = require('./middleware/not-found');

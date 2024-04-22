@@ -65,17 +65,19 @@ const patientSchema = new mongoose.Schema({
   ],
   surgicalProcedures: [{ name: { type: String }, date: { type: Date } }],
 
-  vitals: [{
-    checkdate: { type: Date },
-    height: { type: Number },
-    weight: { type: Number },
-    temperature: { type: Number },
-    bloodPressure: { type: String },
-    pulseRate: { type: Number },
-    respiratoryRate: { type: Number },
-    unit: { type: String },
-    oxygenSaturation: { type: Number },
-  }],
+  vitals: [
+    {
+      checkdate: { type: Date, default: Date.now },
+      height: { type: Number },
+      weight: { type: Number },
+      temperature: { type: Number },
+      bloodPressure: { type: String },
+      pulseRate: { type: Number },
+      respiratoryRate: { type: Number },
+      unit: { type: String },
+      oxygenSaturation: { type: Number },
+    },
+  ],
 
   treatmentHistory: [
     {
@@ -87,10 +89,10 @@ const patientSchema = new mongoose.Schema({
   ],
 
   prescriptions: {
-    doctorId: {type: String,},
-    medications: [{medication: {type: String,},dosage: {type: String,}}],
-    instructions: {type: String,},
-    date: {type: Date,default: Date.now}
+    doctorId: { type: String },
+    medications: [{ medication: { type: String }, dosage: { type: String } }],
+    instructions: { type: String },
+    date: { type: Date, default: Date.now },
   },
 
   dailyQuestions: [

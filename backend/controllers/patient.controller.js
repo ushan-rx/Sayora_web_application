@@ -17,7 +17,7 @@ const createPatient = async (req, res) => {
 // get patient using patient id
 const getSinglePatient = async (req, res) => {
   const { id: patientId } = req.params;
-  console.log(patientId);
+  //console.log(patientId);
   try {
     const patient = await Patient.findOne({ patientId: patientId });
     if (!patient) {

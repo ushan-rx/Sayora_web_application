@@ -5,10 +5,13 @@ import Sidebar from './sidebar'
 import Navbar from "../components/shared/NavbarTop";
 import { Outlet } from 'react-router-dom';
 
+
 function DoctorDashboard(){
     const[suc, setSuc] =  useState()
     const navigate = useNavigate()
     axios.defaults.withCredentials = true;
+
+
 
     useEffect(()=>{
         axios.get('http://localhost:5000/api/v1/auth/DoctorDashboard')
@@ -23,7 +26,7 @@ function DoctorDashboard(){
     },[])
 
     return(
-        <div className="flex">
+        <div className="flex ">
             <Sidebar role={"doc"}/>
             <main className="flex-1 py-0 mx-auto max-w-8xl">
                 <Navbar />

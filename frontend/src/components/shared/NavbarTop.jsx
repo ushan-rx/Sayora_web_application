@@ -1,15 +1,26 @@
 import React from "react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { NavLink } from "react-router-dom";
+
 const navbar = () => {
+  const path = window.location.pathname;
   return (
-    <div>
+    <div >
         <div className="bg-[#e0eff1]">
           <div className="flex flex-col">
             <div className="w-full border-b-2 border-gray-200">
               <div className="flex items-center justify-between h-16 px-0 mx-4">
                 
                 {/* nav search bar */}
-                <div className="relative hidden max-w-xs ml-72 mr-auto lg:block">
+                <div className="relative hidden max-w-xs  mr-auto md:block">
                   <p className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <span className="flex items-center justify-center">
                       <span className="flex items-center justify-center">
@@ -25,7 +36,7 @@ const navbar = () => {
                 </div>
 
                 <div className="flex items-center justify-end ml-auto space-x-3 md:space-x-6">
-                  <div className="relative">
+                  {/* <div className="relative">
                     <p className="pt-1 pb-1 pl-1 pr-1 text-gray-700 transition-all duration-200 bg-white rounded-full hover:text-gray-900 focus:outline-none hover:bg-gray-100">
                       <span className="flex items-center justify-center">
                         <span className="flex items-center justify-center">
@@ -41,11 +52,24 @@ const navbar = () => {
                     </p>
                     <p className="px-1.5 py-0.5 font-semibold text-xs items-center bg-indigo-600 text-white rounded-full inline-flex
                   absolute -top-px -right-1">2</p>
-                  </div>
+                  </div> */}
                   <div className="relative flex items-center justify-center">
-                    <img src="https://static01.nyt.com/images/2019/11/08/world/08quebec/08quebec-superJumbo.jpg"
-                      className="object-cover mr-2 bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
-                    <p className="text-sm font-semibold">Marrie Currie</p>
+                  <DropdownMenu className="p-0">
+                      <DropdownMenuTrigger asChild>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/sayora-web-app0.appspot.com/o/images%2F96199f5c-ab9f-4856-86b4-4cd7f890cc46.png?alt=media&token=0bac3897-7ae7-4d4e-924d-bdcc487eb369"
+                      className="object-cover  bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild><NavLink to={"profile"}>Profile</NavLink></DropdownMenuItem>
+                        {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
+                        {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
+                        {/* <DropdownMenuItem>Settings</DropdownMenuItem> */}
+                      </DropdownMenuContent>
+                  </DropdownMenu>
+  
+                    <p className="text-sm font-semibold ml-4">Ushan Senarathna</p>
                   </div>
                 </div>
               </div>

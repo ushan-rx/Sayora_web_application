@@ -72,12 +72,14 @@ const ServiceView = () => {
   };
 
   return (
-    <div className=" grid grid-cols-3 gap-4 mt-16">
+    <>
+   <div> <h1>Current Sessions</h1>
+    <div className=" grid grid-cols-3 gap-4 mt-16 h-auto">
      {services.map((service) => {
   const doctor = doctors[service.selectedDoctor];
   
   return (
-    <div key={service.serviceId} className="card bg-blue-200 border-3 border-black shadow-lg rounded-lg rounded px-8 pt-6 pb-8 m-16 h-auto">
+    <div key={service.serviceId} className="card bg-blue-200 border-3 border-black shadow-lg rounded-lg rounded px-8 pt-20 pb-8 m-16 mt-40  h-180">
       <div className="font-bold text-xl mb-2">{service.sess_name}</div>
       <p className="text-gray-700 md:text-base mt-2 whitespace-normal">{service.sess_description}</p>
       <div className="flex items-center">
@@ -94,6 +96,8 @@ const ServiceView = () => {
   );
 })}
     </div>
+    </div>
+    </>
   );
 };
 

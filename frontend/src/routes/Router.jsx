@@ -73,7 +73,7 @@ const Router = createBrowserRouter(
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
-          <Route path="viewBookedServices" element={<BookedServices/> } exact/>
+          <Route path="service/viewBookedServices" element={<BookedServices/> } exact/>
           <Route path  = "addServices" element ={<AwarnessPrograms />}exact />
          
           {/*staff dashboard routes here*/}

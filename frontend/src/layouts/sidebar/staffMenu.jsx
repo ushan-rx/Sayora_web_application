@@ -14,6 +14,7 @@ import { FaUserInjured } from "react-icons/fa";
 import { ImAirplane } from "react-icons/im";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import {FaAddressBook} from "react-icons/fa";
 
 function staffMenu() {
   const path = "/staff";
@@ -106,6 +107,20 @@ function staffMenu() {
       },
 
        //kaumal
+
+
+       {
+        name: "service",           //display name
+        path: "/staff",          // main path
+        icon: FaAddressBook,
+        menus: [
+          {subName: "View", subPath: "viewBookedServices"},
+          
+        ],
+
+        
+      },
+
       
   ];
 

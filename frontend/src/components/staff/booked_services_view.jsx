@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const UpdateForm = ({ booking, onUpdate }) => {
   const [updatedBooking, setUpdatedBooking] = useState(booking);
 
@@ -18,19 +19,19 @@ const UpdateForm = ({ booking, onUpdate }) => {
 
   return (
     <div>
-    <input name="bookingId" value={updatedBooking.bookingId} onChange={handleInputChange} placeholder="Booking ID" />
-    <input name="firstName" value={updatedBooking.firstName} onChange={handleInputChange} placeholder="First Name" />
-    <input name="lastName" value={updatedBooking.lastName} onChange={handleInputChange} placeholder="Last Name" />
-    <input name="nic" value={updatedBooking.nic} onChange={handleInputChange} placeholder="NIC" />
-    <input name="email" value={updatedBooking.email} onChange={handleInputChange} placeholder="Email" />
-    <input name="phoneNumber01" value={updatedBooking.phoneNumber01} onChange={handleInputChange} placeholder="Phone Number 01" />
-    <input name="phoneNumber02" value={updatedBooking.phoneNumber02} onChange={handleInputChange} placeholder="Phone Number 02" />
-    <input name="bookingDate" value={updatedBooking.bookingDate} onChange={handleInputChange} placeholder="Booking Date" />
-    <input name="time" value={updatedBooking.time} onChange={handleInputChange} placeholder="Time" />
-    <input name="organizationName" value={updatedBooking.organizationName} onChange={handleInputChange} placeholder="Organization Name" />
-    <input name="venue" value={updatedBooking.venue} onChange={handleInputChange} placeholder="Venue" />
-    <input name="participantCount" value={updatedBooking.participantCount} onChange={handleInputChange} placeholder="Participant Count" />
-    <button onClick={handleSubmit}>Confirm Update</button>
+   {/* <input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3" name="bookingId" value={updatedBooking.bookingId} onChange={handleInputChange} placeholder="Booking ID" /> */}
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="firstName" value={updatedBooking.firstName} onChange={handleInputChange} placeholder="First Name" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="lastName" value={updatedBooking.lastName} onChange={handleInputChange} placeholder="Last Name" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="nic" value={updatedBooking.nic} onChange={handleInputChange} placeholder="NIC" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="email" value={updatedBooking.email} onChange={handleInputChange} placeholder="Email" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="phoneNumber01" value={updatedBooking.phoneNumber01} onChange={handleInputChange} placeholder="Phone Number 01" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="phoneNumber02" value={updatedBooking.phoneNumber02} onChange={handleInputChange} placeholder="Phone Number 02" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="bookingDate" value={updatedBooking.bookingDate} onChange={handleInputChange} placeholder="Booking Date" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="time" value={updatedBooking.time} onChange={handleInputChange} placeholder="Time" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="organizationName" value={updatedBooking.organizationName} onChange={handleInputChange} placeholder="Organization Name" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="venue" value={updatedBooking.venue} onChange={handleInputChange} placeholder="Venue" />
+<input className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm" name="participantCount" value={updatedBooking.participantCount} onChange={handleInputChange} placeholder="Participant Count" />
+ <button onClick={handleSubmit}className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm Update</button>
   </div>
   );
 };
@@ -67,6 +68,17 @@ const ManageBookings = () => {
     setIsUpdating(false);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/Booking_data/${id}`);
+      // After deleting, fetch the updated list of bookings
+      fetchBookings();
+      alert('Booking deleted successfully!');
+    } catch (error) {
+      console.error('Failed to delete booking:', error);
+    }
+  };
+
   const filteredBookings = bookings.filter((booking) => {
     const date = new Date(booking.bookingDate);
     const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
@@ -90,7 +102,7 @@ const ManageBookings = () => {
         onChange={handleSearchChange}
         className="border-2 border-gray-300 bg-white h-10  px-5 pr-16 rounded-lg text-sm focus:outline-none  w-full md:w-1/2"
       />
-      <div style={{ maxHeight: '750px', overflowY:'auto', overflowX: 'visible'}}>
+      <div style={{ maxHeight: '750px', maxWidth:'3000px', overflowY:'auto', overflowX: 'auto'}}>
       <table className="min-w-full bg-white text-sm border-collapse border border-gray-300 w-full font-sans mt-12 ">
         <thead>
           <tr>
@@ -106,7 +118,7 @@ const ManageBookings = () => {
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Organization Name</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Venue</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Participant Count</th>
-            <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Actions</th>
+            <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/2">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -132,8 +144,8 @@ const ManageBookings = () => {
             <div className="flex items-center justify-around h-12">
             <button onClick={() => { setIsUpdating(true); setCurrentBooking(booking); }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Update</button>
             {/* <button onClick={() => navigateToVerifyPage(booking.email)} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">Verify</button> */}
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Update</button>
-              <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm</button>
+            <button onClick={() => handleDelete(booking._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Delete</button>
+              {/* <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm</button> */}
             </div>
             {isUpdating && currentBooking._id === booking._id && <UpdateForm booking={booking} onUpdate={handleUpdate} />}
           </td>

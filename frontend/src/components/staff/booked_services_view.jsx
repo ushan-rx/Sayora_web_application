@@ -1,9 +1,47 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const UpdateForm = ({ booking, onUpdate }) => {
+  const [updatedBooking, setUpdatedBooking] = useState(booking);
+
+  const handleInputChange = (event) => {
+    setUpdatedBooking({
+      ...updatedBooking,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const response = await axios.put(`http://localhost:5000/api/v1/Booking_data/${booking._id}`, updatedBooking);
+    onUpdate(response.data);
+  };
+
+  return (
+    <div>
+    <input name="bookingId" value={updatedBooking.bookingId} onChange={handleInputChange} placeholder="Booking ID" />
+    <input name="firstName" value={updatedBooking.firstName} onChange={handleInputChange} placeholder="First Name" />
+    <input name="lastName" value={updatedBooking.lastName} onChange={handleInputChange} placeholder="Last Name" />
+    <input name="nic" value={updatedBooking.nic} onChange={handleInputChange} placeholder="NIC" />
+    <input name="email" value={updatedBooking.email} onChange={handleInputChange} placeholder="Email" />
+    <input name="phoneNumber01" value={updatedBooking.phoneNumber01} onChange={handleInputChange} placeholder="Phone Number 01" />
+    <input name="phoneNumber02" value={updatedBooking.phoneNumber02} onChange={handleInputChange} placeholder="Phone Number 02" />
+    <input name="bookingDate" value={updatedBooking.bookingDate} onChange={handleInputChange} placeholder="Booking Date" />
+    <input name="time" value={updatedBooking.time} onChange={handleInputChange} placeholder="Time" />
+    <input name="organizationName" value={updatedBooking.organizationName} onChange={handleInputChange} placeholder="Organization Name" />
+    <input name="venue" value={updatedBooking.venue} onChange={handleInputChange} placeholder="Venue" />
+    <input name="participantCount" value={updatedBooking.participantCount} onChange={handleInputChange} placeholder="Participant Count" />
+    <button onClick={handleSubmit}>Confirm Update</button>
+  </div>
+  );
+};
+
+
+
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [currentBooking, setCurrentBooking] = useState(null);
 
   useEffect(() => {
     fetchBookings();
@@ -22,6 +60,11 @@ const ManageBookings = () => {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleUpdate = (updatedBooking) => {
+    setBookings(bookings.map(booking => booking._id === updatedBooking._id ? updatedBooking : booking));
+    setIsUpdating(false);
   };
 
   const filteredBookings = bookings.filter((booking) => {
@@ -87,10 +130,12 @@ const ManageBookings = () => {
                 <td className="border border-gray-300 w-1/6">{booking.participantCount}</td>
                 <td className="border border-gray-300 w-1/6">
             <div className="flex items-center justify-around h-12">
+            <button onClick={() => { setIsUpdating(true); setCurrentBooking(booking); }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Update</button>
             {/* <button onClick={() => navigateToVerifyPage(booking.email)} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">Verify</button> */}
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Update</button>
               <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm</button>
             </div>
+            {isUpdating && currentBooking._id === booking._id && <UpdateForm booking={booking} onUpdate={handleUpdate} />}
           </td>
               </tr>
             );

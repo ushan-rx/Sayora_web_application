@@ -8,21 +8,21 @@ import { Outlet } from 'react-router-dom';
 
 function StaffDashboard(){
 
-    // const[suc, setSuc] =  useState()
-    // const navigate = useNavigate()
-    // axios.defaults.withCredentials = true;
+     const[suc, setSuc] =  useState()
+     const navigate = useNavigate()
+    axios.defaults.withCredentials = true;
 
-    // useEffect(()=>{
-    //     axios.get('http://localhost:5000/api/v1/auth/PatientDashboard')
-    //       .then(res=>{
-    //         if(res.data.stat === "Success"){
-    //             setSuc("Successed ok")
-    //         }else{
-    //             navigate('/login')
-    //         }
-    //       }).catch(err=>console.log(err))
+    useEffect(()=>{
+        axios.get('http://localhost:5000/api/v1/staffAuth/StaffDashboard')
+          .then(res=>{
+            if(res.data.stat === "Success"){
+                setSuc("Successed ok")
+            }else{
+                navigate('/stafflogin')
+            }
+          }).catch(err=>console.log(err))
       
-    // },[])
+    },[])
 
     return(
         <div className="flex">

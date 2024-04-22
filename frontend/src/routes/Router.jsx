@@ -35,6 +35,7 @@ import CashierTable from '@/pages/Cashier/CashierTable'
 import EditTreatment from '@/pages/Cashier/EditTreatment'
 import FetchTreatment from '@/pages/Cashier/FetchTreatment'
 import UpdateCashier from '@/pages/Cashier/UpdateCashier'
+import BookedServices from '@/pages/staff/servicesView'
 
 
 
@@ -50,7 +51,7 @@ import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
 
 import ServiceHome from '../pages/website/HomeNavService'
-import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
+import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
 import ManageDoctor from '@/pages/staff/manageDoctor'
 
 //set routing
@@ -72,6 +73,7 @@ const Router = createBrowserRouter(
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
           <Route path="viewBookedServices" element={<BookedServices/> } exact/>
+          <Route path  = "addServices" element ={<AwarnessPrograms />}exact />
          
           {/*staff dashboard routes here*/}
           {/*AROSHANA-START*/}

@@ -46,6 +46,7 @@ const AddProduct = () => {
       });
       console.log(response.data);
       // Handle the response accordingly
+      alert('Product added successfully!!!')
     } catch (error) {
       console.error('There was an error!', error);
       // Handle the error accordingly

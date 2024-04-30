@@ -63,7 +63,7 @@ async function updateProduct(id, productName, description, stock, unitPrice){
 
 
 async function deleteProduct(id){
-    return await ProductModel.findOneAndDelete({Product_ID: id});
+    return await ProductModel.findByIdAndDelete({_id: id});
 }
 
 

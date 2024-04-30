@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {toast, Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const ViewProducts = () => {
@@ -30,9 +31,14 @@ const ViewProducts = () => {
   const handleDelete = async (productId) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`http://localhost:5000/deleteProduct/${productId}`);
-        setProducts(products.filter((product) => product._id !== productId));
-        alert('Product deleted successfully!');
+        console.log(productId)
+        let response = await axios.delete(`http://localhost:5000/deleteProduct/${productId}`);
+        if(response){
+          setProducts(products.filter((product) => product._id !== productId));
+          toast.success("product deleted succesfully")
+        }else{
+          //
+        }
       } catch (error) {
         console.error('Error deleting product:', error);
       }
@@ -41,6 +47,7 @@ const ViewProducts = () => {
 
   return (
     <div className='h-[90vh] overflow-auto scrollbar-thin -mr-20 rounded-md'>
+    <Toaster position="bottom-right"/>
     <div className='max-w-4xl mx-auto p-8'>
       <h1 className='text-3xl  text-center mb-10'>Product List</h1>
       <button

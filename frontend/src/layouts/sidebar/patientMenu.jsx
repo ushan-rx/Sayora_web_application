@@ -8,6 +8,7 @@ import { BsPerson } from "react-icons/bs";
 import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
+import { GiMedicines } from "react-icons/gi";
 
 function PatientMenu() {
   const path = "/patient";
@@ -69,10 +70,11 @@ function PatientMenu() {
 
       <li>
         <NavLink to={path + "/product"} className="link">
-          <HiOutlineDatabase size={23} className="min-w-max" />
+          <GiMedicines size={23} className="min-w-max" />
           Ayurvedic Products
         </NavLink>
       </li>
+
 
      
 

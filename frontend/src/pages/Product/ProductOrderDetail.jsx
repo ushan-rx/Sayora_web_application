@@ -56,7 +56,7 @@ const POrderDetails = () => {
 
   // Function to navigate back to the orders page
   const handleBack = () => {
-    navigate('/product/adminOrder');
+    navigate('/staff/product/adminOrder');
   };
 
   // Render the component

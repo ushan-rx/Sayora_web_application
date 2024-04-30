@@ -37,6 +37,7 @@ const ProductOrdersTable = () => {
   };
 
   return (
+    <div className='h-[80vh] overflow-auto scrollbar-thin -mr-20 rounded-md'>
     <div className="p-4">
       <h2 className="text-4xl  m-4 text-center">ALL Orders</h2>
       <div className="overflow-auto">
@@ -78,6 +79,7 @@ const ProductOrdersTable = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

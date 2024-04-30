@@ -1,6 +1,7 @@
 import React, { useEffect , useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {toast, Toaster } from 'react-hot-toast';
 
 const ProductCard = ({ product, handleAddToCart }) => {
     return (
@@ -50,9 +51,9 @@ const ProductHome = () => {
     const isProductInCart = cartItems.some(item => item.Product_ID === product.Product_ID);
     if (!isProductInCart) {
       setCartItems([...cartItems, product]);
-      alert('Product added to cart');
+      toast.success("Product added to cart")
     } else {
-      alert('Product is already in the cart');
+      toast.error('Product is already in the cart');
     }
   };
 
@@ -63,7 +64,7 @@ const ProductHome = () => {
   return (
     <div className='h-[80vh] overflow-auto scrollbar-thin -mr-20 rounded-md'>
     <div className="max-w-4xl mx-auto p-6">
-     
+    <Toaster position="bottom-right"/>
         <h1 className="text-3xl mb-10 text-center">Ayurvedic Products</h1>
         <div className="flex justify-between items-center">
         <button

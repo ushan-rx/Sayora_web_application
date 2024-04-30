@@ -1,7 +1,7 @@
-const Requesition = require('../models/requesition');
+const Requesition = require("../models/requesition");
 
-const { StatusCodes } = require('http-status-codes');
-const CustomError = require('../errors');
+const { StatusCodes } = require("http-status-codes");
+const CustomError = require("../errors");
 
 //create new requesition
 const createRequesition = async (req, res) => {
@@ -16,8 +16,10 @@ const createRequesition = async (req, res) => {
 
 const getAllRequesitions = async (req, res) => {
   try {
-    const requesitions = await Requesition.find({})
-    res.status(StatusCodes.OK).json({ requesitions, count: requesitions.length });
+    const requesitions = await Requesition.find({});
+    res
+      .status(StatusCodes.OK)
+      .json({ requesitions, count: requesitions.length });
   } catch (err) {
     res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
   }
@@ -27,7 +29,9 @@ const getRequesitionsByPatient = async (req, res) => {
   const { id: patientId } = req.params;
   try {
     const requesitions = await Requesition.find({ patientId: patientId });
-    res.status(StatusCodes.OK).json({ requesitions, count: requesitions.length });
+    res
+      .status(StatusCodes.OK)
+      .json({ requesitions, count: requesitions.length });
   } catch (err) {
     res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
   }

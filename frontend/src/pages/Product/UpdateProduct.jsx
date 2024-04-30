@@ -79,90 +79,103 @@ const UpdateProduct = () => {
 
     setSubmitting(false);
   };
+  
+  // Function to navigate back to the products page
+  const handleBack = () => {
+    navigate('/staff/Product/viewProduct');
+  };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={ProductFormSchema}
-      onSubmit={handleSubmit}
-      enableReinitialize // This is important when initial values depend on async data
-    >
-      {({ isSubmitting, setFieldValue }) => (
-        <Form className="flex flex-col p-12 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-20">
-          <h1 className="text-3xl m-4  text-center">Update Products</h1>
+    <div className='w-full'>
+      <button onClick={handleBack} className='bg-gray-500 text-white mt-6 ml-6 px-4 py-2 rounded'>
+          Back to Products
+        </button>
+      <div className='h-[80vh] overflow-auto scrollbar-thin'>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={ProductFormSchema}
+          onSubmit={handleSubmit}
+          enableReinitialize // This is important when initial values depend on async data
+        >
+          {({ isSubmitting, setFieldValue }) => (
+            <Form className="flex flex-col p-6 border border-blue-500 rounded shadow-lg max-w-lg mx-auto mt-10">
+              <h1 className="text-3xl m-4  text-center">Update Products</h1>
 
-          <Field
-            name="productName"
-            placeholder="Product Name"
-            className="mb-2 p-2 border rounded"
-          />
-          <ErrorMessage
-            name="productName"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+              <Field
+                name="productName"
+                placeholder="Product Name"
+                className="mb-2 p-2 border rounded"
+              />
+              <ErrorMessage
+                name="productName"
+                component="div"
+                className="text-red-500 text-sm"
+              />
 
-          <Field
-            name="unitPrice"
-            placeholder="Unit Price"
-            className="mb-2 p-2 border rounded"
-            type="number"
-          />
-          <ErrorMessage
-            name="unitPrice"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+              <Field
+                name="unitPrice"
+                placeholder="Unit Price"
+                className="mb-2 p-2 border rounded"
+                type="number"
+              />
+              <ErrorMessage
+                name="unitPrice"
+                component="div"
+                className="text-red-500 text-sm"
+              />
 
-          <Field
-            name="stock"
-            placeholder="Stock"
-            className="mb-2 p-2 border rounded"
-            type="number"
-          />
-          <ErrorMessage
-            name="stock"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+              <Field
+                name="stock"
+                placeholder="Stock"
+                className="mb-2 p-2 border rounded"
+                type="number"
+              />
+              <ErrorMessage
+                name="stock"
+                component="div"
+                className="text-red-500 text-sm"
+              />
 
-          <Field
-            as="textarea"
-            name="description"
-            placeholder="Description"
-            className="mb-2 p-2 border rounded"
-          />
-          <ErrorMessage
-            name="description"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+              <Field
+                as="textarea"
+                name="description"
+                placeholder="Description"
+                rows="6"
+                className="mb-2 p-2 border rounded"
+              />
+              <ErrorMessage
+                name="description"
+                component="div"
+                className="text-red-500 text-sm"
+              />
 
-          {/* 
-          <input
-            name="image"
-            type="file"
-            onChange={(event) => {
-              setFieldValue("image", event.currentTarget.files[0]);
-            }}
-            className="mb-4"
-          />
-          <ErrorMessage
-            name="image"
-            component="div"
-            className="text-red-500 text-sm"
-          /> */}
+              {/* 
+              <input
+                name="image"
+                type="file"
+                onChange={(event) => {
+                  setFieldValue("image", event.currentTarget.files[0]);
+                }}
+                className="mb-4"
+              />
+              <ErrorMessage
+                name="image"
+                component="div"
+                className="text-red-500 text-sm"
+              /> */}
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition-colors duration-300 ease-in-out"
-          >
-            Update Product
-          </button>
-        </Form>
-      )}
-    </Formik>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition-colors duration-300 ease-in-out"
+              >
+                Update Product
+              </button>
+            </Form>
+          )}
+        </Formik>
+        </div>
+      </div>
   );
 };
 export default UpdateProduct;

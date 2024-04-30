@@ -11,7 +11,9 @@ const ProductOrdersTable = () => {
             try{
                 const response = await axios.get('http://localhost:5000/productorders');
                 console.log(response.data);
-                setOrders(response.data);
+                let orderResponse = response.data;
+                let orderReversed = orderResponse.reverse();
+                setOrders(orderReversed);
             }catch(errr){
                 console.error('There was an error!', errr);
 
@@ -37,12 +39,12 @@ const ProductOrdersTable = () => {
   };
 
   return (
-    <div className='h-[80vh] overflow-auto scrollbar-thin -mr-20 rounded-md'>
+    <div className='h-[80vh] w-full overflow-auto scrollbar-thin -mr-20 rounded-md'>
     <div className="p-4">
       <h2 className="text-4xl  m-4 text-center">ALL Orders</h2>
       <div className="overflow-auto">
-        <table className="min-w-full bg-white">
-          <thead className="bg-blue-500 text-white">
+        <table className="min-w-full bg-white pr-2">
+          <thead className="bg-blue-500 text-white mr-4">
             <tr>
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Order ID</th>
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>

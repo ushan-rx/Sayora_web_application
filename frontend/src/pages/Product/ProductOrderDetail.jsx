@@ -69,23 +69,23 @@ const POrderDetails = () => {
           <tbody>
             {/* Render each order detail in a table row */}
             <tr>
-              <th className='border px-4 py-10'>Order ID</th>
+              <th className='border px-4 py-4'>Order ID</th>
               <td className='border px-4 py-2'>{order.ProductOrder_ID}</td>
             </tr>
             <tr>
-              <th className='border px-4 py-10'>Customer Name</th>
+              <th className='border px-4 py-4'>Customer Name</th>
               <td className='border px-4 py-2'>{order.CustomerName}</td>
             </tr>
             <tr>
-              <th className='border px-4 py-10'>Email</th>
+              <th className='border px-4 py-4'>Email</th>
               <td className='border px-4 py-2'>{order.CustomerEmail}</td>
             </tr>
             <tr>
-              <th className='border px-4 py-10'>Address</th>
+              <th className='border px-4 py-4'>Address</th>
               <td className='border px-4 py-2'>{order.CustomerAddress}</td>
             </tr>
             <tr>
-              <th className='border px-4 py-10'>Order Status</th>
+              <th className='border px-4 py-4'>Order Status</th>
               <td className='border px-4 py-2'>
                 {/* Dropdown to select order status */}
                 <select value={newStatus} onChange={handleStatusChange} disabled={updatingStatus}>

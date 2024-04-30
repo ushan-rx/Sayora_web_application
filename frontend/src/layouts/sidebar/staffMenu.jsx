@@ -14,6 +14,9 @@ import { FaUserInjured } from "react-icons/fa";
 import { ImAirplane } from "react-icons/im";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { FaFileInvoice } from "react-icons/fa6";
+import { FaShoppingBag } from "react-icons/fa";
+import { AiFillMedicineBox } from "react-icons/ai";
 
 function staffMenu() {
   const path = "/staff";
@@ -59,7 +62,7 @@ function staffMenu() {
       {
         name: "ManageLeaves",           //display name
         path: "/manageleaves",          // main path
-        icon: ImAirplane,
+        icon: FaShoppingBag,
         menus: [
           {subName: "Overview", subPath: "overview"},
           
@@ -85,7 +88,7 @@ function staffMenu() {
       {
         name: "Treatment",           //display name
         path: "/treatment",          // main path
-        icon: FaUserInjured,
+        icon: AiFillMedicineBox,
         menus: [
           {subName: "Add Treatmenet", subPath: "addTreat"},
           {subName: "Manage Treatment", subPath: "viewTreat"},
@@ -96,7 +99,7 @@ function staffMenu() {
       {
         name: "Cashier",           //display name
         path: "/cashier",          // main path
-        icon: FaUserInjured,
+        icon: FaFileInvoice,
         menus: [
           {subName: "Invoice", subPath: "cashier"},
           {subName: "Manage Invoice", subPath: "viewCash"},

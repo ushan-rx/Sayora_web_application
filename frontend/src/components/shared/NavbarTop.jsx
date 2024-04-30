@@ -36,7 +36,7 @@ const navbar = () => {
                 </div>
 
                 <div className="flex items-center justify-end ml-auto space-x-3 md:space-x-6">
-                  <div className="relative">
+                  {/* <div className="relative">
                     <p className="pt-1 pb-1 pl-1 pr-1 text-gray-700 transition-all duration-200 bg-white rounded-full hover:text-gray-900 focus:outline-none hover:bg-gray-100">
                       <span className="flex items-center justify-center">
                         <span className="flex items-center justify-center">
@@ -52,11 +52,11 @@ const navbar = () => {
                     </p>
                     <p className="px-1.5 py-0.5 font-semibold text-xs items-center bg-indigo-600 text-white rounded-full inline-flex
                   absolute -top-px -right-1">2</p>
-                  </div>
+                  </div> */}
                   <div className="relative flex items-center justify-center">
                   <DropdownMenu className="p-0">
                       <DropdownMenuTrigger asChild>
-                        <img src="https://static01.nyt.com/images/2019/11/08/world/08quebec/08quebec-superJumbo.jpg"
+                        <img src="https://firebasestorage.googleapis.com/v0/b/sayora-web-app0.appspot.com/o/images%2F96199f5c-ab9f-4856-86b4-4cd7f890cc46.png?alt=media&token=0bac3897-7ae7-4d4e-924d-bdcc487eb369"
                       className="object-cover  bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
@@ -65,11 +65,11 @@ const navbar = () => {
                         <DropdownMenuItem asChild><NavLink to={"profile"}>Profile</NavLink></DropdownMenuItem>
                         {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
                         {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                        {/* <DropdownMenuItem>Settings</DropdownMenuItem> */}
                       </DropdownMenuContent>
                   </DropdownMenu>
   
-                    <p className="text-sm font-semibold ml-4">Marrie Currie</p>
+                    <p className="text-sm font-semibold ml-4">Ushan Senarathna</p>
                   </div>
                 </div>
               </div>

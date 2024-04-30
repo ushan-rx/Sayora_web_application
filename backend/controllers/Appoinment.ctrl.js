@@ -3,8 +3,8 @@ const AppoinmentService = require('../Service/Appoinment.service');
 
 async function addAppoinment(req, res) {
     try{
-        const {App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail} = req.body;
-        const newAppoinment = await AppoinmentService.addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail);
+        const {App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail, patientId} = req.body;
+        const newAppoinment = await AppoinmentService.addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail, patientId);
         res.status(201).json(newAppoinment);
 
     }catch(err){

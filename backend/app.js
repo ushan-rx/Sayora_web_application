@@ -51,6 +51,8 @@ const staffRoute = require('./routes/staff.route.js');
 const tempUserRoute = require('./routes/tempUser.route.js');
 const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
 
+const staffAuthRoute = require('./routes/staffAuthRoutes');
+
 const cashierRoutes  = require('./routes/cashierRoutes.js')
 const treatmentRoutes = require('./routes/treatment.js')
 
@@ -85,6 +87,10 @@ app.use('/treatment', treatmentRoutes);
 app.use('/api/v1/staff', staffRoute);
 app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
+
+app.use('/api/v1/staffAuth', staffAuthRoute);
+
+
 
 
 const NotFoundMiddleware = require('./middleware/not-found');

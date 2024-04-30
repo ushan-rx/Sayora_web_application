@@ -56,29 +56,31 @@ export default function EditTreatment(){
 
     return (
         <div className="container mx-auto mt-10">
-            <h1>Update Treatment</h1>
-            {loading ? (
-                <div>Loading...</div>
-            ) : (treatment && Object.keys(treatment).length !== 0 ? (
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                        <Input type="text" id="name" placeholder={treatment.treatment.name} value={name} onChange={(e) => setName(e.target.value)} />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-                        <Input type="text" id="description" placeholder={treatment.treatment.description} value={description} onChange={(e) => setDescription(e.target.value)} />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-                        <Input type="text" id="price" placeholder={treatment.treatment.price} value={price} onChange={(e) => setPrice(e.target.value)} />
-                    </div>
-                    <Button type="primary" htmlType="submit">Update</Button>
-                    <Link to="/viewTreat" className="btn btn-secondary ms-2">Cancel</Link>
-                </form>
-            ) : (
-                <div>Loading...</div>
-            ))}
-        </div>
+        <h1 className="text-2xl font-bold mb-4">Update Treatment</h1>
+        {loading ? (
+            <div className="text-lg text-gray-500">Loading...</div>
+        ) : (treatment && Object.keys(treatment).length !== 0 ? (
+            <form onSubmit={handleSubmit} className="space-y-4 border border-gray-300 p-4 rounded max-w-lg mx-auto">
+                <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                    <Input type="text" id="name" placeholder={treatment.treatment.name} value={name} onChange={(e) => setName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
+                </div>
+                <div>
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+                    <Input type="text" id="description" placeholder={treatment.treatment.description} value={description} onChange={(e) => setDescription(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
+                </div>
+                <div>
+                    <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
+                    <Input type="text" id="price" placeholder={treatment.treatment.price} value={price} onChange={(e) => setPrice(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
+                </div>
+                <div className="flex justify-end space-x-4">
+    <Button type="primary" htmlType="submit" className="bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded">Update</Button>
+    <Link to="/viewTreat" className="btn bg-red-600 text-white text-center py-2 px-4 hover:text-blue-800 rounded">Cancel</Link>
+</div>
+            </form>
+        ) : (
+            <div className="text-lg text-gray-500">Loading...</div>
+        ))}
+    </div>
     );
 }

@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import axios from 'axios';
 
 const usePrescriptionStore = create((set) => ({
     prescription: {

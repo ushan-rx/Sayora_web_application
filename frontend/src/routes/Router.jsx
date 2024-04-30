@@ -14,6 +14,7 @@ import Overview from '../pages/doctor/overviewDoctor'
 import ProfileDoctor from '../pages/doctor/profileDoctor'
 import ExaminationList from '@/pages/doctor/examinationList'
 import ExaminationContainer from '../pages/doctor/examinationContainer'
+import AppointmentReport from '@/pages/doctor/appointmentReport'
 
 //patient
 import ProfilePatient from '../pages/patient/overviewPatient'
@@ -52,6 +53,7 @@ import MyLeaves from '@/pages/staff/myLeaves'
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
 import ManageDoctor from '@/pages/staff/manageDoctor'
+import StaffLogIn from '@/pages/staff/StaffLogin'
 
 import ProductHome from '@/pages/Product/ProductHome'
 import AddProduct from '@/pages/Product/AddProduct'
@@ -68,6 +70,7 @@ const Router = createBrowserRouter(
     <>   
         <Route path = "/login" element ={<LogIn />}exact />
         <Route path = "/register/:tempId" element ={<RegistrationForm />}exact />
+        <Route path="/stafflogin" element={<StaffLogIn/> } exact/>
         
         <Route path = "/" element ={<WebsiteLayout />}exact >
           <Route index element={<Home/> } exact/>
@@ -79,9 +82,9 @@ const Router = createBrowserRouter(
 
 
         </Route>
-        <Route path = "staff" element ={<StaffDashboard />}exact >
+        <Route path = "/staff" element ={<StaffDashboard/>}exact >
           {/*staff dashboard routes here*/}
-          {/*AROSHANA-START*/}
+                    {/*AROSHANA-START*/}
           ManageDoctor
             <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
@@ -92,6 +95,8 @@ const Router = createBrowserRouter(
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
             <Route path="ManageDoctor/overview" element={<ManageDoctor/> } exact/>
+            
+            
            {/*AROSHANA-END*/}
             {/* kaumal */}
 
@@ -152,7 +157,7 @@ const Router = createBrowserRouter(
 
           <Route path="/doctor" element={<DoctorDashboard /> } exact>
             <Route index element={<Overview/> } exact/>
-          {/*doctor dashboard routes here*/}
+            {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
               <Route path="profile" element={<ProfileDoctor/> } exact/>
               <Route path="examination">
@@ -160,10 +165,13 @@ const Router = createBrowserRouter(
                 <Route path=':id' element={<ExaminationContainer/>}></Route>
                 <Route path='' element={<ExaminationList/>} exact></Route>
               </Route>
+              {/* report routes here */}
+              <Route path='reports'>
+                <Route index element={<AppointmentReport/> } exact/>
+                <Route path="appointmentReport" element={<AppointmentReport/>} exact/>
+              </Route>
           </Route>
 
-          
-          
         </Route> 
     </>
   )

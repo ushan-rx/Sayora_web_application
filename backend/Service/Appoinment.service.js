@@ -30,7 +30,7 @@ function generateID() {
   }
 
 
-async function addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail){
+async function addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail, patientId){
     const App_Id = generateID();
     const newAppoinment = new AppointmentModel({
         App_Id,
@@ -43,6 +43,7 @@ async function addAppoinment(App_date , App_time , App_reason , doctorID , patie
         patientContact,
         patientGender,
         patientemail,
+        patientId,         // newly added
     });
     await newAppoinment.save();
     return newAppoinment;

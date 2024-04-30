@@ -54,11 +54,16 @@ async function getProductByID(id){
 }
 
 async function updateProduct(id, productName, description, stock, unitPrice){
+  try{
     await ProductModel.findOneAndUpdate({Product_ID: id}, {productName, description, stock, unitPrice});
+  }catch(err){
+    console.log(err);
+  }
 }
 
+
 async function deleteProduct(id){
-    return await ProductModel.findOneAndDelete({Product_ID: id});
+    return await ProductModel.findByIdAndDelete({_id: id});
 }
 
 

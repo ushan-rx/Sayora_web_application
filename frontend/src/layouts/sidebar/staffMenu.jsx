@@ -17,6 +17,8 @@ import { FaUser } from "react-icons/fa";
 import { FaFileInvoice } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiFillMedicineBox } from "react-icons/ai";
+import { FaCartShopping } from "react-icons/fa6";
+
 
 function staffMenu() {
   const path = "/staff";
@@ -108,8 +110,19 @@ function staffMenu() {
 
       },
 
-       //kaumal
-      
+      {
+        name: "Product",    
+        path: "/product",    
+        icon: FaCartShopping,
+        menus: [
+          {subName: "Product List", subPath: "viewProduct"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "Orders", subPath: "adminOrder"},
+         
+          
+        ],
+      },
   ];
 
 

@@ -55,6 +55,15 @@ import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
 import ManageDoctor from '@/pages/staff/manageDoctor'
 import StaffLogIn from '@/pages/staff/StaffLogin'
 
+import ProductHome from '@/pages/Product/ProductHome'
+import AddProduct from '@/pages/Product/AddProduct'
+
+import Cart from '@/pages/Product/Cart'
+import ProductOrdersTable from '@/pages/Product/ProductOrdersTable'
+import POrderDetails from '@/pages/Product/ProductOrderDetail'
+import ViewProducts from '@/pages/Product/ViewProducts'
+import UpdateProduct from '@/pages/Product/UpdateProduct'
+
 //set routing
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -112,8 +121,18 @@ const Router = createBrowserRouter(
           <Route path="viewCash" element={<viewCash/> } exact/>
           {/* end */}
 
+            <Route path = "product">
+            <Route index element ={<ViewProducts/>}exact/>
+            <Route path="viewProduct" element = {<ViewProducts/>}exact/>
+            <Route path = "add" element ={<AddProduct/>}exact/>
+            <Route path="adminOrder" element= {<ProductOrdersTable/>} exact/>
+          <Route path="adminOrder/order-details/:id" element= {<POrderDetails/>} exact/>
+          <Route path="update-product" element = {<UpdateProduct/>} exact/>
+            </Route>
 
         </Route>
+
+      
 
           {/*protected routes*/}
         <Route element ={<ProtectedRoutesUser />}>
@@ -129,7 +148,10 @@ const Router = createBrowserRouter(
             <Route path="treatments/mytretments" element={<PatientTreatment/>} exact/>
             <Route path="requesition" element={<Requesition/>} exact/>
           
-
+            <Route path = "product">
+            <Route index element ={<ProductHome/>}></Route>
+            <Route path = "cart" element ={<Cart/>}exact/>
+            </Route>
 
           </Route>
 

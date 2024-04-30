@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -22,6 +23,9 @@ const ProductFormSchema = Yup.object().shape({
 });
 
 const AddProduct = () => {
+
+  const navigate = useNavigate()
+
   const initialValues = {
     productName: '',
     description: '',
@@ -55,39 +59,51 @@ const AddProduct = () => {
     setSubmitting(false);
   };
 
+    // Function to navigate back to the products page
+    const handleBack = () => {
+      navigate('/staff/Product/viewProduct');
+    };
+
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={ProductFormSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting, setFieldValue }) => (
-        <Form className="flex flex-col p-6 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-20">
-          <h1 className='text-3xl mb-10 text-center'>Add Products</h1>
+    <div className='w-full'>
+      <button onClick={handleBack} className='bg-gray-500 text-white mt-6 ml-6 px-4 py-2 rounded'>
+          Back to Products
+        </button>
+      <div className='h-[80vh] overflow-auto scrollbar-thin'>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={ProductFormSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, setFieldValue }) => (
+            <Form className="flex flex-col p-6 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-10">
+              <h1 className='text-3xl mb-10 text-center'>Add Products</h1>
 
-          <Field name="productName" placeholder="Name" className="mb-2 p-4 border rounded" />
-          <ErrorMessage name="productName" component="div" className="text-red-500 text-sm" />
+              <Field name="productName" placeholder="Name" className="mb-2 p-4 border rounded" />
+              <ErrorMessage name="productName" component="div" className="text-red-500 text-sm" />
 
-          <Field name="unitPrice" placeholder="Unit Price" className="mb-2 p-4 border rounded" />
-          <ErrorMessage name="unitPrice" component="div" className="text-red-500 text-sm" />
+              <Field name="unitPrice" placeholder="Unit Price" className="mb-2 p-4 border rounded" />
+              <ErrorMessage name="unitPrice" component="div" className="text-red-500 text-sm" />
 
-          <Field name="stock" placeholder="Stock" className="mb-2 p-4 border rounded" />
-          <ErrorMessage name="stock" component="div" className="text-red-500 text-sm" />
+              <Field name="stock" placeholder="Stock" className="mb-2 p-4 border rounded" />
+              <ErrorMessage name="stock" component="div" className="text-red-500 text-sm" />
 
-          <Field as="textarea" name="description" placeholder="Description" className="mb-2 p-4 border rounded" />
-          <ErrorMessage name="description" component="div" className="text-red-500 text-sm" />
+              <Field as="textarea" name="description" placeholder="Description" rows="4" className="mb-2 p-4 border rounded" />
+              <ErrorMessage name="description" component="div" className="text-red-500 text-sm" />
 
-          <input name="image" type="file" onChange={(event) => {
-            setFieldValue("image", event.currentTarget.files[0]);
-          }} className="mb-4" />
-          <ErrorMessage name="image" component="div" className="text-red-500 text-sm" />
+              <input name="image" type="file" onChange={(event) => {
+                setFieldValue("image", event.currentTarget.files[0]);
+              }} className="mb-4" />
+              <ErrorMessage name="image" component="div" className="text-red-500 text-sm" />
 
-          <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white p-2 rounded">
-            Add
-          </button>
-        </Form>
-      )}
-    </Formik>
+              <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white p-2 rounded">
+                Add
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
   );
 };
 

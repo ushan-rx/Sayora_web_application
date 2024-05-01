@@ -19,6 +19,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import toast, {Toaster} from "react-hot-toast";
 
 import { usePatientStore } from "@/store/patient.store";
 
@@ -73,23 +74,37 @@ function doctorRequisitionForm({change}) {
 		name: "testNames"
 	})
 
-	const onSubmit =  async (data) => {
+	const onSubmit =  async (data) => {		
+
 		setIsSubmitting(true);
-		data.testNames.map(test => {
-			axios.post('http://localhost:5000/api/v1/requesition', {
-				patientId: patientId,
-				doctorId: docId,
-				testName: test.name,
-				reqDate: new Date(),
+		const response = await axios.get('http://localhost:5000/api/v1/requesition') // Fetch all tests
+		console.log(response.data.requesitions);
+		const reportList = response.data.requesitions.filter((report) =>
+			data.testNames.some((test) => test.name === report.testName)
+		);
+
+		console.log(reportList)
+		if (reportList?.length == 0) {
+			data.testNames.map(test => {
+				axios.post('http://localhost:5000/api/v1/requesition', {
+					patientId: patientId,
+					doctorId: docId,
+					testName: test.name,
+					reqDate: new Date(),
+				})
+				.then((response) => {
+					console.log(response.data);
+					change("Requistions added successfully");
+				})
+				.catch((error) => {
+					console.log(error);
+				})
 			})
-			.then((response) => {
-				console.log(response.data);
-				change("Requistions added successfully");
-			})
-			.catch((error) => {
-				console.log(error);
-			})
-		})
+			setIsSubmitting(false);
+			form.reset();
+			return;
+		}
+		toast.error("Requisition already exists");
 		setIsSubmitting(false);
 		form.reset();
 	}

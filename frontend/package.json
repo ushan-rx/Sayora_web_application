@@ -50,7 +50,7 @@
     "react-select": "^5.8.0",
     "react-to-pdf": "^1.0.1",
     "react-to-print": "^2.15.1",
-    "sweetalert2": "^11.10.8",
+    "sweetalert2": "^11.6.13",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",

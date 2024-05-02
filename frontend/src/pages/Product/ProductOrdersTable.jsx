@@ -27,7 +27,8 @@ const ProductOrdersTable = () => {
     'Pending': 'bg-yellow-300',
     'Processing': 'bg-blue-800',
     'Shipped': 'bg-purple-500',
-    'Delivered': 'bg-green-500'
+    'Delivered': 'bg-green-500',
+    'Canceled': 'bg-red-500',
   };
 
   const getStatusStyle = (status) => {

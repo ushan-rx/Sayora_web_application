@@ -112,7 +112,7 @@ function staffMenu() {
 
       {
         name: "Product",    
-        path: "/product",    
+        path: "/staff/product",    
         icon: FaCartShopping,
         menus: [
           {subName: "Product List", subPath: "viewProduct"},

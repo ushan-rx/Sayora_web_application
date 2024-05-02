@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const ProductFormSchema = Yup.object().shape({
   productName: Yup.string()
+  .matches(/^[A-Za-z\s]+$/, 'Product name should contain only characters')
+  .typeError("product name must be characters")
     .required('Product name is required'),
   description: Yup.string()
     .required('Description is required'),

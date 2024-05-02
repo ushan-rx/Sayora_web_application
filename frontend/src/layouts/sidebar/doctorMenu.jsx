@@ -20,7 +20,7 @@ function DoctorMenu() {
     const subMenusList = [
         {
           name: "reports",           //display name
-          path: "/report",          // main path
+          path: "/doctor/reports",          // main path
           icon: HiOutlineDocumentReport,
           menus: [
             {subName: "Appointment Report", subPath: "appointmentReport"},

@@ -17,7 +17,7 @@ function PatientMenu() {
   const subMenusList = [
     {
       name: "treatments", //display name
-      path: "/treatments", // main path
+      path: "/patient/treatments", // main path
       icon: RiBuilding3Line,
       menus: [
         { subName: "my tretments", subPath: "mytretments" },
@@ -26,8 +26,8 @@ function PatientMenu() {
     },
 
     {
-      name: "myrecords",
-      path: "/myrecords",
+      name: "My records",
+      path: "/patient/myrecords",
       icon: TbReportAnalytics,
       menus: [
         { subName: "test reports", subPath: "reportpatient" }, //sub menu diplay name and path(dont add / before path)

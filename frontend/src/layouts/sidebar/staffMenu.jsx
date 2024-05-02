@@ -26,8 +26,8 @@ function staffMenu() {
   // items with sub menus
   const subMenusList = [
     {
-        name: "ManageStaff",           //display name
-        path: "/manage",          // main path
+        name: "Manage Staff",           //display name
+        path: "/staff/managestaff",          // main path
         icon: FaUserTie,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -38,8 +38,8 @@ function staffMenu() {
       },
 
       {
-        name: "ManageDoctor",           //display name
-        path: "/managedoctor",          // main path
+        name: "Manage Doctor",           //display name
+        path: "/staff/managedoctor",          // main path
         icon: FaUserDoctor,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -50,8 +50,8 @@ function staffMenu() {
       },
 
       {
-        name: "ManagePatients",           //display name
-        path: "/managepatient",          // main path
+        name: "Manage Patients",           //display name
+        path: "/staff/managepatients",          // main path
         icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -62,8 +62,8 @@ function staffMenu() {
       },
 
       {
-        name: "ManageLeaves",           //display name
-        path: "/manageleaves",          // main path
+        name: "Manage Leaves",           //display name
+        path: "/staff/manageleaves",          // main path
         icon: FaShoppingBag,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -74,8 +74,8 @@ function staffMenu() {
       },
 
       {
-        name: "StaffProfile",           //display name
-        path: "/manageleaves",          // main path
+        name: "Staff Profile",           //display name
+        path: "/staff/staffprofile",          // main path
         icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},

@@ -75,6 +75,12 @@ function PatientMenu() {
         </NavLink>
       </li>
 
+      <li>
+        <NavLink to={path + "/purchase"} className="link">
+          <GiMedicines size={23} className="min-w-max" />
+          Purchase History
+        </NavLink>
+      </li>
 
      
 

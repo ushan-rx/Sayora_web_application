@@ -52,7 +52,7 @@ const tempUserRoute = require('./routes/tempUser.route.js');
 const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
 
 const staffAuthRoute = require('./routes/staffAuthRoutes');
-
+const userRoute = require('./routes/user.route.js');   
 const cashierRoutes  = require('./routes/cashierRoutes.js')
 const treatmentRoutes = require('./routes/treatment.js')
 
@@ -90,7 +90,7 @@ app.use('/api/v1/add-user', tempUserRoute);
 
 app.use('/api/v1/staffAuth', staffAuthRoute);
 
-
+app.use('/api/v1/user', userRoute);   
 
 
 const NotFoundMiddleware = require('./middleware/not-found');

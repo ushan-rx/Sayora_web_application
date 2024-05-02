@@ -19,6 +19,9 @@ const productOrderSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   }, 
+  patientId:{
+    type: String,
+  },
   OrderDate: {
     type: Date,
     default: Date.now 

@@ -39,6 +39,7 @@ ProductOrderRouter.post('/productorders', async (req, res) => {
       CustomerEmail: req.body.CustomerEmail,
       CustomerAddress: req.body.CustomerAddress,
       ProductArray: req.body.ProductArray,
+      patientId:req.body.patientId,
     });
     await newOrder.save();
     res.status(201).send(newOrder);
@@ -107,5 +108,17 @@ ProductOrderRouter.get('/productorders/:id', async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+// Get Orders by Patient Id
+  ProductOrderRouter.get('/getOrdersByPatient/:id', async (req, res) => {
+    try{
+        const id = req.params['id'];
+        const orders = await ProductOrder.find({patientId: id});
+        res.status(200).json(orders);
+    }catch(err){
+        res.status(400).json({message: err.message});
+        console.log(err);
+    }
+});
 
 module.exports = ProductOrderRouter;

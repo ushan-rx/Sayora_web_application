@@ -63,6 +63,7 @@ import ProductOrdersTable from '@/pages/Product/ProductOrdersTable'
 import POrderDetails from '@/pages/Product/ProductOrderDetail'
 import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
+import PatientPurchase from '@/pages/Product/PatientPurhase'
 
 //set routing
 const Router = createBrowserRouter(
@@ -147,6 +148,7 @@ const Router = createBrowserRouter(
             <Route path="myrecords/mycareprofile" element={<MyCareProfile/>} exact/>
             <Route path="treatments/mytretments" element={<PatientTreatment/>} exact/>
             <Route path="requesition" element={<Requesition/>} exact/>
+            <Route path="purchase" element={<PatientPurchase/>} exact/>
           
             <Route path = "product">
             <Route index element ={<ProductHome/>}></Route>

@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const Cart = () => {
+  const patientId = Cookies.get('roleId');
+
   const location = useLocation();
   const navigate = useNavigate();
   const [cartItems, setCartItems]  = useState(location.state.cartItems || { cartItems: [] });
@@ -43,13 +46,40 @@ const Cart = () => {
         return item;
       })
     );
-};
+  };
+
+  useEffect(() => {
+    //if cart items are empty, redirect to product page
+    if(cartItems == null || cartItems.length === 0){
+      navigate('/patient/product');
+    } else{
+      //get patient details 
+      const fetchPatientDetails = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/v1/patient/${patientId}`);
+          if(response){
+            const patient = response.data.patient;
+            setCustomerName(`${patient.fName} ${patient.lName}`);
+            // get patient eamil
+            const userResponse = await axios.get(`http://localhost:5000/api/v1/user/${patient.userId}`);
+            const user = userResponse.data;
+            setCustomerEmail(user.email);
+          }
+        } catch (error) {
+          console.error('There was an error!', error);
+        }
+      };
+
+      fetchPatientDetails();
+    }
+  }, []);
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const productOrder = {
+      patientId:patientId,
       Total_price: getTotalPrice(),
       CustomerName: customerName,
       CustomerEmail: customerEmail,
@@ -79,7 +109,7 @@ const Cart = () => {
   return (
     <div className='max-w-2xl mx-auto p-4'>
       <Toaster position="bottom-right"/>
-      <form onSubmit={handleSubmit} className='flex flex-col p-12 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-20'>
+      <form onSubmit={handleSubmit} className='flex flex-col p-12 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-8'>
       <h1 className='text-3xl text-center mb-10'>Reservation Form</h1>
         <input
           type='text'

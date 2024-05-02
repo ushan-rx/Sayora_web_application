@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -35,12 +35,15 @@ import { set } from 'date-fns';
 // const ACCEPTED_FILE_TYPES = ["application/pdf"]
 
 const formSchema = z.object({
-    testName: z.string(),
+    testName: z.string().min(2, {
+		message: "Report Name must be at least 2 characters.",
+	}),
     documentURL: z.any()
-    // .refine(
-    //     file => ACCEPTED_FILE_TYPES.includes(file.type),
-    //     { message: 'Please choose PDF format files only' }
-    //   ),
+    .refine(
+        (value) => value !== undefined, { message: 'File is required' }
+        // file => ACCEPTED_FILE_TYPES.includes(file.type),
+        // { message: 'Please choose PDF format files only' }
+      ),
 });
 
 function reportsContainer() {
@@ -50,12 +53,14 @@ function reportsContainer() {
 	}));
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [tableRender, setTableRender] = useState(false);
     const [pdf, setPdf] = useState(null);
 
     const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues:{
 			testName: "",
+           
 		}
 	})
 
@@ -65,27 +70,46 @@ function reportsContainer() {
         setIsSubmitting(true);
         const date = new Date().toLocaleString();
 
-        if(pdf){
-            pdfURL = await uploadFile(pdf);
-        }
+        if(patientId !== null){
+            const response = await axios.get(`http://localhost:5000/api/v1/report/patient/${patientId}`) // Fetch all reports
+            console.log(response.data);
+            const reportList = response.data.filter((report) =>
+                {return data.testName === report.testName}
+            );
+            console.log(reportList);
+            if(reportList?.length == 0){ //check if the report name already exists
+                if(pdf){
+                    console.log('Uploading file:', pdf);
+                    pdfURL = await uploadFile(pdf);   // upload pdf to firebase
+                }
+                try {
+                    const response = await axios.post(`http://localhost:5000/api/v1/report`,{
+                        testName: data.testName,
+                        documentURL: pdfURL,
+                        date: date,
+                        patientId: patientId,
+                    })
+                    setIsSubmitting(false);
+                    toast.success('Report uploaded successfully');
+                    setPdf(null);
+                    form.reset();
+                } catch (error) {
+                    console.error('Error posting report details:', error);
+                }
 
-        try {
-            const response = await axios.post(`http://localhost:5000/api/v1/report`,{
-                testName: data.testName,
-                documentURL: pdfURL,
-                date: date,
-                patientId: patientId,
-            })
-            console.log('Report details posted:', response.data);
+            } else{
+                toast.error('Report Name exists.Try different Name.');
+                setIsSubmitting(false);
+            }
+        } else{
+            toast.error('Reresh Page');
             setIsSubmitting(false);
-            toast.success('Report uploaded successfully');
-            setPdf(null);
-            form.reset();
-        } catch (error) {
-            console.error('Error posting report details:', error);
         }
-
     }
+    //force table to re-render after form submission
+    useEffect(() => {
+        setTableRender(!tableRender);
+    }, [isSubmitting]);
 
   return (
     <div className='-mt-3'>
@@ -97,7 +121,7 @@ function reportsContainer() {
               {/* <TabsTrigger value="medical">User's Updates</TabsTrigger> */}
             </TabsList>
             <TabsContent value="reports" className="-mt-3">
-                <Dialog>
+                <Dialog >
                     <DialogTrigger>
                         <Button className='absolute mt-8 right-[12em]'>Add Report</Button>
                     </DialogTrigger>
@@ -117,6 +141,7 @@ function reportsContainer() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    value={field.value}
                                                     placeholder={"X-Ray report"}
                                                     {...field}
                                                     class="appearance-none h-9 block w-full bg-neutral-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-teal-400"
@@ -133,10 +158,10 @@ function reportsContainer() {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                                Profile Photo
+                                                Report File
                                             </FormLabel>
                                             <FormDescription>
-                                            Select a photo to set as profile picture.
+                                            Select the PDF file to upload.
                                             </FormDescription>
                                             <FormControl>
                                                 <Input
@@ -145,6 +170,7 @@ function reportsContainer() {
                                                     accept="application/pdf"
                                                     onChange={(event) => {
                                                         setPdf(event.target.files[0]);
+                                                        field.onChange(event);
                                                     }}
                                                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 />
@@ -153,12 +179,14 @@ function reportsContainer() {
                                         </FormItem>
                                     )}
 							    />
-                                <Button type="submit" disabled={isSubmitting} class="float-end bg-teal-500 rounded-lg p-2 mt-2 font-medium text-white border shadow-md">Update</Button>
+                                <Button type="submit" disabled={isSubmitting} class="float-end bg-teal-500 rounded-lg p-2 mt-2 font-medium text-white border shadow-md">{isSubmitting == true? "Uploading": "Upload"}</Button>
                             </form>
                         </Form>
                     </DialogContent>
                 </Dialog>
-                <PatientReportTable />
+                {   
+                    tableRender && <PatientReportTable/>
+                }
             </TabsContent>
             <TabsContent value="medical">
             rger

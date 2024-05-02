@@ -4,7 +4,6 @@ import DataTable from '@/components/shared/dataTable'
 import { surgicalProcedureColumns } from '@/services/shared/surgicalProcedureColumns' 
 
 function surgicalProcedureTable(data) {
-    console.log(data.tableData)
     return (
         <div>
             <div className="container p-6">

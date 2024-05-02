@@ -34,7 +34,7 @@ function displayRequisitions() {
     return (
     <div>
         <div className="container p-4">
-        <h1 class="block uppercase my-2 text-gray-700 text-lg font-semibold">Requisitions</h1>
+        <h1 class="block uppercase my-2 text-gray-700 text-lg font-semibold">Lab Requisitions</h1>
                 <div className="table-container pt-2">
                     <DataTable columns={requesitionColumns} data={requisitions} />
                 </div>

@@ -70,7 +70,7 @@ function examinationList() {
               <AdvancedTable
               columns={examinationColumns} 
               data={examinationList}
-              filterColumn="patientName"
+              filterColumn={"patientName"}
               />
             ) : (
               // If there are no appointments for today

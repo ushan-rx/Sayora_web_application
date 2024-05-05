@@ -39,30 +39,35 @@ const ProductOrdersTable = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    // Centering the title on the page
-    const title = 'Filtered Orders Report';
-    const pageWidth = doc.internal.pageSize.width;
-    const txtWidth = doc.getStringUnitWidth(title) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-    const x = (pageWidth - txtWidth) / 2;
-    doc.text(title, x, 20); // Adjust y coordinate for spacing
 
-   
-    doc.autoTable({
-      startY: 30, // Start Y coordinate for the table
-      theme: 'grid',
-      head: [['Order ID', 'Date', 'Ordered Products', 'Total', 'Status']],
-      body: filteredOrders.map(order => [
-        order.ProductOrder_ID,
-        new Date(order.OrderDate).toLocaleDateString(),
-        order.ProductArray.map(product => product.productName).join(', '),
-        `$${order.Total_price}`,
-        order.status
-      ]),
-      styles: { fontSize: 8, cellPadding: 2, overflow: 'linebreak' },
-      columnStyles: { text: { cellWidth: 'auto' } }
-    });
+// Centering the title on the page
+const title = 'Order Report';
+const pageWidth = doc.internal.pageSize.width;
+const txtWidth = doc.getStringUnitWidth(title) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+const x = (pageWidth - txtWidth) / 2;
+doc.setFontSize(18); // Set title font size
+doc.text(title, x, 20); // Adjust y coordinate for spacing
 
-    doc.save('filtered_orders_report.pdf');
+doc.autoTable({
+  startY: 40, // Start Y coordinate for the table, adjust for title spacing
+  theme: 'grid',
+  headStyles: { fillColor: [76, 188, 210], textColor: 255, fontStyle: 'bold' }, // Header style
+  bodyStyles: { textColor: 50 }, // Body text color
+  alternateRowStyles: { fillColor: 245 }, // Alternate row color
+  head: [['Order ID', 'Date', 'Ordered Products', 'Total', 'Status']],
+  body: filteredOrders.map(order => [
+    order.ProductOrder_ID,
+    { content: new Date(order.OrderDate).toLocaleDateString(), fontStyle: 'italic' }, // Date in italic
+    { content: order.ProductArray.map(product => product.productName).join(', '), fontStyle: 'bold' }, // Products in bold
+    { content: `$${order.Total_price}`, fontStyle: 'bold' }, // Total in bold
+    order.status
+  ]),
+  styles: { fontSize: 10, cellPadding: 4, overflow: 'linebreak' }, // Common cell styles
+  columnStyles: { text: { cellWidth: 'auto' } } // Auto adjust column width
+});
+
+doc.save('Orders_report.pdf');
+
   };
 
   const getStatusStyle = (status) => {

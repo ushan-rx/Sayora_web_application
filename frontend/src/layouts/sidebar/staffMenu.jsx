@@ -18,6 +18,7 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
+import {FaAddressBook} from "react-icons/fa";
 
 
 function staffMenu() {
@@ -98,6 +99,22 @@ function staffMenu() {
         ],
 
       },
+
+      {
+        name: "service",           //display name
+        path: "/staff",          // main path
+        icon: FaAddressBook,
+        menus: [
+          {subName: "View", subPath: "service/viewBookedServices"},
+          {subName: "Add", subPath: "addServices"},
+          
+        ],
+
+        
+      },
+
+
+
       {
         name: "Cashier",           //display name
         path: "/cashier",          // main path

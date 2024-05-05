@@ -52,6 +52,7 @@ import AddPatient from '@/pages/staff/addPatient'
 import StaffLeaves from '@/pages/staff/manageStaffLeaves'
 import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
+import DoctorVisits from '@/pages/website/OverviewServiceVisits'
 
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
@@ -83,6 +84,7 @@ const Router = createBrowserRouter(
           <Route path="serviceForm" element={<ServiceMgt/> } exact/>
           <Route path="service" element={<ServiceHome/> } exact/>
           <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
+          <Route path="homeVisits" element={<DoctorVisits/> } exact/>
 
 
         </Route>

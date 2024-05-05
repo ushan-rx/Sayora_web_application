@@ -156,7 +156,7 @@ function Cashier() {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <form 
-    className="w-full max-w-sm px-4 py-4 mb-14 space-y-2 bg-white rounded-xl shadow-2xl transition-all duration-500 ease-in-out overflow-y-auto"
+    className="w-full max-w-sm px-4 py-4 space-y-2 overflow-y-auto transition-all duration-500 ease-in-out bg-white shadow-2xl mb-14 rounded-xl"
     noValidate
     autoComplete="off"
     onSubmit={(e) => {

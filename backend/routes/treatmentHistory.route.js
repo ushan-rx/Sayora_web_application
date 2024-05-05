@@ -7,7 +7,8 @@ const { getAllTreatmentHistory,
      deleteTreatmentHistory,
      getFilteredTreatmentHistory,
      getTreatmentHistoryByPatient,
-     getManyTreatmentHistory
+     getManyTreatmentHistory,
+     getTreatmentHistoryByDoctor
     } = require('../controllers/treatmentHistory.controller');
 
 router.route('/').post(createTreatmentHistory).get(getAllTreatmentHistory);      // '/doctor'
@@ -22,5 +23,8 @@ router.route('/patient/:id').get(getTreatmentHistoryByPatient)
 
 // get all treatments using patient id
 router.route('/patient/:id').get(getManyTreatmentHistory)
+
+//get all treatments using doctor id
+router.route('/doctor/:id').get(getTreatmentHistoryByDoctor)
 
 module.exports = router;

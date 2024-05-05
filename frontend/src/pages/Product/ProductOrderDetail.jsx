@@ -93,18 +93,11 @@ const POrderDetails = () => {
                   <option value='Processing'>Processing</option>
                   <option value='Shipped'>Shipped</option>
                   <option value='Delivered'>Delivered</option>
+                  <option value='Canceled'>Canceled</option>
                 </select>
               </td>
             </tr>
-            <tr>
-              <th className='border px-4 py-10'>Approve Order</th>
-              <td className='border px-4 py-10'>
-                {/* Button to toggle approval status */}
-                <button onClick={handleApproveToggle} className={`${isApproving ? 'bg-green-500' : 'bg-red-500'} text-white px-4 py-2 rounded`}>
-                  {isApproving ? 'Approved' : 'Not Approved'}
-                </button>
-              </td>
-            </tr>
+           
           </tbody>
         </table>
       )}

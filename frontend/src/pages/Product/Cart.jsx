@@ -94,11 +94,11 @@ const Cart = () => {
     try{
       const response = await axios.post('http://localhost:5000/productorders', productOrder);
       console.log(response.data);
-      toast.success("Order placed successfully")
+      alert("Order placed successfully")
       navigate('/patient/product');
     }catch(error){
       console.error('There was an error!', error);
-      toast.error("Order failed")
+      alert("Order failed")
     }
   };
 

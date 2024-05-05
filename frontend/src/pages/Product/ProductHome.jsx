@@ -10,6 +10,7 @@ const ProductCard = ({ product, handleAddToCart }) => {
         <div className="flex flex-col flex-grow">
           <h1 className="text-lg font-bold mb-2">{product.productName}</h1>
           <p className="text-md mb-4">{product.description}</p>
+          <p className="text-md mb-2">${product.unitPrice}</p> {/* Unit price */}
           <div className="flex justify-end">
             <button
               className="bg-blue-500 text-white px-3 py-1 rounded"

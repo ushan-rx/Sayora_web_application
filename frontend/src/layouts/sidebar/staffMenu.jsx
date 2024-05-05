@@ -89,7 +89,7 @@ function staffMenu() {
       //kaumal
       {
         name: "Treatment",           //display name
-        path: "/treatment",          // main path
+        path: "/staff/treatment",          // main path
         icon: AiFillMedicineBox,
         menus: [
           {subName: "Add Treatmenet", subPath: "addTreat"},
@@ -100,7 +100,7 @@ function staffMenu() {
       },
       {
         name: "Cashier",           //display name
-        path: "/cashier",          // main path
+        path: "/staff/cashier",          // main path
         icon: FaFileInvoice,
         menus: [
           {subName: "Invoice", subPath: "cashier"},

@@ -11,11 +11,11 @@ const TreatmentCard = ({ treatment }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-xl md:max-w-2xl">
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl md:max-w-2xl">
       <div className="md:flex">
         <div className="md:flex-shrink-0">
           <img
-            className="object-cover w-full h-48 rounded-lg md:w-48"
+            className="object-cover w-full h-48 mt-3 ml-3 rounded-lg md:w-48"
             src={treatment.image}
             alt={treatment.name}
           />
@@ -47,7 +47,7 @@ const TreatmentCard = ({ treatment }) => {
           {/* book now button */}
           <div className="mt-4">
             <Link
-              className="px-4 py-2 font-bold text-white bg-blue-500 rounded-2xl hover:bg-blue-700"
+              className="px-4 py-2 font-bold text-white bg-teal-700 rounded-2xl hover:bg-teal-950"
               to="/appointment"
             >
               Book Now

@@ -82,6 +82,7 @@ function Cashier() {
 
     }else {
         console.log("No appointments found")
+        alert("No appointments found")
     }
 
     

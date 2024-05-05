@@ -21,6 +21,8 @@ const AddTreatment = () => {
     if (!name.trim()) {
       // Name validate
       errors.name = "Treatment Name is required";
+    }else if (!/^[a-zA-Z\s()]*$/.test(name)) {
+      errors.name = "Treatment Name must not contain special characters";
     }
     if (!price.trim()) {
       // Price Validate
@@ -120,7 +122,7 @@ const AddTreatment = () => {
               type="text"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value.toUpperCase())}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
             {errors.name && (
@@ -160,6 +162,9 @@ const AddTreatment = () => {
               rows="4"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             ></textarea>
+              <p className="text-sm text-gray-600">
+                {500 - description.length} characters remaining
+              </p>
             {errors.description && (
               <p className="text-sm text-red-500">{errors.description}</p>
             )}

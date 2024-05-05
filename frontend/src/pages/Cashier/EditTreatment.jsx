@@ -16,6 +16,7 @@ export default function EditTreatment() {
   const [price, setPrice] = useState("");
   const params = useParams();
   const treatmentId = params.id;
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setName(selectedTreatment?.name);
@@ -23,8 +24,45 @@ export default function EditTreatment() {
     setPrice(selectedTreatment?.price);
   }, [selectedTreatment]);
 
+  function validateForm() {
+    let formErrors = {};
+  
+    if (!name.trim()) {
+      formErrors.name = "Treatment Name is required";
+    } else if (!/^[a-zA-Z\s()]*$/.test(name)) {
+      formErrors.name = "Treatment Name must not contain special characters, only parentheses are allowed";
+    }
+  
+    if (!price.trim()) {
+      formErrors.price = "Price is required";
+    } else if (!/^\d+(\.\d{1,2})?$/.test(price.trim())) {
+      formErrors.price = "Price must be a valid number";
+    } else if (parseFloat(price) <= 0) {
+      formErrors.price = "Price must be a positive number";
+    }
+  
+    if (!description.trim()) {
+      formErrors.description = "Description is required";
+    } else if (description.length < 20 || description.length > 500) {
+      formErrors.description = "Description must be between 20 and 500 characters";
+    }
+
+    setErrors(formErrors);
+  
+    return formErrors;
+  }
+
+
   function handleSubmit(e) {
     e.preventDefault();
+
+   const formErrors = validateForm();
+   if (Object.keys(formErrors).length > 0) {
+    // Display errors
+    console.log(formErrors);
+    return;
+  }
+
     const updatedTreatment = {
       name,
       description,
@@ -51,12 +89,12 @@ export default function EditTreatment() {
   }
 
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="mb-4 text-2xl font-bold">Update Treatment</h1>
+    <div className="container mx-auto mt-10 ">
+      <h1 className="text-3xl font-bold mb-7 ml-[430px]">Update Treatment</h1>
       {selectedTreatment ? (
         <form
           onSubmit={handleSubmit}
-          className="max-w-lg p-4 mx-auto space-y-4 border border-gray-300 rounded"
+          className="max-w-lg p-4 mx-auto space-y-4 shadow-xl bo rder bg rounded-xl"
         >
           <div>
             <label
@@ -72,6 +110,7 @@ export default function EditTreatment() {
               onChange={(e) => setName(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
+            {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
           </div>
 
           <div>
@@ -88,6 +127,7 @@ export default function EditTreatment() {
               onChange={(e) => setPrice(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
+            {errors.price && <p className="text-sm text-red-500">{errors.price}</p>}
           </div>
 
           <div>
@@ -101,9 +141,13 @@ export default function EditTreatment() {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              rows="4"
+              rows="8"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             ></textarea>
+            <p className="text-sm text-gray-600">
+                {500 - description.length} characters remaining
+              </p>
+            {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
           </div>
 
           <div className="flex justify-end space-x-4">

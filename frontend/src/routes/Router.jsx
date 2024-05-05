@@ -67,6 +67,7 @@ import POrderDetails from '@/pages/Product/ProductOrderDetail'
 import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
+import Treatments from "@/pages/Treatments";
 
 //set routing
 const Router = createBrowserRouter(
@@ -83,7 +84,7 @@ const Router = createBrowserRouter(
           <Route path="serviceForm" element={<ServiceMgt/> } exact/>
           <Route path="service" element={<ServiceHome/> } exact/>
           <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
-
+          <Route path="treatments" element={<Treatments/> } exact/>
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >

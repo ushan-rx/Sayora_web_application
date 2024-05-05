@@ -1,7 +1,7 @@
 const router = require("express").Router();
 let treatment = require("../models/treatment.model");
 
-router.route("/add").post((req,res)=>{
+router.route("/add").post((req, res) => {
 
     const name = req.body.name
     const description = req.body.description
@@ -13,28 +13,28 @@ router.route("/add").post((req,res)=>{
         price
     })
 
-    newtre.save().then(()=>{
+    newtre.save().then(() => {
         res.json("Medicine Added")
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err);
     })
 
 })
 
-router.route("/").get((req,res)=>{
+router.route("/").get((req, res) => {
 
-    treatment.find().then((treatments)=>{
+    treatment.find().then((treatments) => {
         res.json(treatments)
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
     })
 
 })
 
-router.route("/update/:id").put(async(req,res)=>{
+router.route("/update/:id").put(async(req, res) => {
 
     let treID = req.params.id;
-    const {name, description, price} = req.body;
+    const { name, description, price } = req.body;
 
     const updatetre = {
         name,
@@ -42,33 +42,33 @@ router.route("/update/:id").put(async(req,res)=>{
         price
     }
 
-    const update = await treatment.findOneAndUpdate(treID, updatetre).then(()=>{
-        res.status(200).send({status: "Medicine updated"})
-    }).catch((err)=>{
+    const update = await treatment.findOneAndUpdate(treID, updatetre).then(() => {
+        res.status(200).send({ status: "Medicine updated" })
+    }).catch((err) => {
         console.log(err);
-        res.status(500).send({status: "Error with updating the medicine", error: err.message});
+        res.status(500).send({ status: "Error with updating the medicine", error: err.message });
     })
-    
+
 })
 
-router.route("/delete/:id").delete(async(req,res)=>{
+router.route("/delete/:id").delete(async(req, res) => {
     let treID = req.params.id;
 
-    await treatment.findOneAndDelete(treID).then(()=>{
-        res.status(200).send({status: "Medicine deleted"})
-    }).catch((err)=>{
+    await treatment.findOneAndDelete(treID).then(() => {
+        res.status(200).send({ status: "Medicine deleted" })
+    }).catch((err) => {
         console.log(err.message);
-        res.status(500).send({status: "Error while deleting the medicine",  error: err.message});
+        res.status(500).send({ status: "Error while deleting the medicine", error: err.message });
     })
 })
 
-router.route("/:id").get(async(req,res)=>{
+router.route("/:id").get(async(req, res) => {
     let treID = req.params.id;
-    const treat = await treatment.findById(treID).then((treatment)=>{
-        res.status(200).send({status: "Medicine fetched", treatment})
-    }).catch((err)=>{
+    const treat = await treatment.findById(treID).then((treatment) => {
+        res.status(200).send({ status: "Medicine fetched", treatment })
+    }).catch((err) => {
         console.log(err.message);
-        res.status(500).send({status: "Error in fetching", error: err.message});
+        res.status(500).send({ status: "Error in fetching", error: err.message });
     })
 })
 
@@ -145,7 +145,7 @@ router.route("/:id").get(async(req,res)=>{
 
 module.exports = router;
 
-router.route("/add").post((req,res)=>{
+router.route("/add").post((req, res) => {
 
     const name = req.body.name
     const description = req.body.description
@@ -157,28 +157,28 @@ router.route("/add").post((req,res)=>{
         price
     })
 
-    newtre.save().then(()=>{
+    newtre.save().then(() => {
         res.json("Medicine Added")
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err);
     })
 
 })
 
-router.route("/").get((req,res)=>{
+router.route("/").get((req, res) => {
 
-    treatment.find().then((treatments)=>{
+    treatment.find().then((treatments) => {
         res.json(treatments)
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
     })
 
 })
 
-router.route("/update/:id").put(async(req,res)=>{
+router.route("/update/:id").put(async(req, res) => {
 
     let treID = req.params.id;
-    const {name, description, price} = req.body;
+    const { name, description, price } = req.body;
 
     const updatetre = {
         name,
@@ -186,43 +186,43 @@ router.route("/update/:id").put(async(req,res)=>{
         price
     }
 
-    const update = await treatment.findOneAndUpdate(treID, updatetre).then(()=>{
-        res.status(200).send({status: "Medicine updated"})
-    }).catch((err)=>{
+    const update = await treatment.findOneAndUpdate(treID, updatetre).then(() => {
+        res.status(200).send({ status: "Medicine updated" })
+    }).catch((err) => {
         console.log(err);
-        res.status(500).send({status: "Error with updating the medicine", error: err.message});
+        res.status(500).send({ status: "Error with updating the medicine", error: err.message });
     })
-    
+
 })
 
-router.route("/delete/:id").delete(async(req,res)=>{
+router.route("/delete/:id").delete(async(req, res) => {
     let treID = req.params.id;
 
-    await treatment.findOneAndDelete(treID).then(()=>{
-        res.status(200).send({status: "Medicine deleted"})
-    }).catch((err)=>{
+    await treatment.findOneAndDelete(treID).then(() => {
+        res.status(200).send({ status: "Medicine deleted" })
+    }).catch((err) => {
         console.log(err.message);
-        res.status(500).send({status: "Error while deleting the medicine",  error: err.message});
-    })
-})
-
-router.route("/:id").get(async(req,res)=>{
-    let treID = req.params.id;
-    const treat = await treatment.findById(treID).then((treatment)=>{
-        res.status(200).send({status: "Medicine fetched", treatment})
-    }).catch((err)=>{
-        console.log(err.message);
-        res.status(500).send({status: "Error in fetching", error: err.message});
+        res.status(500).send({ status: "Error while deleting the medicine", error: err.message });
     })
 })
 
-router.route("/treat/:id").get(async(req,res)=>{
+router.route("/:id").get(async(req, res) => {
     let treID = req.params.id;
-    const treat = await treatment.find({treatment: treID}).then((treatment)=>{
-        res.status(200).send({status: "Medicine fetched", treatment})
-    }).catch((err)=>{
+    const treat = await treatment.findById(treID).then((treatment) => {
+        res.status(200).send({ status: "Medicine fetched", treatment })
+    }).catch((err) => {
         console.log(err.message);
-        res.status(500).send({status: "Error in fetching", error: err.message});
+        res.status(500).send({ status: "Error in fetching", error: err.message });
+    })
+})
+
+router.route("/treat/:id").get(async(req, res) => {
+    let treID = req.params.id;
+    const treat = await treatment.find({ treatment: treID }).then((treatment) => {
+        res.status(200).send({ status: "Medicine fetched", treatment })
+    }).catch((err) => {
+        console.log(err.message);
+        res.status(500).send({ status: "Error in fetching", error: err.message });
     })
 })
 

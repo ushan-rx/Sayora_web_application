@@ -62,7 +62,7 @@ const useStore = createZustand((set, get) => ({
       alert("Please enter a valid email");
       return false;
     }
-    if (!(nic.length === 12 || (isNaN(nic) || nic.endsWith("V")))) {
+    if (!(nic.length === 12 && /^[0-9]+[vV]$/.test(nic))) {
       alert("Please enter a valid NIC");
       return false;
     }

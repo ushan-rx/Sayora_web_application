@@ -26,7 +26,7 @@ const navigateToAwarenessProgramHome = () => {
           Navigate
         </button>
       </div>
-      <div className="bg-blue-100 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-300 w-full md:w-1/4 hover:shadow-lg transition duration-200">
+      {/* <div className="bg-blue-100 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-300 w-full md:w-1/4 hover:shadow-lg transition duration-200">
         <img src={physicalTraining} alt="Card 2" className="mx-auto"/>
         <h2 className="text-xl font-bold text-center mt-4">Physical Training Programs</h2>
         <p className="text-sm md:text-base text-center mt-2">
@@ -35,7 +35,7 @@ const navigateToAwarenessProgramHome = () => {
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mx-auto block">
           Navigate
         </button>
-      </div>
+      </div> */}
       <div className="bg-blue-200 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-400 w-full md:w-1/4 hover:shadow-lg transition duration-200">
         <img src={homeVisits} alt="Card 3" className="mx-auto"/>
         <h2 className="text-xl font-bold text-center mt-4">Home Visits</h2>

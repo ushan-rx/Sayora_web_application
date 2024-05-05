@@ -18,6 +18,7 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
+import { MdWarehouse } from "react-icons/md";
 
 
 function staffMenu() {
@@ -109,6 +110,21 @@ function staffMenu() {
         ],
 
       },
+
+      {
+        name: "Manage Inventory",           //display name
+        path: "/staff/inventory",          // main path
+        icon: MdWarehouse,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Orders", subPath: "orders"},
+          {subName: "Suppliers", subPath: "suppliers"},
+          {subName: "Inventory", subPath: "view"},
+          
+        ],
+
+      },
+
 
       {
         name: "Product",    

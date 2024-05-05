@@ -7,7 +7,7 @@ const { getAllReports,
     updateReport,
     deleteReport,
     getReportByPatient,
-    getManyReport
+    // getManyReport
 } = require('../controllers/report.controller');
 
 
@@ -20,5 +20,5 @@ router.route('/:id').get(getReportById)
         .delete(deleteReport);
 
         // get all treatments using patient id
-router.route('/patient/:id').get(getManyReport);
+// router.route('/patient/:id').get(getManyReport);
 module.exports = router;

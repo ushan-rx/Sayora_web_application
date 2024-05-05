@@ -11,7 +11,6 @@ function medicalHistoryContainer() {
     const surgicalProcedures = usePatientStore(state => state.patient.surgicalProcedures)
     const currentMedications = usePatientStore(state => state.patient.currentMedications)
     const familyHistory = usePatientStore(state => state.patient.familyHistory)
-    console.log(surgicalProcedures)
   return (
     <div>
         <div className='grid grid-flow-row h-[80vh] overflow-auto -mr-24'>

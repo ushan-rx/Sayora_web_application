@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Cookies from 'js-cookie';
 
 import  AdvancedTable  from "@/components/shared/advanceTable/advancedTable";
 // import  AdvancedTable  from '@/components/shared/advanceTable/advancedTable'
@@ -7,6 +8,7 @@ import { useExaminationStore } from '@/store/examination.store';
 
 
 function examinationList() {
+  const docId = Cookies.get('roleId');
   const [examinationList, setExaminationList] = useState([]);
   const {isRefetchExaminationNeeded} = useExaminationStore(); //state to refresh the table data
   
@@ -17,8 +19,13 @@ function examinationList() {
         const response = await fetch('http://localhost:5000/appointments'); // Fetch all appointments
         const data = await response.json();
 
+        //filter appointments by docID
+        const docAppointments = data.filter((appointment) => {
+          return appointment.doctorID === docId;
+        });
+
         // get only the appointments in current date
-        const filteredAppointments = data.filter((appointment) => {
+        const filteredAppointments = docAppointments.filter((appointment) => {
           const today = new Date(); // Get today's date
           const appointmentDate = new Date(appointment.App_date);
           return (

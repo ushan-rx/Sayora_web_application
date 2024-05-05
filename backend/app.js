@@ -56,6 +56,9 @@ const userRoute = require('./routes/user.route.js');
 const cashierRoutes  = require('./routes/cashierRoutes.js')
 const treatmentRoutes = require('./routes/treatment.js')
 
+const regularPatientRoute = require('./routes/regularPatient.route.js');
+const doctorNoteRoute = require('./routes/notes.route.js');
+
 
 //use route
 app.use('/api/v1/auth', authRouter);
@@ -89,6 +92,10 @@ app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
 
 app.use('/api/v1/staffAuth', staffAuthRoute);
+
+app.use('/api/v1/user', userRoute);   
+app.use('/api/v1/regularPatient', regularPatientRoute);
+app.use('/api/v1/doctorNote', doctorNoteRoute);
 
 app.use('/api/v1/user', userRoute);   
 

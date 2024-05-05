@@ -15,6 +15,8 @@ import ProfileDoctor from '../pages/doctor/profileDoctor'
 import ExaminationList from '@/pages/doctor/examinationList'
 import ExaminationContainer from '../pages/doctor/examinationContainer'
 import AppointmentReport from '@/pages/doctor/appointmentReport'
+import ServiceView from '@/pages/doctor/serviceView'
+import EmailView from '@/pages/doctor/emailSend'
 
 //patient
 import ProfilePatient from '../pages/patient/overviewPatient'
@@ -36,6 +38,7 @@ import CashierTable from '@/pages/Cashier/CashierTable'
 import EditTreatment from '@/pages/Cashier/EditTreatment'
 import FetchTreatment from '@/pages/Cashier/FetchTreatment'
 import UpdateCashier from '@/pages/Cashier/UpdateCashier'
+import BookedServices from '@/pages/staff/servicesView'
 
 
 
@@ -51,7 +54,7 @@ import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
 
 import ServiceHome from '../pages/website/HomeNavService'
-import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
+import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
 import ManageDoctor from '@/pages/staff/manageDoctor'
 import StaffLogIn from '@/pages/staff/StaffLogin'
 
@@ -83,7 +86,10 @@ const Router = createBrowserRouter(
 
 
         </Route>
-        <Route path = "/staff" element ={<StaffDashboard/>}exact >
+        <Route path = "/staff" element ={<StaffDashboard />}exact >
+          <Route path="service/viewBookedServices" element={<BookedServices/> } exact/>
+          <Route path  = "addServices" element ={<AwarnessPrograms />}exact />
+         
           {/*staff dashboard routes here*/}
                     {/*AROSHANA-START*/}
           ManageDoctor
@@ -131,6 +137,7 @@ const Router = createBrowserRouter(
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
 
+
         </Route>
 
       
@@ -139,7 +146,7 @@ const Router = createBrowserRouter(
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
 
-            //patient dashboard routes here
+        {/* patient dashboard routes here */}
             <Route path="overview" element={<ProfilePatient/> } exact/>
             <Route path="prescription" element={<PrescriptionPatient/> } exact/>
             <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>
@@ -162,6 +169,8 @@ const Router = createBrowserRouter(
             {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
               <Route path="profile" element={<ProfileDoctor/> } exact/>
+              <Route path="serviceDoctorView" element={<ServiceView/> } exact/>
+              <Route path = "emailView" element = {<EmailView/>} exact/>
               <Route path="examination">
                 {/*examination routes here*/}
                 <Route path=':id' element={<ExaminationContainer/>}></Route>

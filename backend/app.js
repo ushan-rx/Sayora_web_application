@@ -91,7 +91,6 @@ app.use('/api/v1/staff', staffRoute);
 app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
 
-<<<<<<< Updated upstream
 app.use('/api/v1/staffAuth', staffAuthRoute);
 
 app.use('/api/v1/user', userRoute);
@@ -100,9 +99,7 @@ app.use('/api/v1/doctorNote', doctorNoteRoute);
 
 app.use('/api/v1/user', userRoute);
 
-=======
 app.use('/api/v1/email_handle', emailRouter);
->>>>>>> Stashed changes
 
 const NotFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');

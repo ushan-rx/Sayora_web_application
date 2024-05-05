@@ -53,8 +53,15 @@ const BookingSchema = mongoose.Schema({
     },
     serviceId: {
         type: String,
-        required: [true, "Please provide session id"]
-    }
+        required: [true, "Please provide session id"],
+    },
+
+    active: {
+        type: Boolean,
+        default: false, // Default is 'inactive'
+    },
+
+
 }, {
     timestamps: true
 });

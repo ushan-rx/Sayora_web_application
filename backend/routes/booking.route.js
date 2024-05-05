@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Booking_data = require("../models/booking.model.js");
+
+
 const {
     getBookings,
     getBooking,

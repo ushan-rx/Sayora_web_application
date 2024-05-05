@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -44,12 +45,40 @@ const ViewProducts = () => {
       }
     }
   };
+  
+  const filteredProducts = search.length > 0
+  ? products.filter((val) =>
+    val.productName.toLowerCase().includes(search.toLowerCase())
+  )
+  : products;
 
   return (
     <div className='h-[90vh] overflow-auto scrollbar-thin -mr-20 rounded-md'>
     <Toaster position="bottom-right"/>
     <div className='max-w-4xl mx-auto p-8'>
       <h1 className='text-3xl  text-center mb-10'>Product List</h1>
+      <div className="flex justify-center mt-5">
+        <div className="flex items-center border border-gray-300 rounded-md px-4 py-2">
+          <input
+            type="text"
+            placeholder="Search"
+            className="outline-none w-full"
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-gray-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9 16a7 7 0 100-14A7 7 0 009 16zm1.5-7a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
       <button
         onClick={handleAdd}
         className='bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mb-4'>
@@ -65,7 +94,7 @@ const ViewProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <tr key={product._id} className='text-center'>
               <td className='px-4 py-2 flex flex-col items-center'>
                 <img

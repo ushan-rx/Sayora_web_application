@@ -5,9 +5,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 
+
 // Schema for form validation
 const ProductFormSchema = Yup.object().shape({
-  productName: Yup.string().required("Product name is required"),
+  productName: Yup.string()
+  .matches(/^[A-Za-z\s]+$/, 'Product name should contain only characters')
+  .typeError("product name must be characters")
+  .required("Product name is required"),
   description: Yup.string().required("Description is required"),
   stock: Yup.number()
     .typeError("Stock must be a number")
@@ -72,6 +76,7 @@ const UpdateProduct = () => {
         `http://localhost:5000/updateProduct/${productId}`,
         data);
       console.log(response.data);
+      alert('Product updated successfully!!!')
       navigate("/staff/product/viewproduct");
     } catch (error) {
       console.error("There was an error updating the product:", error);
@@ -87,9 +92,7 @@ const UpdateProduct = () => {
 
   return (
     <div className='w-full'>
-      <button onClick={handleBack} className='bg-gray-500 text-white mt-6 ml-6 px-4 py-2 rounded'>
-          Back to Products
-        </button>
+     
       <div className='h-[80vh] overflow-auto scrollbar-thin'>
         <Formik
           initialValues={initialValues}

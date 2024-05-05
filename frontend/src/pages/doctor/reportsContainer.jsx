@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { toast, Toaster } from 'react-hot-toast';
 
 import PatientReportTable from "@/components/doctor/patientReportTable"
+import DailyUpdateView from '@/components/doctor/dailyUploadView';
 
 import { usePatientStore } from "@/store/patient.store";
 import { uploadFile } from '@/utils/pdfUpload';
@@ -117,8 +118,8 @@ function reportsContainer() {
         <div className='flex flex-row'>
           <Tabs Tabs defaultValue="reports" className="w-full mt-2 mx-2">
             <TabsList className="grid w-full grid-cols-2 h-10 bg-slate-200 text-slate-900 border-slate-300 border-2">
-              <TabsTrigger value="reports" className="col-span-2">Medical Reports</TabsTrigger>
-              {/* <TabsTrigger value="medical">User's Updates</TabsTrigger> */}
+              <TabsTrigger value="reports" className="col-span-1">Medical Reports</TabsTrigger>
+              <TabsTrigger value="medical">Patient's Updates</TabsTrigger>
             </TabsList>
             <TabsContent value="reports" className="-mt-3">
                 <Dialog >
@@ -189,7 +190,7 @@ function reportsContainer() {
                 }
             </TabsContent>
             <TabsContent value="medical">
-            rger
+                <DailyUpdateView/>
             </TabsContent>
           </Tabs>
 

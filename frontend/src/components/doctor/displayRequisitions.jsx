@@ -8,7 +8,7 @@ import DataTable from '../shared/dataTable';
 import { requesitionColumns } from '@/services/doctor/requisitionColumns';
 
 function displayRequisitions() {
-    const {isRefetchNeeded} = useExaminationStore(); //state to refresh the table data
+  const {isRefetchNeeded} = useExaminationStore(); //state to refresh the table data
 	const {patientId} = usePatientStore(state => ({
 		patientId: state.patient.patientId,
 	}))

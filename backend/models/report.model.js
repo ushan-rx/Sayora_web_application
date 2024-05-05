@@ -8,11 +8,10 @@ const reportsSchema = new mongoose.Schema({
   },
   testName: {
     type: String,
-    required: true,
   },
   date: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   documentURL: {
     type: String,

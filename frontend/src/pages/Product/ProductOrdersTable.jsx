@@ -1,27 +1,73 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const ProductOrdersTable = () => {
-    const navigate = useNavigate();
-    const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [filterDate, setFilterDate] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const response = await axios.get('http://localhost:5000/productorders');
-                console.log(response.data);
-                let orderResponse = response.data;
-                let orderReversed = orderResponse.reverse();
-                setOrders(orderReversed);
-            }catch(errr){
-                console.error('There was an error!', errr);
+  const redirectToOrderDetails = (orderId) => {
+    navigate(`order-details/${orderId}`);
+  };
 
-            }
-        }
-        fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/productorders');
+        setOrders(response.data);
+        setFilteredOrders(response.data);
+      } catch (err) {
+        console.error('There was an error!', err);
+      }
+    };
+    fetchData();
+  }, []);
 
-    }, []);
+  const handleFilterChange = () => {
+    let filtered = orders.filter(order =>
+      (!filterDate || new Date(order.OrderDate).toLocaleDateString() === new Date(filterDate).toLocaleDateString()) &&
+      (!filterStatus || order.status === filterStatus)
+    );
+    setFilteredOrders(filtered);
+  };
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    // Centering the title on the page
+    const title = 'Filtered Orders Report';
+    const pageWidth = doc.internal.pageSize.width;
+    const txtWidth = doc.getStringUnitWidth(title) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+    const x = (pageWidth - txtWidth) / 2;
+    doc.text(title, x, 20); // Adjust y coordinate for spacing
+
+   
+    doc.autoTable({
+      startY: 30, // Start Y coordinate for the table
+      theme: 'grid',
+      head: [['Order ID', 'Date', 'Ordered Products', 'Total', 'Status']],
+      body: filteredOrders.map(order => [
+        order.ProductOrder_ID,
+        new Date(order.OrderDate).toLocaleDateString(),
+        order.ProductArray.map(product => product.productName).join(', '),
+        `$${order.Total_price}`,
+        order.status
+      ]),
+      styles: { fontSize: 8, cellPadding: 2, overflow: 'linebreak' },
+      columnStyles: { text: { cellWidth: 'auto' } }
+    });
+
+    doc.save('filtered_orders_report.pdf');
+  };
+
+  const getStatusStyle = (status) => {
+    return statusStyles[status] || 'bg-cyan-500';
+  }; 
   
   const statusStyles = {
     'Pending': 'bg-yellow-300',
@@ -31,58 +77,78 @@ const ProductOrdersTable = () => {
     'Canceled': 'bg-red-500',
   };
 
-  const getStatusStyle = (status) => {
-    return statusStyles[status] || 'bg-gray-500';
-  };
-
-  const redirectToOrderDetails = (orderId) => {
-    navigate(`order-details/${orderId}`);
-  };
-
   return (
     <div className='h-[80vh] w-full overflow-auto scrollbar-thin -mr-20 rounded-md'>
-    <div className="p-4">
-      <h2 className="text-4xl  m-4 text-center">ALL Orders</h2>
-      <div className="overflow-auto">
-        <table className="min-w-full bg-white pr-2">
-          <thead className="bg-blue-500 text-white mr-4">
-            <tr>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Order ID</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Ordered Products</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Total</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-700">
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td className="text-left py-3 px-4">{order.ProductOrder_ID}</td>
-                <td className="text-left py-3 px-4">{new Date(order.OrderDate).toLocaleDateString()}</td>
-                <td className="text-left py-3 px-4">
-                  {order.ProductArray.map(product => product.productName).join(', ')}
-                </td>
-                <td className="text-left py-3 px-4">${order.Total_price}</td>
-                <td className="text-left py-3 px-4">
-                  <span className={`badge ${getStatusStyle(order.status)} text-white px-2 py-1 rounded`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td className="text-left py-3 px-4">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                    onClick={() => redirectToOrderDetails(order._id)}
-                  >
-                    Details
-                  </button>
-                </td>
+      <div className="p-4">
+        <h2 className="text-4xl m-4 text-center">ALL Orders</h2>
+        <div className="flex justify-between items-center px-4 mb-4">
+          <div className="flex items-center">
+            <input
+              type="date"
+              value={filterDate}
+              onChange={(e) => { setFilterDate(e.target.value); handleFilterChange(); }}
+              className="border rounded py-1 px-2 mr-4"
+            />
+            <select
+              value={filterStatus}
+              onChange={(e) => { setFilterStatus(e.target.value); handleFilterChange(); }}
+              className="border rounded py-1 px-2"
+            >
+              <option value="">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Canceled">Canceled</option>
+            </select>
+          </div>
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded"
+            onClick={generatePDF}
+          >
+            Generate Report
+          </button>
+        </div>
+        <div className="overflow-auto">
+          <table className="min-w-full bg-white pr-2 border border-cyan-300">
+            <thead className="bg-cyan-500 text-white">
+              <tr>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Order ID</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Date</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Ordered Products</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Total</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Status</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="text-cyan-700">
+              {filteredOrders.map((order) => (
+                <tr key={order._id}>
+                  <td className="text-left py-3 px-4 border border-cyan-300">{order.ProductOrder_ID}</td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">{new Date(order.OrderDate).toLocaleDateString()}</td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">
+                    {order.ProductArray.map(product => product.productName).join(', ')}
+                  </td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">${order.Total_price}</td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">
+                    <span className={`badge ${getStatusStyle(order.status)} text-white px-2 py-1 rounded`}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">
+                    <button
+                      className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-1 px-3 rounded"
+                      onClick={() => redirectToOrderDetails(order._id)}
+                    >
+                      Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

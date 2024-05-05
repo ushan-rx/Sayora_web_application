@@ -78,7 +78,7 @@ const AddProduct = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
-            <Form className="flex flex-col p-6 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-10">
+            <Form className="flex flex-col p-6 border border-cyan-500 rounded shadow-lg max-w-md mx-auto mt-10">
               <h1 className='text-3xl mb-10 text-center'>Add Products</h1>
 
               <Field name="productName" placeholder="Name" className="mb-2 p-4 border rounded" />
@@ -98,7 +98,7 @@ const AddProduct = () => {
               }} className="mb-4" />
               <ErrorMessage name="image" component="div" className="text-red-500 text-sm" />
 
-              <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white p-2 rounded">
+              <button type="submit" disabled={isSubmitting} className="bg-cyan-500 text-white p-2 rounded hover:bg-cyan-700 transition-colors duration-300 ease-in-out">
                 Add
               </button>
             </Form>

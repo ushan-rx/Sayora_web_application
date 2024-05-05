@@ -10,8 +10,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { NavLink } from "react-router-dom";
 
-const navbar = () => {
+const navbar = ({photo, name}) => {
   const path = window.location.pathname;
+
+
+
+
   return (
     <div >
         <div className="bg-[#e0eff1]">
@@ -56,20 +60,17 @@ const navbar = () => {
                   <div className="relative flex items-center justify-center">
                   <DropdownMenu className="p-0">
                       <DropdownMenuTrigger asChild>
-                        <img src="https://firebasestorage.googleapis.com/v0/b/sayora-web-app0.appspot.com/o/images%2F96199f5c-ab9f-4856-86b4-4cd7f890cc46.png?alt=media&token=0bac3897-7ae7-4d4e-924d-bdcc487eb369"
+                        <img src={photo}
                       className="object-cover  bg-gray-300 rounded-full btn- h-9 w-9" alt="" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild><NavLink to={"profile"}>Profile</NavLink></DropdownMenuItem>
-                        {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
-                        {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
                         {/* <DropdownMenuItem>Settings</DropdownMenuItem> */}
                       </DropdownMenuContent>
                   </DropdownMenu>
-  
-                    <p className="text-sm font-semibold ml-4">Ushan Senarathna</p>
+                    <p className="text-sm font-semibold ml-4">{name}</p>
                   </div>
                 </div>
               </div>

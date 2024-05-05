@@ -54,6 +54,17 @@ import MyLeaves from '@/pages/staff/myLeaves'
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
 import ManageDoctor from '@/pages/staff/manageDoctor'
+import StaffLogIn from '@/pages/staff/StaffLogin'
+
+import ProductHome from '@/pages/Product/ProductHome'
+import AddProduct from '@/pages/Product/AddProduct'
+
+import Cart from '@/pages/Product/Cart'
+import ProductOrdersTable from '@/pages/Product/ProductOrdersTable'
+import POrderDetails from '@/pages/Product/ProductOrderDetail'
+import ViewProducts from '@/pages/Product/ViewProducts'
+import UpdateProduct from '@/pages/Product/UpdateProduct'
+import PatientPurchase from '@/pages/Product/PatientPurhase'
 
 //set routing
 const Router = createBrowserRouter(
@@ -61,6 +72,7 @@ const Router = createBrowserRouter(
     <>   
         <Route path = "/login" element ={<LogIn />}exact />
         <Route path = "/register/:tempId" element ={<RegistrationForm />}exact />
+        <Route path="/stafflogin" element={<StaffLogIn/> } exact/>
         
         <Route path = "/" element ={<WebsiteLayout />}exact >
           <Route index element={<Home/> } exact/>
@@ -88,6 +100,8 @@ const Router = createBrowserRouter(
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
             <Route path="ManageDoctor/overview" element={<ManageDoctor/> } exact/>
+            
+            
            {/*AROSHANA-END*/}
             {/* kaumal */}
 
@@ -112,8 +126,18 @@ const Router = createBrowserRouter(
           <Route path="viewCash" element={<viewCash/> } exact/>
           {/* end */}
 
+            <Route path = "product">
+            <Route index element ={<ViewProducts/>}exact/>
+            <Route path="viewProduct" element = {<ViewProducts/>}exact/>
+            <Route path = "add" element ={<AddProduct/>}exact/>
+            <Route path="adminOrder" element= {<ProductOrdersTable/>} exact/>
+          <Route path="adminOrder/order-details/:id" element= {<POrderDetails/>} exact/>
+          <Route path="update-product" element = {<UpdateProduct/>} exact/>
+            </Route>
 
         </Route>
+
+      
 
           {/*protected routes*/}
         <Route element ={<ProtectedRoutesUser />}>
@@ -128,8 +152,12 @@ const Router = createBrowserRouter(
             <Route path="myrecords/mycareprofile" element={<MyCareProfile/>} exact/>
             <Route path="treatments/mytretments" element={<PatientTreatment/>} exact/>
             <Route path="requesition" element={<Requesition/>} exact/>
+            <Route path="purchase" element={<PatientPurchase/>} exact/>
           
-
+            <Route path = "product">
+            <Route index element ={<ProductHome/>}></Route>
+            <Route path = "cart" element ={<Cart/>}exact/>
+            </Route>
 
           </Route>
 

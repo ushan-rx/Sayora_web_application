@@ -182,29 +182,32 @@ function prescribeContainer({change}) {
                         </div>
                         <div className="mb-4">
                             <p className="font-semibold">Medications:</p>
+                            <br/>
                             {/* medications table  */}
                             <table className=" ml-6 w-full">
-                            <thead>
+                            <thead className='border-y-2'>
                                 <tr>
-                                <th className="text-left">Medication</th>
-                                <th className="text-left">Dosage</th>
-                                <th className="text-left">Frequency</th>
+                                <th className="text-center  border-x-2">Medication</th>
+                                <th className="text-center  border-x-2">Dosage</th>
+                                <th className="text-center  border-x-2">Frequency</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {prescription?.medications.map((med, index) => (
                                 <tr key={index}>
-                                    <td>{med.medication}</td>
-                                    <td>{med.dosage}</td>
-                                    <td>{med.frequency}</td>
+                                    <td className="text-left">{med.medication}</td>
+                                    <td className="text-left">{med.dosage}</td>
+                                    <td className="text-left">{med.frequency}</td>
                                 </tr>
                                 ))}
                             </tbody>
                             </table>
                         </div>
                         <div className='mt-6'>
+                            <br/>
                             <p className="font-semibold">Instructions:</p>
-                            <p className='px-20'>{prescription?.instructions}</p>
+                            <br/>
+                            <p className='px-20'><pre>{prescription?.instructions}</pre></p>
                         </div>
                     </div>
                 </div>

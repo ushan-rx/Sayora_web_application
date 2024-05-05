@@ -15,6 +15,8 @@ import ProfileDoctor from '../pages/doctor/profileDoctor'
 import ExaminationList from '@/pages/doctor/examinationList'
 import ExaminationContainer from '../pages/doctor/examinationContainer'
 import AppointmentReport from '@/pages/doctor/appointmentReport'
+import ServiceView from '@/pages/doctor/serviceView'
+import EmailView from '@/pages/doctor/emailSend'
 
 //patient
 import ProfilePatient from '../pages/patient/overviewPatient'
@@ -135,6 +137,7 @@ const Router = createBrowserRouter(
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
 
+
         </Route>
 
       
@@ -166,6 +169,8 @@ const Router = createBrowserRouter(
             {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
               <Route path="profile" element={<ProfileDoctor/> } exact/>
+              <Route path="serviceDoctorView" element={<ServiceView/> } exact/>
+              <Route path = "emailView" element = {<EmailView/>} exact/>
               <Route path="examination">
                 {/*examination routes here*/}
                 <Route path=':id' element={<ExaminationContainer/>}></Route>

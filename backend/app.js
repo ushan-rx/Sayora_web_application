@@ -45,7 +45,7 @@ const orderRouter = require('./routes/Inventory_Order.route');
 
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
-
+const emailRouter = require('./routes/email.route.js');
 
 const staffRoute = require('./routes/staff.route.js');
 const tempUserRoute = require('./routes/tempUser.route.js');
@@ -91,6 +91,7 @@ app.use('/api/v1/staff', staffRoute);
 app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
 
+<<<<<<< Updated upstream
 app.use('/api/v1/staffAuth', staffAuthRoute);
 
 app.use('/api/v1/user', userRoute);
@@ -99,6 +100,9 @@ app.use('/api/v1/doctorNote', doctorNoteRoute);
 
 app.use('/api/v1/user', userRoute);
 
+=======
+app.use('/api/v1/email_handle', emailRouter);
+>>>>>>> Stashed changes
 
 const NotFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');

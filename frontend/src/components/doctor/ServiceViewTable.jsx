@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
+
 
 const UpdateForm = ({ booking, onUpdate }) => {
   const [updatedBooking, setUpdatedBooking] = useState({
@@ -63,6 +66,7 @@ const ManageBookings = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
   const [currentBooking, setCurrentBooking] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBookings();
@@ -106,10 +110,9 @@ const ManageBookings = () => {
       formattedDate.includes(searchTerm) ||
       booking.bookingId.includes(searchTerm) ||
       booking.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.nic.includes(searchTerm)|| 
+    
       booking.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.phoneNumber01.includes(searchTerm) || 
-      booking.phoneNumber02.includes(searchTerm) || 
+      
       booking.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) || 
       booking.venue.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
@@ -136,10 +139,9 @@ const ManageBookings = () => {
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Booking ID</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">First Name</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Last Name</th>
-            <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">NIC</th>
+           
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Email</th>
-            <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Phone Number 01</th>
-            <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Phone Number 02</th>
+           
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Booking Date</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Time</th>
             <th className="py-2 px-4 bg-cyan-500 text-white  border border-gray-300 w-1/6">Organization Name</th>
@@ -149,7 +151,7 @@ const ManageBookings = () => {
           </tr>
         </thead>
         <tbody>
-        {filteredBookings.map((booking) => {
+        {filteredBookings.filter(booking => booking.active).map((booking) => {
             const date = new Date(booking.bookingDate);
             const formattedDate = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
@@ -158,10 +160,9 @@ const ManageBookings = () => {
                 <td className="border border-gray-300 w-1/6">{booking.bookingId}</td>
                 <td className="border border-gray-300 w-1/6">{booking.firstName}</td>
                 <td className="border border-gray-300 w-1/6">{booking.lastName}</td>
-                <td className="border border-gray-300 w-1/6">{booking.nic}</td>
+               
                 <td className="border border-gray-300 w-1/6">{booking.email}</td>
-                <td className="border border-gray-300 w-1/6">{booking.phoneNumber01}</td>
-                <td className="border border-gray-300 w-1/6">{booking.phoneNumber02}</td>
+              
                 <td className="border border-gray-300 w-1/6">{formattedDate}</td>
                 <td className="border border-gray-300 w-1/6">{booking.time}</td>
                 <td className="border border-gray-300 w-1/6">{booking.organizationName}</td>
@@ -173,6 +174,8 @@ const ManageBookings = () => {
             {/* <button onClick={() => navigateToVerifyPage(booking.email)} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">Verify</button> */}
             <button onClick={() => handleDelete(booking._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Delete</button>
               {/* <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm</button> */}
+            
+              <button onClick={() => navigate('/doctor/emailView')} className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded m-2">Discuss</button>
             </div>
             {isUpdating && currentBooking._id === booking._id && <UpdateForm booking={booking} onUpdate={handleUpdate} />}
           </td>

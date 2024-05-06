@@ -109,7 +109,7 @@ const Cart = () => {
   return (
     <div className='max-w-2xl mx-auto p-4'>
       <Toaster position="bottom-right"/>
-      <form onSubmit={handleSubmit} className='flex flex-col p-12 border border-blue-500 rounded shadow-lg max-w-md mx-auto mt-8'>
+      <form onSubmit={handleSubmit} className='flex flex-col p-12 border border-cyan-500 rounded shadow-lg max-w-md mx-auto mt-8'>
       <h1 className='text-3xl text-center mb-10'>Reservation Form</h1>
         <input
           type='text'
@@ -147,12 +147,12 @@ const Cart = () => {
                 <span className='mx-2'>{item.quantity || 1}</span>
                 <button type='button' onClick={() => handleQuantityChange(item.Product_ID, 1)}>+</button>
                 <span className='ml-4'>{item.Unit_Price}</span>
-                <span className='ml-4'>Sub Total: {getEachPrice(item)}</span>
+                <span className='ml-4'>Sub Total: ${getEachPrice(item)}</span>
               </div>
             </div>
           ))}
           <div className='text-right mt-2'>
-            <strong>Total: {getTotalPrice().toFixed(2)}</strong>
+            <strong>Total: ${getTotalPrice().toFixed(2)}</strong>
           </div>
         </div>
 
@@ -160,7 +160,7 @@ const Cart = () => {
           <button type='button' onClick={handleCancel} className='bg-red-500 text-white px-6 py-2 rounded'>
             Cancel
           </button>
-          <button type='submit' className='bg-blue-500 text-white px-6 py-2 rounded'>
+          <button type='submit' className='bg-cyan-500 text-white px-6 py-2 rounded'>
             Reserve
           </button>
         </div>

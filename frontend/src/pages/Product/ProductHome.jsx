@@ -5,7 +5,7 @@ import {toast, Toaster } from 'react-hot-toast';
 
 const ProductCard = ({ product, handleAddToCart }) => {
     return (
-      <div className="flex flex-row items-center border border-gray-500 rounded-md shadow-md p-4 mb-4">
+      <div className="flex flex-row items-center border border-cyan-500 rounded-md shadow-md p-4 mb-4">
         <img src={`http://localhost:5000/${product.url.slice(7)}`} alt="Product" className="w-200 h-60 mr-10" />
         <div className="flex flex-col flex-grow">
           <h1 className="text-lg font-bold mb-2">{product.productName}</h1>
@@ -13,7 +13,7 @@ const ProductCard = ({ product, handleAddToCart }) => {
           <p className="text-md mb-2">${product.unitPrice}</p> {/* Unit price */}
           <div className="flex justify-end">
             <button
-              className="bg-blue-500 text-white px-3 py-1 rounded"
+              className="bg-cyan-500 text-white px-3 py-1 rounded"
               onClick={() => handleAddToCart(product)}
             >
               Add to Cart
@@ -69,7 +69,7 @@ const ProductHome = () => {
         <h1 className="text-3xl mb-10 text-center">Ayurvedic Products</h1>
         <div className="flex justify-between items-center">
         <button
-          className="bg-blue-500 text-white py-2 px-5 rounded mb-5 ml-auto"
+          className="bg-cyan-500 text-white py-2 px-5 rounded mb-5 ml-auto"
           onClick={handleGoToCart}
         >
           Cart

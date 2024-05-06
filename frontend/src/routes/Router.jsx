@@ -87,6 +87,7 @@ import InventoryHome from '@/pages/Inventry/InventryHome'
 import Supplier from '@/pages/Inventry/Supplier'
 import OrdersTable from '@/pages/Inventry/OrderTable'
 
+import Treatments from "@/pages/Treatments";
 
 //set routing
 const Router = createBrowserRouter(
@@ -106,7 +107,7 @@ const Router = createBrowserRouter(
           <Route path="homeVisits" element={<DoctorVisits/> } exact/>
           <Route path="appointment/add" element={<AddAppointment/> } exact/>
           <Route path="appointment" element={<AppoinmentHome/> } exact/>
-
+          <Route path="treatments" element={<Treatments/> } exact/>
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >

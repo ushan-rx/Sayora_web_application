@@ -41,7 +41,7 @@ const PatientPurchase = () => {
                 <h2 className="text-4xl m-4 text-center">My Orders</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {orders.map((order) => (
-                        <div key={order._id} className="border border-black rounded-md shadow-md p-6">
+                        <div key={order._id} className="border border-cyan-500 rounded-md shadow-md p-6">
                             <p className="text-lg font-semibold ">Order ID: {order.ProductOrder_ID}</p>
                             <p className="text-sm text-gray-500">Date: {new Date(order.OrderDate).toLocaleDateString()}</p>
                             <p className="text-sm text-gray-500">Ordered Products: {order.ProductArray.map(product => product.productName).join(', ')}</p>

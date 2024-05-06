@@ -15,6 +15,8 @@ import ProfileDoctor from '../pages/doctor/profileDoctor'
 import ExaminationList from '@/pages/doctor/examinationList'
 import ExaminationContainer from '../pages/doctor/examinationContainer'
 import AppointmentReport from '@/pages/doctor/appointmentReport'
+import ServiceView from '@/pages/doctor/serviceView'
+import EmailView from '@/pages/doctor/emailSend'
 
 //patient
 import ProfilePatient from '../pages/patient/overviewPatient'
@@ -36,6 +38,7 @@ import CashierTable from '@/pages/Cashier/CashierTable'
 import EditTreatment from '@/pages/Cashier/EditTreatment'
 import FetchTreatment from '@/pages/Cashier/FetchTreatment'
 import UpdateCashier from '@/pages/Cashier/UpdateCashier'
+import BookedServices from '@/pages/staff/servicesView'
 
 
 
@@ -49,9 +52,10 @@ import AddPatient from '@/pages/staff/addPatient'
 import StaffLeaves from '@/pages/staff/manageStaffLeaves'
 import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
+import DoctorVisits from '@/pages/website/OverviewServiceVisits'
 
 import ServiceHome from '../pages/website/HomeNavService'
-import AwarenessProgramHome from '@/components/website/awarnessProgramsHome/';
+import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
 import ManageDoctor from '@/pages/staff/manageDoctor'
 import StaffLogIn from '@/pages/staff/StaffLogin'
 
@@ -64,6 +68,25 @@ import POrderDetails from '@/pages/Product/ProductOrderDetail'
 import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
+
+
+import AppoinmentHome from '@/pages/Appoinment/AppoinmentHome'
+import AddDoctorTime from '@/pages/Appoinment/AddDoctorTime'
+import AddAppointment from '@/pages/Appoinment/AddAppoinment'
+import ViewAppointment from '@/pages/Appoinment/ViewAppoinment'
+
+import ViewDoctorTIme from '@/pages/Appoinment/ViewDoctorTime'
+import UpdateDoctorAvailability from '@/pages/Appoinment/UpdateDoctorAvailability'
+
+import UpdateSupplier from '@/pages/Inventry/UpdateSupplier'
+import AddSupplier from '@/pages/Inventry/AddSupplier'
+import AddItem from '@/pages/Inventry/AddItem'
+import AddOrder from '@/pages/Inventry/AddOrder'
+import ViewInventory from '@/pages/Inventry/ViewInventory'
+import InventoryHome from '@/pages/Inventry/InventryHome'
+import Supplier from '@/pages/Inventry/Supplier'
+import OrdersTable from '@/pages/Inventry/OrderTable'
+
 
 //set routing
 const Router = createBrowserRouter(
@@ -80,13 +103,19 @@ const Router = createBrowserRouter(
           <Route path="serviceForm" element={<ServiceMgt/> } exact/>
           <Route path="service" element={<ServiceHome/> } exact/>
           <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
+          <Route path="homeVisits" element={<DoctorVisits/> } exact/>
+          <Route path="appointment/add" element={<AddAppointment/> } exact/>
+          <Route path="appointment" element={<AppoinmentHome/> } exact/>
 
 
         </Route>
-        <Route path = "/staff" element ={<StaffDashboard/>}exact >
+        <Route path = "/staff" element ={<StaffDashboard />}exact >
+          <Route path="service/viewBookedServices" element={<BookedServices/> } exact/>
+          <Route path  = "addServices" element ={<AwarnessPrograms />}exact />
+         
           {/*staff dashboard routes here*/}
                     {/*AROSHANA-START*/}
-          ManageDoctor
+          {/* ManageDoctor */}
             <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
             <Route path="ManagePatient/add" element={<AddStaff/> } exact/>
@@ -131,6 +160,29 @@ const Router = createBrowserRouter(
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
 
+
+            // Appoinment Route
+            <Route path = "appointment">
+            
+              <Route path = "addtime" element = {<AddDoctorTime/>}></Route>
+              <Route path = "view" element={<ViewAppointment/>}></Route>
+              <Route path= "time" element = {<ViewDoctorTIme/>}></Route>
+              <Route path = "time/update" element ={<UpdateDoctorAvailability/>}></Route>
+            </Route>
+
+            <Route path = "inventory">
+              <Route index element ={<InventoryHome/>}exact/>
+              <Route path="overview" element = {<InventoryHome/>}exact/>
+              <Route path = "view" element = {<ViewInventory/>}exact/>
+              <Route path = "suppliers" element = {<Supplier/>}exact/>
+              <Route path = "addSupplier" element = {<AddSupplier/>}exact/>
+              <Route path = "updateSupplier" element = {<UpdateSupplier/>}exact/>
+              <Route path = "orders" element = {<OrdersTable/>}exact/>
+              <Route path = "addItem" element = {<AddItem/>}exact/>
+              <Route path = "addOrder" element = {<AddOrder/>}exact/>
+            </Route> 
+
+
         </Route>
 
       
@@ -139,7 +191,7 @@ const Router = createBrowserRouter(
         <Route element ={<ProtectedRoutesUser />}>
           <Route path="/patient" element={<PatientDashboard /> } exact >
 
-            //patient dashboard routes here
+        {/* patient dashboard routes here */}
             <Route path="overview" element={<ProfilePatient/> } exact/>
             <Route path="prescription" element={<PrescriptionPatient/> } exact/>
             <Route path="myrecords/reportpatient" element={<ReportPatients/> } exact/>
@@ -162,6 +214,8 @@ const Router = createBrowserRouter(
             {/*doctor dashboard routes here*/}
               <Route path="overview" element={<Overview/> } exact/>
               <Route path="profile" element={<ProfileDoctor/> } exact/>
+              <Route path="serviceDoctorView" element={<ServiceView/> } exact/>
+              <Route path = "emailView" element = {<EmailView/>} exact/>
               <Route path="examination">
                 {/*examination routes here*/}
                 <Route path=':id' element={<ExaminationContainer/>}></Route>

@@ -47,7 +47,7 @@ function AddStaff() {
     try {
       const parsedData = schema.parse(formData);
       await axios.post('http://localhost:5000/api/v1/add-user/add', parsedData);
-      setMessage({ text: 'User added successfully!', type: 'success' });
+      setMessage({ text: 'User added successfully! Now Check Their Email Account for verification link', type: 'success' });
     } catch (error) {
       if (error instanceof z.ZodError) {
         setMessage({ text: error.errors.map(e => e.message).join("\n"), type: 'error' });
@@ -63,7 +63,7 @@ function AddStaff() {
       <form className="bg-white border-[#089BAB] shadow-lg p-8 rounded w-full max-w-md" onSubmit={handleSubmit}>
         <h1 className="text-xl text-cyan-500 font-bold mb-4">Add Staff</h1>
         <div className="flex justify-center mb-4">
-            <FaUserTie style={{ color: 'cyan-500', fontSize: '100px' }}/>
+        <FaUserTie className="text-cyan-500 text-8xl" />
         </div>
         
         {/* User Role Selection */}
@@ -132,10 +132,10 @@ function AddStaff() {
         {/* Form Submission Button */}
         <div className="flex items-center justify-start">
           <button
-            className="bg-teal-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Add User
+            Add Staff
           </button>
         </div>
         

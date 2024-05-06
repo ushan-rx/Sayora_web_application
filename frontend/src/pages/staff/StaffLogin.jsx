@@ -42,7 +42,7 @@ function StaffLogIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[url('https://img.freepik.com/free-vector/medical-healthcare-blue-color_1017-26807.jpg?w=1380&t=st=1713738413~exp=1713739013~hmac=d7a059810ed36f1f205c7cd0346bac400bea9fb5d8d8731b11a565bac594556c')] bg-cover py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[url('https://img.freepik.com/free-vector/blue-background-with-abstract-dynamic-shapes_1393-161.jpg?t=st=1714939606~exp=1714940206~hmac=7eada5115632c73a73ada70193b990025d8a588bc40a1185659a9c1fc88c445c')] bg-cover py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-lg shadow-md">
       <img src="https://sayora.lk/wp-content/uploads/2023/04/SAYORA-LOGO-NEW.png" alt="Sayora Logo" className="mx-auto mb-4 w-32 h-32" />
         <h2 className="text-center text-3xl font-extrabold text-cyan-800">Log in</h2>
@@ -80,7 +80,7 @@ function StaffLogIn() {
             </div>
           </div>
           {message && (
-            <div className="text-center py-2 text-sm text-red-600">
+            <div className="text-center py-2 text-sm text-cyan-600">
               {message}
             </div>
           )}

@@ -76,9 +76,9 @@ const ManagePatient = () => {
   };
 
   const handleDelete = (patientId) => {
-    axios.delete(`http://localhost:5000/api/v1/patient/${patientId}`)
+    axios.put(`http://localhost:5000/api/v1/patient/${patientId}`, { status: false })
       .then(() => {
-        fetchPatients(); // Refresh data
+        fetchPatients(); 
         closeDeleteModal();
       })
       .catch(error => console.error('Error deleting patient:', error));
@@ -151,7 +151,7 @@ const ManagePatient = () => {
               <td className="text-center">{patient.phone}</td>
               <td className="text-center">{patient.status ? 'Active' : 'Inactive'}</td>
               <td className="text-center">
-                <button onClick={() => openEditModal(patient)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onClick={() => openEditModal(patient)} className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded mr-3">
                   Edit
                 </button>
                 <button onClick={() => openDeleteModal(patient)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

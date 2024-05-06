@@ -71,10 +71,20 @@ const getAllStaff = async (req, res) => {
   }
 };
 
+const getActiveStaffCount = async (req, res) => {
+  try {
+    const count = await Staff.countDocuments({ Status: 'Active' });
+    res.status(StatusCodes.OK).json({ count });
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getAllStaff,
   createStaff,
   getSingleStaff,
   updateStaff,
   deleteStaff,
+  getActiveStaffCount,
 };

@@ -20,7 +20,7 @@ const createLeaveRequest = async (req, res) => {
 // READ all leave requests
 const getAllLeaves = async (req, res) => {
     try {
-        const leaves = await StaffLeaves.find(); 
+        const leaves = await StaffLeaves.find().sort({ createdAt: -1 }); 
         res.status(StatusCodes.OK).json({ leaves });
     } catch (err) {
         res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });

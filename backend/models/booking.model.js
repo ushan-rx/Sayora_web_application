@@ -40,7 +40,7 @@ const BookingSchema = mongoose.Schema({
     },
     organizationName: {
         type: String,
-        required: [true, "Please provide organization name"]
+
     },
     venue: {
         type: String,
@@ -48,7 +48,7 @@ const BookingSchema = mongoose.Schema({
     },
     participantCount: {
         type: Number,
-        required: [true, "Please provide participant count"],
+
         default: 0
     },
     serviceId: {

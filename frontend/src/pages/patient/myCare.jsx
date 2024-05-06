@@ -388,8 +388,12 @@ const MyCareProfile = () => {
                             <div className=" mt-1 text-sm center text- text-[#089BAB]">
                               <div className="flex justify-between gap-4">
                                 <div>Name</div>
+                                <div className="hidden-space"></div>{" "}
                                 <div>Dosage</div>
+                                <div className="hidden-space"></div>{" "}
                                 <div>Frequency</div>
+                                <div className="hidden-space"></div>{" "}
+                                <div className="hidden-space"></div>{" "}
                                 <div>Reason</div>
                               </div>
                             </div>

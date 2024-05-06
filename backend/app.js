@@ -74,7 +74,7 @@ app.use('/api/v1/treatmentHistory', treatmentHistory)
 app.use('/api/v1/report', reportRoute);
 app.use('/api/v1/prescription', PrescriptionRouter);
 
-app.use('/doctortime', doctorTimeRouter);
+app.use('/doctortime' ,doctorTimeRouter);
 
 app.use(productRouter);
 app.use(ProductOrderRouter);

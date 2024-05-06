@@ -139,6 +139,21 @@ function staffMenu() {
           
         ],
       },
+
+      {
+        name: "Appointments",    
+        path: "/staff/appointment",    
+        icon: FaCartShopping,
+        menus: [
+          {subName: "Add Schedule Time", subPath: "addtime"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "View Appointments", subPath: "view"},
+          {subName: "Appointment Times", subPath: "time"},
+         
+          
+        ],
+      },
   ];
 
 

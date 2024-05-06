@@ -9,6 +9,10 @@ import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
 
+import { FaNotesMedical } from "react-icons/fa";
+import { HiOutlineDocumentReport } from "react-icons/hi";
+import {FaAddressBook} from "react-icons/fa";
+
 
 function DoctorMenu() {
     const path = "/doctor";
@@ -16,24 +20,35 @@ function DoctorMenu() {
     // items with sub menus
     const subMenusList = [
         {
-          name: "ddd",           //display name
-          path: "/ddd",          // main path
-          icon: RiBuilding3Line,
+          name: "reports",           //display name
+          path: "/doctor/reports",          // main path
+          icon: HiOutlineDocumentReport,
           menus: [
-            {subName: "overview", path: "/overview"},
-            {subName: "sub 1.2", path: "/sub1.2"},
+            {subName: "Appointment Report", subPath: "appointmentReport"},
+            // {subName: "sub 1.2", subPath: "/sub1.2"},
           ],
         },
 
         {
-          name: "Sub Topic 2",    
-          path: "/subtopic2",    
-          icon: TbReportAnalytics,
-          menus: [
-            {subName: "overview", path: "overview"},  //sub menu diplay name and path(dont add / before path)
-            {subName: "sub 1.2", path: "sub1.2"},
-          ],
-        },
+            name: "Bookings",
+            path: "/doctor",
+            icon: FaAddressBook,
+            menus: [
+              {subName: "View Bookings", subPath: "serviceDoctorView"},
+            ],
+          },
+
+
+
+        // {
+        //   name: "Sub Topic 2",    
+        //   path: "/subtopic2",    
+        //   icon: TbReportAnalytics,
+        //   menus: [
+        //     {subName: "overview", subPath: "overview"},  //sub menu diplay name and path(dont add / before path)
+        //     {subName: "sub 1.2", subPath: "sub1.2"},
+        //   ],
+        // },
 
         
       ];
@@ -47,17 +62,19 @@ function DoctorMenu() {
             </NavLink>
         </li>
         <li>
-            <NavLink to={path + "/authentication"} className="link">
-                <BsPerson size={23} className="min-w-max" />
-                Topic 2
+            <NavLink to={path + "/examination"} className="link">
+                <FaNotesMedical  size={23} className="min-w-max" />
+                Examination
             </NavLink>
         </li>
-        <li>
+
+        
+        {/* <li>
             <NavLink to={path + "/stroage"} className="link">
                 <HiOutlineDatabase size={23} className="min-w-max" />
                 Topic 3
             </NavLink>    
-        </li>
+        </li> */}
 
 
         <div name='submenu-items'>

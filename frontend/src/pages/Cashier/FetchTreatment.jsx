@@ -89,7 +89,7 @@ const FetchTreatment = () => {
                     <td className="px-4 py-2 border">
                       <Link
                         to={`/staff/updatex/${record.treatmentId}`}
-                        className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-yellow-500 rounded hover:bg-yellow-700"
+                        className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-teal-400 rounded hover:bg-teal-700"
                         onClick={() => setSelectedTreatment(record)}
                       >
                         Edit

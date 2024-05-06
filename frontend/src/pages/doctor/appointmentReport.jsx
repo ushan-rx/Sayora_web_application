@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Cookies from "js-cookie";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -58,10 +58,15 @@ function appointmentReport() {
   const [appointmentList, setAppointmentList] = useState([]);
   const [displayTable, setDisplayTable] = useState(false);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [docPayment, setDocPayment] = useState(0);
+  const [docName, setDocName] = useState('');
+  const [dateRange, setDateRange] = useState('');
+
+  const [reportData, setReportData] = useState({});
 
   const [date, setDate] = React.useState({
     from: new Date(),
-    to: new Date(),
+    to: addDays(new Date(), 8),
   })
 
   useEffect(() => {
@@ -74,8 +79,11 @@ function appointmentReport() {
         const filteredAppointments = data.filter((appointment) => {
           return appointment.doctorID === doctorId
         });
-
         setAppointmentList(filteredAppointments);
+        const docResponse = await fetch(`http://localhost:5000/api/v1/doctor/${doctorId}`); // Fetch doctor details
+        const docData = await docResponse.json();
+        setDocPayment(Number(docData.doctor.appointmentPrice));
+        setDocName(docData.doctor.fName + ' ' + docData.doctor.lName);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -92,19 +100,14 @@ function appointmentReport() {
       range: '',
       dateRange:{
         from: new Date(),
-        to: new Date(),
+        to: addDays(new Date(), 7),
       }
 		},
 	})
 
   const onSubmit = async (data) => {
-    console.log(data);
     appointmentFilter(data);
     setDisplayTable(true);
-  }
-
-  const resetForm = () => {
-    form.reset();
   }
 
   const appointmentFilter = (filters) => {
@@ -122,10 +125,12 @@ function appointmentReport() {
         case 'Month':
           fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
           toDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+          setDateRange(fromDate.toLocaleDateString() + ' - ' + toDate.toLocaleDateString());
           break;
         case 'Year':
           fromDate = new Date(currentDate.getFullYear(), 0, 1);
           toDate = new Date(currentDate.getFullYear(), 11, 31);
+          setDateRange(fromDate.toLocaleDateString() + ' - ' + toDate.toLocaleDateString());
           break;
         case 'Week':
           const currentDay = currentDate.getDay();
@@ -133,18 +138,23 @@ function appointmentReport() {
           fromDate.setDate(currentDate.getDate() - currentDay);
           toDate = new Date(currentDate);
           toDate.setDate(currentDate.getDate() + (6 - currentDay));
+          setDateRange(fromDate.toLocaleDateString() + ' - ' + toDate.toLocaleDateString());
           break;
         case 'Day':
           // Use the current date (already set)
+          setDateRange(currentDate.toLocaleDateString());
           break;
         default:
           // Invalid range or no range specified, use dateRange input
-          if (dateRange.from && dateRange.to) {
-            console.log(dateRange.from, dateRange.to)
-            fromDate = new Date(dateRange.from);
-            toDate = new Date(dateRange.to);
-          }
+          // if (dateRange.from && dateRange.to) {
+          //   console.log(dateRange.from, dateRange.to)
+          //   fromDate = new Date(dateRange.from);
+          //   toDate = new Date(dateRange.to);
+          // }
       }
+      // console.log(dateRange.from, dateRange.to)
+      // fromDate = new Date(dateRange.from);
+      // toDate = new Date(dateRange.to);
 
       // Filter appointments based on user inputs
       const filteredList = appointmentList.filter((appointment) => {
@@ -162,16 +172,33 @@ function appointmentReport() {
         }
         // check date range 
         const appointmentDate = new Date(appointment.App_date);
-        if( (new Date(dateRange.from).toLocaleString != new Date(dateRange.to).toLocaleString)  || range != ''){
-          matchesDateRange = (new Date(appointmentDate).getUTCDay >= new Date(fromDate).getUTCDay && new Date(appointmentDate).getUTCDay <= new Date(toDate).getUTCDay);
+        if( range === 'Day' || range === 'Week' || range === 'Month' || range === 'Year'){
+          // console.log('date range', dateRange.from, dateRange.to);
+          matchesDateRange = appointmentDate >= fromDate && appointmentDate <= toDate;
         }
         //return matching results
         return matchesStatus && matchesGender && matchesDateRange;
       })
       // Update filteredAppointments state
       setFilteredAppointments(filteredList);
-      console.log(filteredList);
   }
+
+  useMemo(() => {
+    if (filteredAppointments.length > 0) {
+      const completed = filteredAppointments.filter((appointment) => appointment.status === 'Completed').length;
+      console.log(typeof docPayment, docPayment)
+      const reportData = {
+        totalAppointments: filteredAppointments.length,
+        totalCanceled: filteredAppointments.filter((appointment) => appointment.status === 'Canceled').length,
+        totalCompleted: completed,
+        earnings: (completed * docPayment),
+        doctor: docName,
+        date: dateRange
+      }
+      setReportData(reportData);
+    }
+
+  }, [filteredAppointments]);
 
   console.log(filteredAppointments);
 
@@ -184,7 +211,7 @@ function appointmentReport() {
           <div className='row-span-1 grid'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-6 m-4">
-              <FormLabel className="text-md ml-2">Select Options
+              <FormLabel className="text-md ml-2">Select Options to Filter
               </FormLabel>
                 <div className='grid grid-cols-5'>
                   <div className='col-span-2 ml-2'>
@@ -337,6 +364,7 @@ function appointmentReport() {
                 <AppointmentReportTable 
                   columns={appointmentReportColumns} 
                   data={filteredAppointments}
+                  reportData={reportData}
                   filterColumn="App_reason"
                 />
               )

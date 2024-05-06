@@ -26,7 +26,7 @@ import { uploadImage } from "@/utils/imageUpload";
 
 //form1 schema
 const formSchema = z.object({
-  reportName: z.string().min(2, {
+  testName: z.string().min(2, {
     message: "reportName must be at least 2 characters.",
   }),
 });
@@ -72,7 +72,7 @@ function Requesition() {
         );
         setReportData(response.data.requesitions);
         console.log(response.data);
-        console.log(reportData);
+        //console.log(reportData);
       } catch (error) {
         console.error("Error fetching report data:", error);
       }
@@ -106,7 +106,7 @@ function Requesition() {
     try {
       // Send the form data to the backend
       data.patientId = patId;
-      await axios.post(`http://localhost:5000/api/v1/dailyupdate`, { ...data });
+      await axios.post(`http://localhost:5000/api/v1/report`, { ...data });
 
       if (selectedReportId) {
         const requestData = selectedReportId;
@@ -130,7 +130,7 @@ function Requesition() {
     <div>
       <h2 className="mx-6 my-4 text-2xl font-bold">My Requesition</h2>
       <div className="flex flex-col md:flex-row">
-        <ScrollArea className="p-4 border rounded-xl h-[580px] bg-white md:w-3/5 mx-6">
+        <ScrollArea className="p-4 border rounded-xl h-[550px] bg-slate-300 md:w-3/5 mx-6">
           {/* Check if data has been fetched */}
           {reportData && Array.isArray(reportData) ? (
             reportData.map((report) => {
@@ -196,7 +196,7 @@ function Requesition() {
               return (
                 <div key={report._id}>
                   {/* prescription Card 1 */}
-                  <div className="mb-4 px-6 py-4 border-2 border-[#089BAB] rounded-2xl">
+                  <div className="mb-4 px-6 py-4 border-2 border-[#089BAB] rounded-2xl bg-white">
                     <div>
                       <div className="text-xl font-semibold">
                         Report Name - {report.testName}
@@ -266,7 +266,7 @@ function Requesition() {
                   <h2 className="mb-6 text-lg font-semibold text-center">Upload Your Report</h2>
                   <FormField
                     control={form.control}
-                    name="reportName"
+                    name="testName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Enter Your report name</FormLabel>

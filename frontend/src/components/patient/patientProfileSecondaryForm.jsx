@@ -63,18 +63,23 @@ const formSchema = z.object({
       bloodPressure: z.string().min(2, {
         message: "Blood pressure must be at least 2 characters.",
       }),
-      temperature: z.number().min(1, {
-        message: "Temperature must be at least 1.",
+      temperature: z.number().refine((val) => val > 32, {
+        message: "Humen temparatuere should be above 32 degree celsius.",
       }),
       oxygenSaturation: z.number().min(1, {
         message: "Oxygen saturation must be at least 1.",
       }),
-      pulseRate: z.number().min(1, {
-        message: "Pulse rate must be at least 1.",
+      pulseRate: z.number().refine((val) => val > 72 && val < 108, {
+        message: "pulseRate should be 72bpm to 108bpm",
       }),
     })
   ),
 });
+
+function validatePulseRate(value) {
+  const pulseRate = parseInt(value);
+  return pulseRate >= 72 && pulseRate <= 108;
+}
 
 function doctorProfileSecondaryForm({ doctor, change }) {
   const patId = Cookies.get("roleId");
@@ -87,7 +92,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
   //default values for the form from the doctor prop
   let defaultValues = {
     bloodGroup: doctor?.bloodGroup || "",
-    currentMedications: doctor?.currentMedications || {name: "", dosage: "", frequency: "", reason: ""},
+    currentMedications: doctor?.currentMedications || {
+      name: "",
+      dosage: "",
+      frequency: "",
+      reason: "",
+    },
     allergies: doctor?.allergies || "",
     vitals: doctor?.vitals,
   };
@@ -161,7 +171,6 @@ function doctorProfileSecondaryForm({ doctor, change }) {
     }
   };
 
-
   return (
     <>
       <Form {...form}>
@@ -230,8 +239,6 @@ function doctorProfileSecondaryForm({ doctor, change }) {
           <div className="flex flex-col md:flex-row">
             {/* Allergies */}
             <div class="w-full px-4 md:w-2/5">
-              
-
               {/* vitalsFields */}
               <div class="w-full mt-6 md:w-1/5">
                 <p className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
@@ -250,7 +257,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
                           </FormLabel>
                           <div className="flex-1 pl-8 ">
                             <FormControl>
-                              <Input {...field} onChange={(event) => field.onChange(+event.target.value)}/>
+                              <Input
+                                {...field}
+                                onChange={(event) =>
+                                  field.onChange(+event.target.value)
+                                }
+                              />
                             </FormControl>
                             <FormMessage className="w-full" />
                           </div>
@@ -268,7 +280,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
                           </FormLabel>
                           <div className="flex-1 pl-8 ">
                             <FormControl>
-                              <Input {...field} onChange={(event) => field.onChange(+event.target.value)}/>
+                              <Input
+                                {...field}
+                                onChange={(event) =>
+                                  field.onChange(+event.target.value)
+                                }
+                              />
                             </FormControl>
                             <FormMessage className="w-full" />
                           </div>
@@ -304,7 +321,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
                           </FormLabel>
                           <div className="flex-1 pl-8 ">
                             <FormControl>
-                              <Input {...field} onChange={(event) => field.onChange(+event.target.value)}/>
+                              <Input
+                                {...field}
+                                onChange={(event) =>
+                                  field.onChange(+event.target.value)
+                                }
+                              />
                             </FormControl>
                             <FormMessage className="w-full" />
                           </div>
@@ -322,7 +344,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
                           </FormLabel>
                           <div className="flex-1 pl-8 ">
                             <FormControl>
-                              <Input {...field} onChange={(event) => field.onChange(+event.target.value)}/>
+                              <Input
+                                {...field}
+                                onChange={(event) =>
+                                  field.onChange(+event.target.value)
+                                }
+                              />
                             </FormControl>
                             <FormMessage className="w-full" />
                           </div>
@@ -340,7 +367,12 @@ function doctorProfileSecondaryForm({ doctor, change }) {
                           </FormLabel>
                           <div className="flex-1 pl-8 ">
                             <FormControl>
-                              <Input {...field} onChange={(event) => field.onChange(+event.target.value)}/>
+                              <Input
+                                {...field}
+                                onChange={(event) =>
+                                  field.onChange(+event.target.value)
+                                }
+                              />
                             </FormControl>
                             <FormMessage className="w-full" />
                           </div>
@@ -354,7 +386,7 @@ function doctorProfileSecondaryForm({ doctor, change }) {
 
             {/* Allergies */}
             <div class="w-full m-6 md:w-4/5">
-            <p className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
+              <p className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
                 Allergies
               </p>
 
@@ -406,96 +438,101 @@ function doctorProfileSecondaryForm({ doctor, change }) {
 
           {/* Currunt medication */}
           <p className="block mt-6 mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
-                Current medications
-              </p>
+            Current medications
+          </p>
 
-              <div className="w-full">
-                {medicationFields.map((field, index) => (
-                  <div className="flex w-full my-1 ">
-                    <FormField
-                      control={form.control}
-                      name={`currentMedications.${index}.name`}
-                      render={({ field }) => (
-                        <FormItem className="flex w-full space-y-2">
-                          <div className="flex-1 pr-2">
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage className="w-full" />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name={`currentMedications.${index}.dosage`}
-                      render={({ field }) => (
-                        <FormItem className="flex w-full space-y-0">
-                          <div className="flex-1 pr-2">
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage className="w-full" />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      key={field.id}
-                      name={`currentMedications.${index}.frequency`}
-                      render={({ field }) => (
-                        <FormItem className="flex w-full space-y-0">
-                          <div className="flex-1 pr-4">
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage className="w-full" />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      key={field.id}
-                      name={`currentMedications.${index}.reason`}
-                      render={({ field }) => (
-                        <FormItem className="flex w-full space-y-0">
-                          <div className="flex-1 ">
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage className="w-full" />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className={cn("text-red-500 h-9 mr-4")}
-                      onClick={() => {
-                        medicationRemove(index);
-                      }}
-                    >
-                      <BiX />
-                    </Button>
-                  </div>
-                ))}
-                {/* button to add new fields */}
+          <div className="w-full">
+            {medicationFields.map((field, index) => (
+              <div className="flex w-full my-1 ">
+                <FormField
+                  control={form.control}
+                  name={`currentMedications.${index}.name`}
+                  render={({ field }) => (
+                    <FormItem className="flex w-full space-y-2">
+                      <div className="flex-1 pr-2">
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage className="w-full" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`currentMedications.${index}.dosage`}
+                  render={({ field }) => (
+                    <FormItem className="flex w-full space-y-0">
+                      <div className="flex-1 pr-2">
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage className="w-full" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  key={field.id}
+                  name={`currentMedications.${index}.frequency`}
+                  render={({ field }) => (
+                    <FormItem className="flex w-full space-y-0">
+                      <div className="flex-1 pr-4">
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage className="w-full" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  key={field.id}
+                  name={`currentMedications.${index}.reason`}
+                  render={({ field }) => (
+                    <FormItem className="flex w-full space-y-0">
+                      <div className="flex-1 ">
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage className="w-full" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="mt-2 text-white bg-slate-600"
-                  onClick={() =>
-                    medicationAppend({ name: "", dosage: "", frequency: "", reason: "" })
-                  }
+                  className={cn("text-red-500 h-9 mr-4")}
+                  onClick={() => {
+                    medicationRemove(index);
+                  }}
                 >
-                  Add New
+                  <BiX />
                 </Button>
               </div>
+            ))}
+            {/* button to add new fields */}
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="mt-2 text-white bg-slate-600"
+              onClick={() =>
+                medicationAppend({
+                  name: "",
+                  dosage: "",
+                  frequency: "",
+                  reason: "",
+                })
+              }
+            >
+              Add New
+            </Button>
+          </div>
 
           <Button
             type="submit"

@@ -67,6 +67,14 @@ import ProductOrdersTable from '@/pages/Product/ProductOrdersTable'
 import POrderDetails from '@/pages/Product/ProductOrderDetail'
 import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
+import AttendanceMarker from '@/pages/staff/markAttendance'
+import Attendance from '@/pages/staff/attendance'
+import ManageSalary from '@/pages/staff/manageSalary'
+import SalaryManagementPage from '@/pages/staff/SalaryManage'
+import MySalary from '@/pages/staff/mySalary'
+import StaffProfile from '@/pages/staff/StaffProfile'
+import StaffPage from '@/pages/staff/manageProfile'
+import SDashboard from '@/pages/staff/dashboard'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
 
 
@@ -120,14 +128,26 @@ const Router = createBrowserRouter(
             <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
             <Route path="ManagePatient/add" element={<AddStaff/> } exact/>
+            <Route path="managedoctor/add" element={<AddStaff/> } exact/>
             <Route path="ManagePatients/overview" element={<ManagePatient/> } exact/>
             <Route path="ManagePatients/add" element={<AddPatient/> } exact/>
             <Route path="ManageLeaves/overview" element={<StaffLeaves/> } exact/>
+            <Route path="StaffProfile/overview" element={<StaffProfile/> } exact/>
+            <Route path="profile" element={<StaffProfile/> } exact/>
+            <Route path="StaffProfile/manage" element={<StaffPage/> } exact/>
             <Route path="StaffProfile/leaves/apply" element={<ApplyLeave/> } exact/>
             <Route path="StaffProfile/leaves/my" element={<MyLeaves/> } exact/>
+            <Route path="StaffProfile/attendance/mark" element={<AttendanceMarker/> } exact/>
+            <Route path="attendance/overview" element={<Attendance/> } exact/>
             <Route path="ManageDoctor/overview" element={<ManageDoctor/> } exact/>
+            <Route path="managesalary/overview" element={<ManageSalary/> } exact/>
+            <Route path="managesalary/salarymanage/:staffId" element={<SalaryManagementPage/> } exact/>
+            <Route path="StaffProfile/mysalary" element={<MySalary/> } exact/>
+            <Route path="" element={<SDashboard/> } exact/>
+          
+          
             
-            
+           
            {/*AROSHANA-END*/}
             {/* kaumal */}
 

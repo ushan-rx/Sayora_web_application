@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from "js-cookie";
 
-const MyLeaves = ({ staffId = "STF00011" }) => {
+const MyLeaves = () => {
   const [leaves, setLeaves] = useState([]);
   const [error, setError] = useState("");
+  
+  const staffId = Cookies.get("staffId"); // Retrieve staffId from cookies here inside the component
 
   useEffect(() => {
     const fetchLeaves = async () => {
+      if (!staffId) {
+        setError("No staff ID found. Please log in.");
+        return;
+      }
       try {
         const response = await axios.get(`http://localhost:5000/staff/leaves/std/${staffId}`);
-        console.log(response.data);
         setLeaves(response.data.leaves || []);
       } catch (error) {
         console.error('Error fetching leave data:', error);
@@ -22,7 +28,7 @@ const MyLeaves = ({ staffId = "STF00011" }) => {
 
   const deleteLeave = async (leaveId) => {
     try {
-      await axios.delete(`http://localhost:5000/staff/leaves/${leavesId}`);
+      await axios.delete(`http://localhost:5000/staff/leaves/${leaveId}`);
       setLeaves(leaves.filter(leave => leave.leavesId !== leaveId));
     } catch (error) {
       console.error('Error deleting leave:', error);

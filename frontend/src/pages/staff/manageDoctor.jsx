@@ -68,13 +68,16 @@ const ManageDoctor = () => {
   };
 
   const handleDelete = (doctorId) => {
-    axios.delete(`http://localhost:5000/api/v1/doctor/${doctorId}`)
+    axios.put(`http://localhost:5000/api/v1/doctor/${doctorId}`, { status: false })
       .then(() => {
         fetchDoctors(); // Refresh data
         closeDeleteModal();
       })
       .catch(error => console.error('Error deleting doctor:', error));
   };
+
+
+  
 
   return (
     <div className="container mx-auto px-4" style={{ marginTop: '20px' }}>
@@ -128,7 +131,7 @@ const ManageDoctor = () => {
               <td className="text-center">{doctor.phone}</td>
               <td className="text-center">{doctor.specialization.map(s => s.name).join(', ')}</td>
               <td className="text-center">
-                <button onClick={() => openEditModal(doctor)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onClick={() => openEditModal(doctor)} className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded mr-3">
                   Edit
                 </button>
                 <button onClick={() => openDeleteModal(doctor)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

@@ -6,12 +6,20 @@ function LeaveModal({ isOpen, onClose, leave, onStatusChange }) {
   const updateLeaveStatus = async (status) => {
     try {
       await axios.put(`http://localhost:5000/staff/leaves/${leave.leavesId}`, { status });
-      onStatusChange(); // Notify parent component of the update
-      onClose(); // Close modal after update
+      onStatusChange();
+      onClose();
     } catch (error) {
       console.error('Failed to update leave status', error);
     }
   };
+
+  function calculateDays(start, end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const timeDiff = endDate.getTime() - startDate.getTime(); 
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+    return Math.ceil(daysDiff);
+  }
 
   const deleteLeave = async () => {
     try {
@@ -54,7 +62,7 @@ function LeaveModal({ isOpen, onClose, leave, onStatusChange }) {
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500 space-y-2">
-                  {/* Displaying leave details */}
+                  
                   <span className="block font-bold text-cyan-500">Leave ID:</span> {leave.leavesId}
                   <span className="block font-bold text-cyan-500">Staff ID:</span> {leave.staffId}
                   <span className="block font-bold text-cyan-500">Name:</span> {leave.staffName}
@@ -62,14 +70,15 @@ function LeaveModal({ isOpen, onClose, leave, onStatusChange }) {
                   <span className="block font-bold text-cyan-500">Status:</span> {leave.status}
                   <span className="block font-bold text-cyan-500">Start Time:</span> {new Date(leave.leaveStartTime).toLocaleString()}
                   <span className="block font-bold text-cyan-500">End Time:</span> {new Date(leave.leaveEndTime).toLocaleString()}
+                  <span className="block font-bold text-cyan-500">No Of Days:</span> {calculateDays(leave.leaveStartTime, leave.leaveEndTime)}
                   <span className="block font-bold text-cyan-500">Reason:</span> {leave.reason}
                 </p>
               </div>
               <div className="mt-4 flex justify-around">
-                <button onClick={() => updateLeaveStatus('approved')} className="...">Approve</button>
-                <button onClick={() => updateLeaveStatus('rejected')} className="...">Reject</button>
-                <button onClick={deleteLeave} className="...">Delete</button> {/* New delete button */}
-                <button onClick={onClose} className="...">Cancel</button>
+                <button onClick={() => updateLeaveStatus('approved')} className="bg-cyan-300 text-white font-bold py-2 px-4 rounded">Approve</button>
+                <button onClick={() => updateLeaveStatus('rejected')} className="bg-cyan-300 text-white font-bold py-2 px-4 rounded">Reject</button>
+                <button onClick={deleteLeave} className="bg-cyan-300 text-white font-bold py-2 px-4 rounded">Delete</button> 
+                <button onClick={onClose} className="bg-cyan-300 text-white font-bold py-2 px-4 rounded">Cancel</button>
               </div>
             </div>
           </Transition.Child>

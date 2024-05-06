@@ -150,7 +150,7 @@ function EditPatient({ isOpen, handleClose, patient, handleUpdate }) {
           </div>
 
           <div className="flex justify-between space-x-2">
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 flex-grow">
+            <button type="submit" className="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-700 flex-grow">
               Save Changes
             </button>
             <button onClick={handleClose} type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 flex-grow">

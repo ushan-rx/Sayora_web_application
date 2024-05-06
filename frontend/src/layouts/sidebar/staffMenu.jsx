@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import SubMenu from "./SubMenu";
+import Cookies from 'js-cookie';
 
 //icons
 import { AiOutlineAppstore } from "react-icons/ai";
@@ -18,6 +19,9 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import {FaRegCalendarPlus,FaMoneyBillWave} from 'react-icons/fa';
+import {MdOutlineEventNote } from 'react-icons/md';
 
 import {FaAddressBook} from "react-icons/fa";
 
@@ -27,6 +31,21 @@ import { MdWarehouse } from "react-icons/md";
 
 function staffMenu() {
   const path = "/staff";
+
+
+  const jobRole=Cookies.get("staffRole")
+
+  const roleAccess = {
+    systemadmin: ["Manage Staff", "Staff Profile", "Manage Doctors","Manage Patients","Manage Leaves","Treatment","Cashier","Product","Overview","Salary Management","Manage Attendance","service","Manage Inventory","Appointments"],
+    doctor: ["ManageDoctor", "Treatment"],
+    cashier: ["Cashier"],
+    appointmentmanager: ["Overview","Appointments","Staff Profile"],
+    servicehandler: ["Overview","service","Staff Profile"],
+    inventorymanager: ["Overview","Manage Inventory","Staff Profile"], 
+    staffmanager: ["Overview","Manage Staff","Salary Management","Manage Leaves","Manage Attendance","Staff Profile"], 
+    productmanager: ["Overview","Product","Staff Profile"], 
+  };
+  
 
   // items with sub menus
   const subMenusList = [
@@ -43,7 +62,7 @@ function staffMenu() {
       },
 
       {
-        name: "Manage Doctor",           //display name
+        name: "Manage Doctors",           //display name
         path: "/staff/managedoctor",          // main path
         icon: FaUserDoctor,
         menus: [
@@ -66,29 +85,42 @@ function staffMenu() {
         
       },
 
+    
+      {
+        name: "Salary Management",           //display name
+        path: "/staff/managesalary",          // main path
+        icon: FaMoneyBillWave,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+         
+        ],
+
+       
+      },
+
+      
+
+      {
+        name: "Manage Attendance",           //display name
+        path: "/staff/attendance",          // main path
+        icon: IoMdCheckmarkCircleOutline,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          
+        ],
+
+       
+      },
       {
         name: "Manage Leaves",           //display name
         path: "/staff/manageleaves",          // main path
-        icon: FaShoppingBag,
+        icon: FaRegCalendarPlus,
         menus: [
           {subName: "Overview", subPath: "overview"},
           
         ],
 
         
-      },
-
-      {
-        name: "Staff Profile",           //display name
-        path: "/staff/staffprofile",          // main path
-        icon: FaUser,
-        menus: [
-          {subName: "Overview", subPath: "overview"},
-          {subName: "Apply Leave", subPath: "leaves/apply"},
-          {subName: "My Leaves", subPath: "leaves/my"},
-        ],
-
-       
       },
 
       //kaumal
@@ -163,7 +195,7 @@ function staffMenu() {
       {
         name: "Appointments",    
         path: "/staff/appointment",    
-        icon: FaCartShopping,
+        icon: MdOutlineEventNote,
         menus: [
           {subName: "Add Schedule Time", subPath: "addtime"},
           // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
@@ -174,18 +206,39 @@ function staffMenu() {
           
         ],
       },
+
+      {
+        name: "Staff Profile",           //display name
+        path: "/staff/staffprofile",          // main path
+        icon: FaUser,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "My Salary", subPath: "mysalary"},
+          {subName: "Mark Attendance", subPath: "attendance/mark"},
+          {subName: "Apply Leave", subPath: "leaves/apply"},
+          {subName: "My Leaves", subPath: "leaves/my"},
+          
+        ],
+
+       
+      },
   ];
+
+  const accessibleSubMenus = subMenusList.filter(menu => roleAccess[jobRole]?.includes(menu.name));
 
 
 return (
   <>
     {/* include single menu items here */}
-    <li>
-        <NavLink to={path + "/"} className="link">
+
+    {roleAccess[jobRole]?.includes("Overview") && (
+        <li>
+          <NavLink to={`${path}/`} className="link">
             <AiOutlineAppstore size={23} className="min-w-max" />
             Overview
-        </NavLink>
-    </li>
+          </NavLink>
+        </li>
+      )}
 
 
 
@@ -193,7 +246,7 @@ return (
 
     {/* attach sub menu items  */}
     <div name='submenu-items'>
-        {subMenusList?.map((menu) => (
+        {accessibleSubMenus?.map((menu) => (
             <div key={menu.name} className="flex flex-col gap-1">
             <SubMenu data={menu} />
             </div>

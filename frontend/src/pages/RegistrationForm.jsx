@@ -53,8 +53,11 @@ const RegistrationForm = () => {
       errors.confirmPassword = 'Passwords do not match';
     }
     if (!phone.trim()) {
-      errors.phone = 'Phone number is required';
+      newErrors.phone = 'Phone number is required';
+    } else if (phone.trim().length !== 10) {
+      newErrors.phone = 'Phone number must be exactly 10 digits long';
     }
+    
     if (!gender.trim()) {
       errors.gender = 'Gender is required';
     }

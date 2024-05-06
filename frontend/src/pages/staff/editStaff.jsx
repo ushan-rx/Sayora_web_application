@@ -103,15 +103,20 @@ function EditStaff({ isOpen, handleClose, staffMember, handleUpdate }) {
               onChange={handleChange}
               className="border border-gray-300 rounded px-3 py-1 w-full"
             >
-              <option value="systemadmin">System Admin</option>
-              <option value="staffmanager">Staff Manager</option>
-              <option value="medicalsecratary">Medical Secretary</option>
+            
+            <option value="systemadmin">System Admin</option>
+            <option value="medicalsecretary">Medical Secretary</option>
+            <option value="staffmanager">Staff Manager</option>
+            <option value="appointmentmanager">Appointment Manager</option>
+            <option value="inventorymanager">Inventory Manager</option>
+            <option value="productmanager">Product Manager</option> 
+            <option value="servicehandler">Service Handler</option>  
             </select>
             {errors.JobRole && <p className="text-red-500 text-xs mt-1">{errors.JobRole}</p>}
           </label>
 
           <div className="flex justify-between space-x-2">
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 flex-grow">
+            <button type="submit" className="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-700 flex-grow">
               Save Changes
             </button>
             <button onClick={handleClose} type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 flex-grow">

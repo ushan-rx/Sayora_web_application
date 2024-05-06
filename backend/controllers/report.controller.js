@@ -79,21 +79,21 @@ const getReportByPatient = async (req, res) => {
   }
 };
 
-const getManyReport = async (req, res) => {
-  const {id: patientId} = req.params;
-  //console.log(patientId);
-  try {
-    const report = await Report.find({patientId: patientId});
-    if (!report) {  
-      throw new CustomError.NotFoundError(
-        `No daily updates for patient with id : ${req.params.id}`
-      );
-    }
-    res.status(StatusCodes.OK).json({ report });
-  } catch (err) {
-    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
-  }
-};
+// const getManyReport = async (req, res) => {
+//   const {id: patientId} = req.params;
+//   //console.log(patientId);
+//   try {
+//     const report = await Report.find({patientId: patientId});
+//     if (!report) {  
+//       throw new CustomError.NotFoundError(
+//         `No daily updates for patient with id : ${req.params.id}`
+//       );
+//     }
+//     res.status(StatusCodes.OK).json({ report });
+//   } catch (err) {
+//     res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+//   }
+// };
 
 
 module.exports = {
@@ -103,5 +103,5 @@ module.exports = {
   updateReport,
   deleteReport,
   getReportByPatient,
-  getManyReport
+  // getManyReport
 };

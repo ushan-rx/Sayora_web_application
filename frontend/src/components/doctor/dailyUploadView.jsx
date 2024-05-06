@@ -115,33 +115,48 @@ const dailyUpdateView = () => {
                           </div>
                         </div>
                         <div className="w-[400px] text-center desktop-view-only">
-                          <h2 className="text-xl pb-4 font-bold">Summery</h2>
-                          <div className=" text-slate-600 font-bold text-m">
-                            Temperature :
-                            <span className="text-black font-normal">
-                              {report.temperature}
-                            </span>
-                          </div>
-                          <div className=" text-slate-600 font-bold text-m">
-                            Syptomps :
-                            <span className="text-black font-normal">
-                              {report.symptoms + " "}
-                            </span>
-                          </div>
-                          <div className=" text-slate-600 font-bold text-m">
-                            Medication :
-                            {report.medications.map((medication) => (
-                              <div key={medication.index}>
+                          {(report.temperature || report.symptoms != '' || report.medications != '') && (
+                            <h2 className="text-xl pb-4 font-bold">Summery</h2>
+                          )}
+                          {
+                          report.temperature &&
+                            (
+                              <div className=" text-slate-600 font-bold text-m">
+                                Temperature :
                                 <span className="text-black font-normal">
-                                  {medication.type + " - "}
+                                  {report.temperature}
                                 </span>
-                                <span className="text-black font-normal">
-                                  {medication.messure + " "}
-                                </span>{" "}
-                                {/* //this measure is not defined in the report schema */}
                               </div>
-                            ))}
-                          </div>
+                            )
+                          }
+                          {
+                            report.symptoms != '' && (
+                              <div className=" text-slate-600 font-bold text-m">
+                                Syptomps :
+                                <span className="text-black font-normal">
+                                  {report.symptoms + " "}
+                                </span>
+                              </div>
+                            )
+                          }
+                          {
+                            report.medications != '' && (
+                              <div className=" text-slate-600 font-bold text-m">
+                                Medication :
+                                {report.medications.map((medication) => (
+                                  <div key={medication.index}>
+                                    <span className="text-black font-normal">
+                                      {medication.type + " - "}
+                                    </span>
+                                    <span className="text-black font-normal">
+                                      {medication.messure + " "}
+                                    </span>{" "}
+                                  </div>
+                                ))}
+                              </div>
+                            )
+                          }
+                          
                         </div>
                         <div className="text-right">
                           <Dialog>
@@ -157,24 +172,38 @@ const dailyUpdateView = () => {
                                     </h2>
                                     <p> <span className="font-bold text-slate-600"> Date:</span> {formattedDate}</p>
                                     <p><span className="font-bold text-slate-600"> Time:</span> {formattedTime}</p>
-                                    <div className=" text-slate-600 font-bold text-m">
-                                      Temperature :
-                                      <span className="text-black font-normal">
-                                        {report.temperature}
-                                      </span>
-                                    </div>
-                                    <div className=" text-slate-600 font-bold text-m">
-                                      Syptomps :
-                                      <span className="text-black font-normal">
-                                        {report.symptoms + " "}
-                                      </span>
-                                    </div>
-                                    <p className="font-bold text-slate-600">
-                                      Additional Notes: 
-                                      <span className="text-black font-normal">
-                                        {report.additionalNotes}
-                                      </span>
-                                    </p>
+                                    {
+                                      report.temperature &&
+                                        (
+                                          <div className=" text-slate-600 font-bold text-m">
+                                            Temperature :
+                                            <span className="text-black font-normal">
+                                              {' '+ report.temperature}
+                                            </span>
+                                          </div>
+                                        )
+                                    }
+                                    {
+                                      report.symptoms != '' && (
+                                        <div className=" text-slate-600 font-bold text-m">
+                                          Syptomps :
+                                          <span className="text-black font-normal">
+                                            {' '+ report.symptoms + " "}
+                                          </span>
+                                        </div>
+                                      )
+                                    }
+                                    {
+                                      report.additionalNotes && (
+                                        <p className="font-bold text-slate-600">
+                                          Additional Notes: 
+                                          <span className="text-black font-normal">
+                                            {' '+ report.additionalNotes}
+                                          </span>
+                                        </p>
+                                      )
+                                    }
+                                    
                                     <div className="flex justify-between mt-6">
                                         <div className="flex ">
                                             <div className=" text-slate-600 font-bold text-xs">

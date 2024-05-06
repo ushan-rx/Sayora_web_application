@@ -69,6 +69,10 @@ export const appointmentReportColumns = [
           )
         },
     },
+    {
+      accessorKey: "status",
+      header: "status",
+    },
     // {
     //     accessorKey: "amount",
     //     header: ({ column }) => {

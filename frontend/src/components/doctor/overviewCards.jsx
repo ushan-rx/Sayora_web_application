@@ -49,7 +49,6 @@ function overviewCards({docAppointments}) {
                 )
             })
             setCompletedAppointments(completeAppointments.length)
-            
         } catch (error) {
             console.log(error)
         }
@@ -74,7 +73,7 @@ function overviewCards({docAppointments}) {
             const completedTreatments = data.filter((treatment) => {
               return treatment.isComplete === true
             })
-            setTreatments(data)
+            setTreatments(completedTreatments)
         } catch (error) {
             console.log(error)
         }

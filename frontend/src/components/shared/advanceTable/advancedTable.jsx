@@ -48,6 +48,7 @@ export default function advancedTable({columns, data, filterColumn}) {
  //   columnVisibility,
  //   rowSelection,
     },
+    
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -69,10 +70,11 @@ export default function advancedTable({columns, data, filterColumn}) {
         {/* filtering (searching) */}
       <div className="flex flex-1 items-center space-x-4">
         <Input
-          placeholder="Filter values..."
+          placeholder="Filter by Name..."
           value={(table.getColumn(filter)?.getFilterValue()) ?? ""}
-          onChange={(event) =>
+          onChange={(event) =>{
             table.getColumn(filter)?.setFilterValue(event.target.value)
+          }
           }
           className="h-8 mt-1 ml-1 w-[150px] lg:w-[250px]"
         />
@@ -96,7 +98,7 @@ export default function advancedTable({columns, data, filterColumn}) {
 
         </div>
         {/* table container */}
-        <div className="rounded-md  h-[50vh] overflow-auto">               
+        <div className="rounded-md  h-[60vh] overflow-auto">               
                 <Table className="rounded-md border" >
                     <TableHeader className="border-y-2 bg-slate-200">
                         {table.getHeaderGroups().map((headerGroup) => (

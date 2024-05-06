@@ -240,7 +240,7 @@ export default function DailyUploads() {
                             <FormItem className="flex w-full space-y-2">
                               <div className="flex-1 pr-2">
                                 <FormControl>
-                                  <Input {...field} />
+                                  <Input placeholder="Medicine" {...field} />
                                 </FormControl>
                                 <FormMessage className="w-full" />
                               </div>
@@ -254,7 +254,7 @@ export default function DailyUploads() {
                             <FormItem className="flex w-full space-y-0">
                               <div className="flex-1 pr-2">
                                 <FormControl>
-                                  <Input {...field} />
+                                  <Input placeholder="Dossage" {...field} />
                                 </FormControl>
                                 <FormMessage className="w-full" />
                               </div>
@@ -312,7 +312,7 @@ export default function DailyUploads() {
                               <FormItem className="flex w-full space-y-0">
                                 <div className="flex-1">
                                   <FormControl>
-                                    <Input {...field} />
+                                    <Input placeholder="Enter valid report" {...field} />
                                   </FormControl>
                                   <FormMessage className="w-full" />
                                 </div>

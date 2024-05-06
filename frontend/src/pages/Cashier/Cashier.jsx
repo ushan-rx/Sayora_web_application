@@ -23,9 +23,14 @@ function Cashier() {
     const handleOnBlur = async() => {
     
     //Get patient appointment details    
-    const appointments = await axios.get(`http://localhost:5000/appointments?patientContact=${patientMobile}`)
+    const appointments = await axios.get(`http://localhost:5000/appointments`)
     console.log(appointments)
-    if(appointments.data.length > 0){
+
+    const filteredApp = appointments.data.filter((appointment) => {
+        return appointment.patientContact === patientMobile
+    })
+    console.log(filteredApp)
+    if(filteredApp.length > 0){
         for (let i = 0; i < appointments.data.length; i++) {
         const appontmentDate = appointments.data[i].App_date
         const appDate = new Date(appontmentDate).toLocaleDateString()
@@ -83,6 +88,7 @@ function Cashier() {
     }else {
         console.log("No appointments found")
         alert("No appointments found")
+        setIsSubmitted(false)
     }
 
     

@@ -66,7 +66,7 @@ const FetchTreatment = () => {
     <div className="container mx-auto">
       <h1 className="mt-8 mb-4 text-3xl px-28">All Treatments</h1>
       {/* <Link to={`/addTreat`} className="inline-block px-4 py-2 mb-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Add New</Link> */}
-      <div className="mt-8 overflow-y-auto h-96">
+      <div className="mt-8 overflow-y-auto h-[30rem]">
         <div className="w-4/5 mx-auto">
           <table className="w-full border-collapse">
             <thead className="sticky top-0">
@@ -89,7 +89,7 @@ const FetchTreatment = () => {
                     <td className="px-4 py-2 border">
                       <Link
                         to={`/staff/updatex/${record.treatmentId}`}
-                        className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-teal-400 rounded hover:bg-teal-700"
+                        className="inline-block px-2 py-1 mb-2 mr-2 font-bold text-white bg-teal-600 rounded hover:bg-teal-700"
                         onClick={() => setSelectedTreatment(record)}
                       >
                         Edit

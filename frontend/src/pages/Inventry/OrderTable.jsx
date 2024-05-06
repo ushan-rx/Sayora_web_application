@@ -136,7 +136,7 @@ const OrdersTable = () => {
         </table>
       {orders.length === 0 && <div className="text-center py-8">No orders to display</div>}
     </div>
-    </div>
+  </div>
   );
 };
 

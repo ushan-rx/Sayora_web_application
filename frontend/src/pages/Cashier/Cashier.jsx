@@ -307,7 +307,7 @@ function Cashier() {
                 </div>
 
                <div className="flex justify-between space-x-4">
-    <Link to="/staff/Cashier/viewCash" className="flex-1 px-4 py-2 font-semibold text-white bg-green-600 rounded-md hover:bg-green-700" onClick={insertUsersData}>Add Payment</Link>
+    <Link to="/staff/Cashier/viewCash" className="flex-1 px-4 py-2 font-semibold text-white bg-teal-700 rounded-md hover:bg-teal-950" onClick={insertUsersData}>Add Payment</Link>
 
     <button
         className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700"

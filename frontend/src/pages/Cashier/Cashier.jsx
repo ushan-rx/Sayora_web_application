@@ -23,9 +23,14 @@ function Cashier() {
     const handleOnBlur = async() => {
     
     //Get patient appointment details    
-    const appointments = await axios.get(`http://localhost:5000/appointments?patientContact=${patientMobile}`)
+    const appointments = await axios.get(`http://localhost:5000/appointments`)
     console.log(appointments)
-    if(appointments.data.length > 0){
+
+    const filteredApp = appointments.data.filter((appointment) => {
+        return appointment.patientContact === patientMobile
+    })
+    console.log(filteredApp)
+    if(filteredApp.length > 0){
         for (let i = 0; i < appointments.data.length; i++) {
         const appontmentDate = appointments.data[i].App_date
         const appDate = new Date(appontmentDate).toLocaleDateString()
@@ -83,6 +88,7 @@ function Cashier() {
     }else {
         console.log("No appointments found")
         alert("No appointments found")
+        setIsSubmitted(false)
     }
 
     
@@ -301,7 +307,7 @@ function Cashier() {
                 </div>
 
                <div className="flex justify-between space-x-4">
-    <Link to="/staff/Cashier/viewCash" className="flex-1 px-4 py-2 font-semibold text-white bg-green-600 rounded-md hover:bg-green-700" onClick={insertUsersData}>Add Payment</Link>
+    <Link to="/staff/Cashier/viewCash" className="flex-1 px-4 py-2 font-semibold text-white bg-teal-700 rounded-md hover:bg-teal-950" onClick={insertUsersData}>Add Payment</Link>
 
     <button
         className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700"

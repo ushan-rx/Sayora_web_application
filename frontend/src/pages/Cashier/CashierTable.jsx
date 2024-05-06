@@ -162,9 +162,9 @@ function CashierTable() {
     }, 0);
     const totalInvoices = reqData.length;
     //
-    const additionalInfo = `Total Income: Rs.${totalIncome}/=, Total Invoices: ${totalInvoices}`;
+    //const additionalInfo = `Total Income: Rs.${totalIncome}/=, Total Invoices: ${totalInvoices}`;
     //
-    // modify the column names as needed
+    // column names
     reqData.forEach((item) => {
       item["Patient Name"] = item.patientName;
       item["Doctor Name"] = item.docName;
@@ -173,8 +173,9 @@ function CashierTable() {
     });
     //
     generatePDF(
-      additionalInfo,
+      "",//additionalInfo,
       ["Patient Name", "Doctor Name", "Treatment Name", "Total"],
+      
       reqData,
       "invoice_report"
     );
@@ -183,7 +184,7 @@ function CashierTable() {
   const downloadPDFInvoice = (record) => {
     // const additionalInfo = `Invoice for ${record.patientName}`;
     const additionalInfo = "Sayora Health & Wellness Clinic";
-    // modify the column names as needed
+    //  column names
     record["Patient Name"] = record.patientName;
     record["Doctor Name"] = record.docName;
     record["Treatment Name"] = record.treatmentName;
@@ -250,12 +251,12 @@ function CashierTable() {
           <Button
             type="primary"
             onClick={downloadPDFReport}
-            className="px-6 my-3 mb-2 ml-4 text-white bg-green-500 rounded-md"
+            className="px-6 my-3 mb-2 ml-4 text-white bg-teal-700 rounded-md hover:bg-teal-500"
           >
             Download Report
           </Button>
 
-          <div id="report-container" className="mx-auto ">
+          <div id="report-container" className="mx-auto overflow-y-auto h-[30rem]">
             <Table
               dataSource={reqData}
               bordered
@@ -269,32 +270,57 @@ function CashierTable() {
                 key="patientId"
               />
               <Column
+                className="bg-blue-100"
                 title="Patient Name"
                 dataIndex="patientName"
                 key="patientName"
               />
-              <Column title="Doctor Name" dataIndex="docName" key="docName" />
-              <Column title="Doctor Fee" dataIndex="docFee" key="docFee" />
               <Column
-                title="Treatment Name"
-                dataIndex="treatmentName"
-                key="treatmentName"
+               className="bg-blue-100" 
+               title="Doctor Name" 
+               dataIndex="docName"
+               key="docName" />
+
+              <Column
+              className="bg-blue-100"
+              title="Doctor Fee" 
+              dataIndex="docFee" 
+              key="docFee" />
+
+              <Column
+              className="bg-blue-100"
+              title="Treatment Name"
+              dataIndex="treatmentName"
+              key="treatmentName"
               />
               <Column
-                title="Treatment Fee"
-                dataIndex="treatmentFee"
-                key="treatmentFee"
+              className="bg-blue-100"
+               title="Treatment Fee"
+              dataIndex="treatmentFee"
+              key="treatmentFee"
               />
-              <Column title="Discount" dataIndex="discount" key="discount" />
-              <Column title="Total" dataIndex="total" key="total" />
+              <Column 
+              className="bg-blue-100"
+              title="Discount"
+              dataIndex="discount" 
+              key="discount" />
+              
+
               <Column
-                title="Action"
-                key="action"
-                render={(text, record) => (
+              className="bg-blue-100"
+              title="Total" 
+              dataIndex="total" 
+              key="total" />
+
+              <Column
+              className="bg-blue-100"
+              title="Action"
+              key="action"
+              render={(text, record) => (
                   <Space size="middle">
                     <Link
                       to={`staff/updateCash/${record._id}`}
-                      className="text-blue-500 hover:underline"
+                      className="hidden text-blue-500 hover:underline"
                     >
                       Edit
                     </Link>
@@ -302,12 +328,12 @@ function CashierTable() {
                       type="link"
                       danger
                       onClick={() => handleDelete(record._id)}
-                      className="text-red-500 hover:underline"
+                      className="text-red-800 hover:underline"
                     >
                       Delete
                     </Button>
                     <button
-                      className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded-2xl hover:bg-blue-700"
+                      className="px-4 py-2 mt-4 font-bold text-white bg-teal-600 rounded-2xl hover:bg-teal-900"
                       onClick={() => downloadPDFInvoice(record)}
                     >
                       {" "}

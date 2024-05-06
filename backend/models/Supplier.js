@@ -15,9 +15,9 @@ const supplierSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  ContactNo: [{
+  ContactNo: {
     type: Number
-  }],
+  },
   Address: {
     type: String,
     required: true

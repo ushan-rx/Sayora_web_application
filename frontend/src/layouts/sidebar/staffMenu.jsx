@@ -18,7 +18,11 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
+
 import {FaAddressBook} from "react-icons/fa";
+
+import { MdWarehouse } from "react-icons/md";
+
 
 
 function staffMenu() {
@@ -128,6 +132,21 @@ function staffMenu() {
       },
 
       {
+        name: "Manage Inventory",           //display name
+        path: "/staff/inventory",          // main path
+        icon: MdWarehouse,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Orders", subPath: "orders"},
+          {subName: "Suppliers", subPath: "suppliers"},
+          {subName: "Inventory", subPath: "view"},
+          
+        ],
+
+      },
+
+
+      {
         name: "Product",    
         path: "/staff/product",    
         icon: FaCartShopping,
@@ -136,6 +155,21 @@ function staffMenu() {
           // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
           // {subName: "Update products", subPath: "viewproduct/product/update-product"},
           {subName: "Orders", subPath: "adminOrder"},
+         
+          
+        ],
+      },
+
+      {
+        name: "Appointments",    
+        path: "/staff/appointment",    
+        icon: FaCartShopping,
+        menus: [
+          {subName: "Add Schedule Time", subPath: "addtime"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "View Appointments", subPath: "view"},
+          {subName: "Appointment Times", subPath: "time"},
          
           
         ],

@@ -3,8 +3,8 @@ const OrderService = require('../Service/Inventory_Order.service.js');
 //Add new inventory order
 const addOrder = async (req, res) => {
     try{
-        const {SupplierID, ItemArray} = req.body;
-        const newOrder = await OrderService.addOrder( SupplierID, ItemArray);
+        const {SupplierID, ItemArray , OrderTotal} = req.body;
+        const newOrder = await OrderService.addOrder( SupplierID, ItemArray , OrderTotal);
         res.status(200).json(newOrder);
     }catch(err){
         res.status(400).json({error: err});
@@ -17,7 +17,7 @@ const getOrders = async (req, res) => {
     try{
         const orders = await OrderService.getOrders();
         res.status(200).json(orders);
-    }catch{
+    }catch(err) {
         res.status(400).json({error: err});
         console.log(err.message);
     }

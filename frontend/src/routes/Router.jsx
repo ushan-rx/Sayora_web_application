@@ -68,6 +68,14 @@ import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
 
+import AppoinmentHome from '@/pages/Appoinment/AppoinmentHome'
+import AddDoctorTime from '@/pages/Appoinment/AddDoctorTime'
+import AddAppointment from '@/pages/Appoinment/AddAppoinment'
+import ViewAppointment from '@/pages/Appoinment/ViewAppoinment'
+
+import ViewDoctorTIme from '@/pages/Appoinment/ViewDoctorTime'
+import UpdateDoctorAvailability from '@/pages/Appoinment/UpdateDoctorAvailability'
+
 //set routing
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -83,7 +91,8 @@ const Router = createBrowserRouter(
           <Route path="serviceForm" element={<ServiceMgt/> } exact/>
           <Route path="service" element={<ServiceHome/> } exact/>
           <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
-
+          <Route path="appointment/add" element={<AddAppointment/> } exact/>
+          <Route path="appointment" element={<AppoinmentHome/> } exact/>
 
         </Route>
         <Route path = "/staff" element ={<StaffDashboard />}exact >
@@ -92,7 +101,7 @@ const Router = createBrowserRouter(
          
           {/*staff dashboard routes here*/}
                     {/*AROSHANA-START*/}
-          ManageDoctor
+          {/* ManageDoctor */}
             <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
             <Route path="ManagePatient/add" element={<AddStaff/> } exact/>
@@ -137,6 +146,14 @@ const Router = createBrowserRouter(
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
 
+            // Appoinment Route
+            <Route path = "appointment">
+            
+              <Route path = "addtime" element = {<AddDoctorTime/>}></Route>
+              <Route path = "view" element={<ViewAppointment/>}></Route>
+              <Route path= "time" element = {<ViewDoctorTIme/>}></Route>
+              <Route path = "time/update" element ={<UpdateDoctorAvailability/>}></Route>
+            </Route>
 
         </Route>
 

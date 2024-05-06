@@ -1,54 +1,51 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
+
+
 
 const EmailHandle = () => {
-  const [reciver, setReciver] = useState("");
+  const { state } = useLocation();
+  const email = state?.email ?? '';
+
+  const [reciver, setReciver] = useState(email);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [sentMessages, setSentMessages] = useState([]);
 
-  const sendEmail = async (e) => { // Use async/await for cleaner handling
+  const sendEmail = (e) => {
     e.preventDefault();
-    const sentDate = new Date().toISOString();
-    const receivedDate = new Date().toISOString();
-    try {
-      const response = await axios.post('http://localhost:5000/api/v1/email_handle', {
-        reciver,
-        subject,
-        text: message, // Use 'text' for consistency with server
-        receivedDate,
-        sentDate
+    const sentDate = new Date().toISOString(); // Generate sentDate
+    const receivedDate = new Date().toISOString(); // Generate receivedDate
+    axios.post('http://localhost:5000/api/v1/email_handle', { reciver, subject, text: message, receivedDate, sentDate }) // Change 'message' to 'text'
+      .then((response) => {
+        console.log(response.data);
+        setSentMessages([...sentMessages, { reciver, subject, text: message, receivedDate, sentDate }]); // Change 'message' to 'text'
+        alert('Email sent and stored successfully!');
+        setReciver("");
+        setSubject("");
+        setMessage("");
+      }, (error) => {
+        console.log(error);
       });
-      console.log(response.data);
-      setSentMessages([...sentMessages, { reciver, subject, text: message, receivedDate, sentDate }]);
-      alert('Email sent and stored successfully!');
-      setReciver("");
-      setSubject("");
-      setMessage("");
-    } catch (error) {
-      console.error(error);
-      alert('Error sending email. Please check your details and try again.'); // More informative error message
-    }
-  };
+}
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/v1/email_handle');
+    axios.get('http://localhost:5000/api/v1/email_handle')
+      .then((response) => {
+        console.log('Response data:', response.data);
         if (Array.isArray(response.data)) {
           setSentMessages(response.data);
         } else {
           console.log('Warning: response data is not an array. Wrapping it in an array.');
           setSentMessages([response.data]);
         }
-      } catch (error) {
-        console.error('Error fetching emails:', error);
-      }
-    };
-
-    fetchData();
+      })
+      .catch((error) => {
+        console.log('Error fetching emails:', error);
+      });
   }, []);
-
 
 
   return (

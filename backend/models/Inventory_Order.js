@@ -12,7 +12,7 @@ const orderSchema = new mongoose.Schema({
   },
   OrderStatus: {
     type: String,
-    enum: ['Pending', 'Processing', 'Shipped', 'Delivered'], 
+    enum: ['Pending', 'Completed'], 
     default: 'Pending'
   },
   SupplierID: {
@@ -22,6 +22,10 @@ const orderSchema = new mongoose.Schema({
   ItemArray : [{
     type: Object
   }],
+  OrderTotal : {
+    type: Number,
+    required: true
+  }
 });
 
 

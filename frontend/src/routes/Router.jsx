@@ -52,6 +52,7 @@ import AddPatient from '@/pages/staff/addPatient'
 import StaffLeaves from '@/pages/staff/manageStaffLeaves'
 import ApplyLeave from '@/pages/staff/applyLeave'
 import MyLeaves from '@/pages/staff/myLeaves'
+import DoctorVisits from '@/pages/website/OverviewServiceVisits'
 
 import ServiceHome from '../pages/website/HomeNavService'
 import AwarenessProgramHome from '../pages/website/awarnessPrograms_View';
@@ -67,6 +68,25 @@ import POrderDetails from '@/pages/Product/ProductOrderDetail'
 import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
+
+
+import AppoinmentHome from '@/pages/Appoinment/AppoinmentHome'
+import AddDoctorTime from '@/pages/Appoinment/AddDoctorTime'
+import AddAppointment from '@/pages/Appoinment/AddAppoinment'
+import ViewAppointment from '@/pages/Appoinment/ViewAppoinment'
+
+import ViewDoctorTIme from '@/pages/Appoinment/ViewDoctorTime'
+import UpdateDoctorAvailability from '@/pages/Appoinment/UpdateDoctorAvailability'
+
+import UpdateSupplier from '@/pages/Inventry/UpdateSupplier'
+import AddSupplier from '@/pages/Inventry/AddSupplier'
+import AddItem from '@/pages/Inventry/AddItem'
+import AddOrder from '@/pages/Inventry/AddOrder'
+import ViewInventory from '@/pages/Inventry/ViewInventory'
+import InventoryHome from '@/pages/Inventry/InventryHome'
+import Supplier from '@/pages/Inventry/Supplier'
+import OrdersTable from '@/pages/Inventry/OrderTable'
+
 import Treatments from "@/pages/Treatments";
 
 //set routing
@@ -84,6 +104,9 @@ const Router = createBrowserRouter(
           <Route path="serviceForm" element={<ServiceMgt/> } exact/>
           <Route path="service" element={<ServiceHome/> } exact/>
           <Route path="awarenessProgramHome" element={<AwarenessProgramHome/> } exact/>
+          <Route path="homeVisits" element={<DoctorVisits/> } exact/>
+          <Route path="appointment/add" element={<AddAppointment/> } exact/>
+          <Route path="appointment" element={<AppoinmentHome/> } exact/>
           <Route path="treatments" element={<Treatments/> } exact/>
 
         </Route>
@@ -93,7 +116,7 @@ const Router = createBrowserRouter(
          
           {/*staff dashboard routes here*/}
                     {/*AROSHANA-START*/}
-          ManageDoctor
+          {/* ManageDoctor */}
             <Route path="ManageStaff/add" element={<AddStaff/> } exact/>
             <Route path="ManageStaff/overview" element={<ManageStaff/> } exact/>
             <Route path="ManagePatient/add" element={<AddStaff/> } exact/>
@@ -137,6 +160,28 @@ const Router = createBrowserRouter(
           <Route path="adminOrder/order-details/:id" element= {<POrderDetails/>} exact/>
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
+
+
+            // Appoinment Route
+            <Route path = "appointment">
+            
+              <Route path = "addtime" element = {<AddDoctorTime/>}></Route>
+              <Route path = "view" element={<ViewAppointment/>}></Route>
+              <Route path= "time" element = {<ViewDoctorTIme/>}></Route>
+              <Route path = "time/update" element ={<UpdateDoctorAvailability/>}></Route>
+            </Route>
+
+            <Route path = "inventory">
+              <Route index element ={<InventoryHome/>}exact/>
+              <Route path="overview" element = {<InventoryHome/>}exact/>
+              <Route path = "view" element = {<ViewInventory/>}exact/>
+              <Route path = "suppliers" element = {<Supplier/>}exact/>
+              <Route path = "addSupplier" element = {<AddSupplier/>}exact/>
+              <Route path = "updateSupplier" element = {<UpdateSupplier/>}exact/>
+              <Route path = "orders" element = {<OrdersTable/>}exact/>
+              <Route path = "addItem" element = {<AddItem/>}exact/>
+              <Route path = "addOrder" element = {<AddOrder/>}exact/>
+            </Route> 
 
 
         </Route>

@@ -68,6 +68,15 @@ import ViewProducts from '@/pages/Product/ViewProducts'
 import UpdateProduct from '@/pages/Product/UpdateProduct'
 import PatientPurchase from '@/pages/Product/PatientPurhase'
 
+import UpdateSupplier from '@/pages/Inventry/UpdateSupplier'
+import AddSupplier from '@/pages/Inventry/AddSupplier'
+import AddItem from '@/pages/Inventry/AddItem'
+import AddOrder from '@/pages/Inventry/AddOrder'
+import ViewInventory from '@/pages/Inventry/ViewInventory'
+import InventoryHome from '@/pages/Inventry/InventryHome'
+import Supplier from '@/pages/Inventry/Supplier'
+import OrdersTable from '@/pages/Inventry/OrderTable'
+
 //set routing
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -137,6 +146,17 @@ const Router = createBrowserRouter(
           <Route path="update-product" element = {<UpdateProduct/>} exact/>
             </Route>
 
+            <Route path = "inventory">
+              <Route index element ={<InventoryHome/>}exact/>
+              <Route path="overview" element = {<InventoryHome/>}exact/>
+              <Route path = "view" element = {<ViewInventory/>}exact/>
+              <Route path = "suppliers" element = {<Supplier/>}exact/>
+              <Route path = "addSupplier" element = {<AddSupplier/>}exact/>
+              <Route path = "updateSupplier" element = {<UpdateSupplier/>}exact/>
+              <Route path = "orders" element = {<OrdersTable/>}exact/>
+              <Route path = "addItem" element = {<AddItem/>}exact/>
+              <Route path = "addOrder" element = {<AddOrder/>}exact/>
+            </Route> 
 
         </Route>
 

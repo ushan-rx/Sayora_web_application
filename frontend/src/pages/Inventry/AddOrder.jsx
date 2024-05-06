@@ -99,6 +99,7 @@ const AddOrder = () => {
     : inventoryItems;
 
   return (
+    <div className='h-[80vh] w-full overflow-auto scrollbar-thin -mr-20 rounded-md'>
     <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">Add New Order</h1>
       <form
@@ -183,6 +184,7 @@ const AddOrder = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

@@ -40,10 +40,10 @@ const TreatmentCard = ({ treatment }) => {
               </button>
             )}
           </p>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <span className="text-gray-700">Price: </span>
             <span className="font-bold">Rs.{treatment.price}</span>
-          </div>
+          </div> */}
           {/* book now button */}
           <div className="mt-4">
             <Link

@@ -162,7 +162,7 @@ function CashierTable() {
     }, 0);
     const totalInvoices = reqData.length;
     //
-    const additionalInfo1 = `Total Income: Rs.${totalIncome}/=, Total Invoices: ${totalInvoices}`;
+    //const additionalInfo = `Total Income: Rs.${totalIncome}/=, Total Invoices: ${totalInvoices}`;
     //
     // column names
     reqData.forEach((item) => {
@@ -173,7 +173,7 @@ function CashierTable() {
     });
     //
     generatePDF(
-      additionalInfo1,
+      "",//additionalInfo,
       ["Patient Name", "Doctor Name", "Treatment Name", "Total"],
       
       reqData,
@@ -304,6 +304,7 @@ function CashierTable() {
               title="Discount"
               dataIndex="discount" 
               key="discount" />
+              
 
               <Column
               className="bg-blue-100"

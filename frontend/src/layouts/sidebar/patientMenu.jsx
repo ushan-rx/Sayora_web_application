@@ -9,6 +9,10 @@ import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
 import { GiMedicines } from "react-icons/gi";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { RiHealthBookLine } from "react-icons/ri";
+import { GiHealing } from "react-icons/gi";
+import { BiPurchaseTag } from "react-icons/bi";
 
 function PatientMenu() {
   const path = "/patient";
@@ -18,10 +22,9 @@ function PatientMenu() {
     {
       name: "treatments", //display name
       path: "/patient/treatments", // main path
-      icon: RiBuilding3Line,
+      icon: GiHealing,
       menus: [
         { subName: "my tretments", subPath: "mytretments" },
-        { subName: "new schedule", subPath: "newshedule" },
       ],
     },
 
@@ -54,16 +57,16 @@ function PatientMenu() {
         </NavLink>
       </li>
 
-      <li>
+      {/* <li>
         <NavLink to={path + "/appoinmet_path"} className="link">
           <HiOutlineDatabase size={23} className="min-w-max" />
           Appoinments
         </NavLink>
-      </li>
+      </li> */}
 
       <li>
         <NavLink to={path + "/requesition"} className="link">
-          <HiOutlineDatabase size={23} className="min-w-max" />
+          <VscGitPullRequestGoToChanges size={23} className="min-w-max" />
           Requesition
         </NavLink>
       </li>
@@ -77,7 +80,7 @@ function PatientMenu() {
 
       <li>
         <NavLink to={path + "/purchase"} className="link">
-          <GiMedicines size={23} className="min-w-max" />
+          <BiPurchaseTag size={23} className="min-w-max" />
           Purchase History
         </NavLink>
       </li>

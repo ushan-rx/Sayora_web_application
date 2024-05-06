@@ -11,6 +11,7 @@ import { RiBuilding3Line } from "react-icons/ri";
 
 import { FaNotesMedical } from "react-icons/fa";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import {FaAddressBook} from "react-icons/fa";
 
 
 function DoctorMenu() {
@@ -27,6 +28,17 @@ function DoctorMenu() {
             // {subName: "sub 1.2", subPath: "/sub1.2"},
           ],
         },
+
+        {
+            name: "Bookings",
+            path: "/doctor",
+            icon: FaAddressBook,
+            menus: [
+              {subName: "View Bookings", subPath: "serviceDoctorView"},
+            ],
+          },
+
+
 
         // {
         //   name: "Sub Topic 2",    
@@ -55,6 +67,8 @@ function DoctorMenu() {
                 Examination
             </NavLink>
         </li>
+
+        
         {/* <li>
             <NavLink to={path + "/stroage"} className="link">
                 <HiOutlineDatabase size={23} className="min-w-max" />

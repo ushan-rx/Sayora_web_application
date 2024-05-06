@@ -108,13 +108,12 @@ const ManageBookings = () => {
     const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
     return (
       formattedDate.includes(searchTerm) ||
-      booking.bookingId.includes(searchTerm) ||
-      booking.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    
-      booking.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      
-      booking.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.venue.toLowerCase().includes(searchTerm.toLowerCase()) 
+      booking.bookingId?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      booking.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.email?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.organizationName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.venue?.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
   });
 
@@ -175,7 +174,7 @@ const ManageBookings = () => {
             <button onClick={() => handleDelete(booking._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Delete</button>
               {/* <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">Confirm</button> */}
             
-              <button onClick={() => navigate('/doctor/emailView')} className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded m-2">Discuss</button>
+              <button onClick={() => navigate('/doctor/emailView', { state: { email: booking.email } })} className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded m-2">Discuss</button>
             </div>
             {isUpdating && currentBooking._id === booking._id && <UpdateForm booking={booking} onUpdate={handleUpdate} />}
           </td>

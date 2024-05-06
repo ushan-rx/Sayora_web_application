@@ -104,14 +104,14 @@ const ManageBookings = () => {
     const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
     return (
       formattedDate.includes(searchTerm) ||
-      booking.bookingId.includes(searchTerm) ||
-      booking.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.nic.includes(searchTerm)|| 
-      booking.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.phoneNumber01.includes(searchTerm) || 
-      booking.phoneNumber02.includes(searchTerm) || 
-      booking.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      booking.venue.toLowerCase().includes(searchTerm.toLowerCase()) 
+      booking.bookingId?.includes(searchTerm) ||
+      booking.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.nic?.includes(searchTerm)|| 
+      booking.email?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.phoneNumber01?.includes(searchTerm) || 
+      booking.phoneNumber02?.includes(searchTerm) || 
+      booking.organizationName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      booking.venue?.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
   });
 

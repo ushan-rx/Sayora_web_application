@@ -19,7 +19,8 @@ function treatmentHistoryTable() {
             try {
                 const response = await axios.get(`http://localhost:5000/api/v1/treatmentHistory/patient/${patientId}`);
                 const data = response.data.tHistory;
-                const tHistory = data.map((item) => {
+                const filteredData = data.filter((item) => item.isComplete == true);
+                const tHistory = filteredData.map((item) => {
                     return {
                         date: item.date,
                         treatment: item.treatment?.name,

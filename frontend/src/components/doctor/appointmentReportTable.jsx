@@ -28,12 +28,13 @@ import {
 } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Separator } from "../ui/separator";
 
 import { RxCross2 } from "react-icons/rx";
 
 import { DataTablePagination } from "../shared/advanceTable/data-table-pagination"
 
-export default function treatmentReportTable({columns, data, filterColumn}) {
+export default function treatmentReportTable({columns, data, filterColumn, reportData}) {
 
   const [columnFilters, setColumnFilters] = React.useState([])
 
@@ -110,10 +111,40 @@ export default function treatmentReportTable({columns, data, filterColumn}) {
                 <style>{`@page { margin: 6rem 2rem 2rem 2rem !important; }`}</style>
                 {/* decerative section with title only visibke in report pdf */}
                 <div className="hidden" id="reportHeader"> 
-                <div className="font-bold bg-teal-100 text-center my-6 p-2">
-                    Appointment Report
+                <div className="font-bold bg-teal-50 w-full text-center my-6 p-2">
+                  <span className="w-full">Appointments Report</span>
+
+                  <div className="w-full font-normal text-left mt-4 ml-4">
+                    { reportData.doctor && 
+                      <p className="text-sm">Doctor: {reportData.doctor}</p>
+                    }
+                    {
+                      reportData.date &&
+                      <p className="text-sm">Date: { reportData.date}</p>
+                    }
+                    
+                    {
+                      reportData.totalAppointments != '' &&(
+                        <p className="text-sm">Total Appointments: {reportData.totalAppointments}</p>
+                        )
+                    }
+                    {
+                      reportData.totalCompleted != '' && (
+                        <p className="text-sm">Completed Appointments: {reportData.totalCompleted}</p>
+                      )
+                    }
+                    {
+                      reportData.totalCanceled != '' &&
+                        <p className="text-sm">Cancelled Appointments: {reportData.totalCanceled}</p>
+                    }
+                    {
+                      reportData.earnings != '' &&(
+                      <p className="text-sm">Total Earnings: {'Rs.' + reportData.earnings}</p>
+                      )
+                    }
+                  </div>
                 </div>  
-                </div>   
+                </div>
                 
                 <Table className="rounded-md border" >
                     <TableHeader className="border-y-2 bg-slate-200">

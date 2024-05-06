@@ -12,7 +12,7 @@ async function findID(accNo){
 
 function generateID() {
 
-    let chars = '00001'; // Characters to use for ID
+    let chars = '63021'; // Characters to use for ID
     let accID = 'IOR';
     for (let i = 0; i < 5; i++) { 
       accID += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -30,12 +30,14 @@ function generateID() {
   }
 
 //Add inventory order
-async function addOrder(SupplierID, ItemArray){
+async function addOrder(SupplierID, ItemArray, OrderTotal){
+    console.log(SupplierID, ItemArray, OrderTotal);
     const OrderID = generateID();
     const newOrder = new OrderModel({
         OrderID,
         SupplierID,
-        ItemArray
+        ItemArray,
+        OrderTotal
     });
     await newOrder.save();
     return newOrder;

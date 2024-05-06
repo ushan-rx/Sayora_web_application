@@ -14,6 +14,16 @@ import { FaUserInjured } from "react-icons/fa";
 import { ImAirplane } from "react-icons/im";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { FaFileInvoice } from "react-icons/fa6";
+import { FaShoppingBag } from "react-icons/fa";
+import { AiFillMedicineBox } from "react-icons/ai";
+import { FaCartShopping } from "react-icons/fa6";
+
+import {FaAddressBook} from "react-icons/fa";
+
+import { MdWarehouse } from "react-icons/md";
+
+
 
 function staffMenu() {
   const path = "/staff";
@@ -21,8 +31,8 @@ function staffMenu() {
   // items with sub menus
   const subMenusList = [
     {
-        name: "ManageStaff",           //display name
-        path: "/manage",          // main path
+        name: "Manage Staff",           //display name
+        path: "/staff/managestaff",          // main path
         icon: FaUserTie,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -33,8 +43,8 @@ function staffMenu() {
       },
 
       {
-        name: "ManageDoctor",           //display name
-        path: "/managedoctor",          // main path
+        name: "Manage Doctor",           //display name
+        path: "/staff/managedoctor",          // main path
         icon: FaUserDoctor,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -45,8 +55,8 @@ function staffMenu() {
       },
 
       {
-        name: "ManagePatients",           //display name
-        path: "/managepatient",          // main path
+        name: "Manage Patients",           //display name
+        path: "/staff/managepatients",          // main path
         icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -57,9 +67,9 @@ function staffMenu() {
       },
 
       {
-        name: "ManageLeaves",           //display name
-        path: "/manageleaves",          // main path
-        icon: ImAirplane,
+        name: "Manage Leaves",           //display name
+        path: "/staff/manageleaves",          // main path
+        icon: FaShoppingBag,
         menus: [
           {subName: "Overview", subPath: "overview"},
           
@@ -69,8 +79,8 @@ function staffMenu() {
       },
 
       {
-        name: "StaffProfile",           //display name
-        path: "/manageleaves",          // main path
+        name: "Staff Profile",           //display name
+        path: "/staff/staffprofile",          // main path
         icon: FaUser,
         menus: [
           {subName: "Overview", subPath: "overview"},
@@ -84,8 +94,8 @@ function staffMenu() {
       //kaumal
       {
         name: "Treatment",           //display name
-        path: "/treatment",          // main path
-        icon: FaUserInjured,
+        path: "/staff/treatment",          // main path
+        icon: AiFillMedicineBox,
         menus: [
           {subName: "Add Treatmenet", subPath: "addTreat"},
           {subName: "Manage Treatment", subPath: "viewTreat"},
@@ -93,10 +103,26 @@ function staffMenu() {
         ],
 
       },
+
+      {
+        name: "service",           //display name
+        path: "/staff",          // main path
+        icon: FaAddressBook,
+        menus: [
+          {subName: "View", subPath: "service/viewBookedServices"},
+          {subName: "Add", subPath: "addServices"},
+          
+        ],
+
+        
+      },
+
+
+
       {
         name: "Cashier",           //display name
-        path: "/cashier",          // main path
-        icon: FaUserInjured,
+        path: "/staff/cashier",          // main path
+        icon: FaFileInvoice,
         menus: [
           {subName: "Invoice", subPath: "cashier"},
           {subName: "Manage Invoice", subPath: "viewCash"},
@@ -105,8 +131,49 @@ function staffMenu() {
 
       },
 
-       //kaumal
-      
+      {
+        name: "Manage Inventory",           //display name
+        path: "/staff/inventory",          // main path
+        icon: MdWarehouse,
+        menus: [
+          {subName: "Overview", subPath: "overview"},
+          {subName: "Orders", subPath: "orders"},
+          {subName: "Suppliers", subPath: "suppliers"},
+          {subName: "Inventory", subPath: "view"},
+          
+        ],
+
+      },
+
+
+      {
+        name: "Product",    
+        path: "/staff/product",    
+        icon: FaCartShopping,
+        menus: [
+          {subName: "Product List", subPath: "viewProduct"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "Orders", subPath: "adminOrder"},
+         
+          
+        ],
+      },
+
+      {
+        name: "Appointments",    
+        path: "/staff/appointment",    
+        icon: FaCartShopping,
+        menus: [
+          {subName: "Add Schedule Time", subPath: "addtime"},
+          // {subName: "Add products", subPath: "add"},  //sub menu diplay name and path(dont add / before path)
+          // {subName: "Update products", subPath: "viewproduct/product/update-product"},
+          {subName: "View Appointments", subPath: "view"},
+          {subName: "Appointment Times", subPath: "time"},
+         
+          
+        ],
+      },
   ];
 
 

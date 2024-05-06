@@ -18,7 +18,6 @@ function treatmentHistoryTable() {
             
             try {
                 const response = await axios.get(`http://localhost:5000/api/v1/treatmentHistory/patient/${patientId}`);
-                console.log(response.data);
                 const data = response.data.tHistory;
                 const tHistory = data.map((item) => {
                     return {

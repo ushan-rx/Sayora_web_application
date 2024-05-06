@@ -8,6 +8,7 @@ import { BsPerson } from "react-icons/bs";
 import { HiOutlineDatabase } from "react-icons/hi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
+import { GiMedicines } from "react-icons/gi";
 
 function PatientMenu() {
   const path = "/patient";
@@ -16,7 +17,7 @@ function PatientMenu() {
   const subMenusList = [
     {
       name: "treatments", //display name
-      path: "/treatments", // main path
+      path: "/patient/treatments", // main path
       icon: RiBuilding3Line,
       menus: [
         { subName: "my tretments", subPath: "mytretments" },
@@ -25,8 +26,8 @@ function PatientMenu() {
     },
 
     {
-      name: "myrecords",
-      path: "/myrecords",
+      name: "My records",
+      path: "/patient/myrecords",
       icon: TbReportAnalytics,
       menus: [
         { subName: "test reports", subPath: "reportpatient" }, //sub menu diplay name and path(dont add / before path)
@@ -67,6 +68,23 @@ function PatientMenu() {
         </NavLink>
       </li>
 
+      <li>
+        <NavLink to={path + "/product"} className="link">
+          <GiMedicines size={23} className="min-w-max" />
+          Ayurvedic Products
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink to={path + "/purchase"} className="link">
+          <GiMedicines size={23} className="min-w-max" />
+          Purchase History
+        </NavLink>
+      </li>
+
+     
+
+      
       {/* attach sub menu items  */}
       <div name="submenu-items">
         {subMenusList?.map((menu) => (

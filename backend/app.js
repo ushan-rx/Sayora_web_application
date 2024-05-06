@@ -38,21 +38,26 @@ const treatmentHistory = require('./routes/treatmentHistory.route.js')
 const reportRoute = require('./routes/report.route');
 
 const productRouter = require('./routes/Product.route');
-
+const ProductOrderRouter = require('./routes/ProductOrder.route');
 const supplierRouter = require('./routes/Supplier.route');
 const itemRouter = require('./routes/Inventory_Item.route');
 const orderRouter = require('./routes/Inventory_Order.route');
 
 const appoinmentRouter = require('./routes/Appointment.route');
 const doctorTimeRouter = require('./routes/DoctorTime.route'); //doctor times are available here.
-
+const emailRouter = require('./routes/email.route.js');
 
 const staffRoute = require('./routes/staff.route.js');
 const tempUserRoute = require('./routes/tempUser.route.js');
 const StaffLeavesRoute = require('./routes/staffLeaves.route.js');
 
-const cashierRoutes  = require('./routes/cashierRoutes.js')
+const staffAuthRoute = require('./routes/staffAuthRoutes');
+const userRoute = require('./routes/user.route.js');
+const cashierRoutes = require('./routes/cashierRoutes.js')
 const treatmentRoutes = require('./routes/treatment.js')
+
+const regularPatientRoute = require('./routes/regularPatient.route.js');
+const doctorNoteRoute = require('./routes/notes.route.js');
 
 
 //use route
@@ -72,13 +77,13 @@ app.use('/api/v1/prescription', PrescriptionRouter);
 app.use('/doctortime' ,doctorTimeRouter);
 
 app.use(productRouter);
-
+app.use(ProductOrderRouter);
 app.use(supplierRouter);
 app.use(itemRouter);
-app.use('/Inventory' , orderRouter);
+app.use('/Inventory', orderRouter);
 
 app.use(appoinmentRouter);
-app.use('/doctortime' ,doctorTimeRouter);
+app.use('/doctortime', doctorTimeRouter);
 app.use('/cashier', cashierRoutes);
 app.use('/treatment', treatmentRoutes);
 
@@ -86,6 +91,15 @@ app.use('/api/v1/staff', staffRoute);
 app.use('/staff/leaves', StaffLeavesRoute);
 app.use('/api/v1/add-user', tempUserRoute);
 
+app.use('/api/v1/staffAuth', staffAuthRoute);
+
+app.use('/api/v1/user', userRoute);
+app.use('/api/v1/regularPatient', regularPatientRoute);
+app.use('/api/v1/doctorNote', doctorNoteRoute);
+
+app.use('/api/v1/user', userRoute);
+
+app.use('/api/v1/email_handle', emailRouter);
 
 const NotFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -101,4 +115,3 @@ const start = async() => {
 
 // Start the server
 start();
-

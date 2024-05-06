@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { ScrollArea } from "@/components/ui/scroll-area"
+
 
 
 function Cashier() {
@@ -13,9 +15,10 @@ function Cashier() {
     const [docName, setDocName] = useState(''); 
     const [docFee, setDocFee] = useState('');
     const [treatmentFee, setTreatmentFee] = useState('');
-    const [discount, setDiscount] = useState('');
+    const [discount, setDiscount] = useState('0');
     const [total, setTotal] = useState('');
     const [isTotalCalculated, setIsTotalCalculated] = useState(false);
+    
 
     const handleOnBlur = async() => {
     
@@ -25,8 +28,8 @@ function Cashier() {
     if(appointments.data.length > 0){
         for (let i = 0; i < appointments.data.length; i++) {
         const appontmentDate = appointments.data[i].App_date
-        const appDate = new Date(appontmentDate).toISOString().split('T')[0]
-        const date = new Date().toISOString().split('T')[0]
+        const appDate = new Date(appontmentDate).toLocaleDateString()
+        const date = new Date().toLocaleDateString()
         //--console.log(appDate)
         console.log(date)
         //Get relevant appointment details  
@@ -79,7 +82,10 @@ function Cashier() {
 
     }else {
         console.log("No appointments found")
+        alert("No appointments found")
     }
+
+    
 }
     
 
@@ -106,85 +112,108 @@ function Cashier() {
         };
 
         try {
-            axios.post("http://localhost:5000/cashier/", usersData)
-            .then(res => {
-                toast.success('Cashier added');
-                console.log('Cashier added');
-            
-            }).catch(err => {
-                toast.error(err.message);
-                console.log(err.message);
-            })
+            const response = await axios.post("http://localhost:5000/cashier/", usersData);
+            if (response.status === 200) {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cashier added',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log('Payment added');
+            } else {
+                throw new Error('Network response was not ok');
+            }
         } catch (error) {
-            toast.error(error.message);
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Error adding payment',
+                text: error.message,
+                showConfirmButton: true,
+            });
             console.error(error);
         }
     };
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const resetForm = () => {
+        // Reset the form fields
+        setpatientMobile('');
+        setPatientId('');
+        setPatientName('');
+        setTreatmentName('');
+        setDocName('');
+        setDocFee('');
+        setTreatmentFee('');
+        setDiscount('');
+        setTotal('');
+        setIsTotalCalculated(false);
+        // Hide the form fields
+        setIsSubmitted(false);
+    };
 
     return (
-<div>
-<form
-    className="border-2 border-[#16ACBD] w-full max-w-lg mx-auto rounded-lg text-center p-6 mt-5 mb-20 space-y-6"
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <form 
+    className="w-full max-w-sm px-4 py-4 space-y-2 overflow-y-auto transition-all duration-500 ease-in-out bg-white shadow-2xl mb-14 rounded-xl"
     noValidate
     autoComplete="off"
     onSubmit={(e) => {
         e.preventDefault();
+        // Validate mobile number
+        const mobileNumberPattern = /^[0-9]{10}$/; 
+        if (!mobileNumberPattern.test(patientMobile)) {
+            alert('Invalid mobile number'); 
+            return;
+        }
         handleOnBlur();
+        setIsSubmitted(true);
     }}
 >
-    <div className="flex items-center justify-center">
-        <h2 className="mb-4 text-xl font-semibold text-gray-800">Sayora Wellness Center</h2>
-    </div>
-    <div className="mb-4">
-        <label htmlFor="patientMobile" className="block mb-1 text-sm font-semibold text-gray-700">Patient Mobile Num</label>
-        <input
-            id="patientMobile"
-            type="text"
-            value={patientMobile}
-            onChange={(e) => setpatientMobile(e.target.value)}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-    </div>
-    <button type="submit" className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-        Submit
-    </button>
-    <div className="mb-4">
-        <label htmlFor="patientName" className="block mb-1 text-sm font-semibold text-gray-700">Patient Name</label>
-        <input
-            id="patientName"
-            type="text"
-            value={patientName}
-            onChange={(e) => setTreatmentFee(e.target.value)}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-    </div>
+                <div className="flex items-center justify-center">
+                    <h2 className="mb-4 text-2xl font-semibold text-gray-800">Sayora Wellness Center</h2>
+                </div>
+                {!isSubmitted && (
+                    <>
+                        <div className="mb-4">
+                            <label htmlFor="patientMobile" className="block mb-1 text-sm font-semibold text-gray-700">Patient Mobile Num</label>
+                            <input
+                                id="patientMobile"
+                                type="text"
+                                value={patientMobile}
+                                onChange={(e) => setpatientMobile(e.target.value)}
+                                required
+                                className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            />
+                        </div>
+                        <button type="submit" className="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700">
+                            Submit
+                        </button>
+                    </>
+                )}
 
+            <div className="mb-4">
+                <label htmlFor="patientName" className="block mb-1 text-sm font-semibold text-gray-700">Patient Name</label>
+                <p id="patientName" className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    {patientName}
+                </p>
+            </div>
 
-    <div className="mb-4">
-        <label htmlFor="docFee" className="block mb-1 text-sm font-semibold text-gray-700">Doctor Fee</label>
-        <input
-            id="docFee"
-            type="text"
-            value={docFee}
-            onChange={(e) => setDocFee(e.target.value)}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-    </div>
+            <div className="mb-4">
+                <label htmlFor="docFee" className="block mb-1 text-sm font-semibold text-gray-700">Doctor Fee</label>
+                <p id="docFee" className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    {docFee}
+                </p>
+            </div>
 
-    <div className="mb-4">
-        <label htmlFor="treatmentFee" className="block mb-1 text-sm font-semibold text-gray-700">Treatment Fee</label>
-        <input
-            id="treatmentFee"
-            type="text"
-            value={treatmentFee}
-            onChange={(e) => setTreatmentFee(e.target.value)}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-    </div>
+            <div className="mb-4">
+                <label htmlFor="treatmentFee" className="block mb-1 text-sm font-semibold text-gray-700">Treatment Fee</label>
+                <p id="treatmentFee" className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    {treatmentFee}
+                </p>
+            </div>
 {/* --- */}         
     
     <div className="hidden mb-4">
@@ -258,38 +287,35 @@ function Cashier() {
             Calculate Total
         </button>
     )}
+ {isSubmitted && isTotalCalculated && ( 
+            <>
+                <div className="mb-4">
+                    <label htmlFor="total" className="block mb-1 text-sm font-semibold text-gray-700">Total</label>
+                    <input
+                        id="total"
+                        type="text"
+                        value={total}
+                        readOnly
+                        className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                </div>
 
-    {isTotalCalculated && ( 
-        <>
-            <div className="mb-4">
-                <label htmlFor="total" className="block mb-1 text-sm font-semibold text-gray-700">Total</label>
-                <input
-                    id="total"
-                    type="text"
-                    value={total}
-                    readOnly
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-            </div>
+               <div className="flex justify-between space-x-4">
+    <Link to="/staff/Cashier/viewCash" className="flex-1 px-4 py-2 font-semibold text-white bg-green-600 rounded-md hover:bg-green-700" onClick={insertUsersData}>Add Payment</Link>
 
-            {/* Use Link instead of submit button */}
-            <Link to="/viewCash" className="w-full px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-700" onClick={insertUsersData}>Add</Link>
-
-            <button
-                className="w-full px-4 py-2 mt-4 font-semibold text-white bg-red-500 rounded-md hover:bg-red-700"
-                type="button"
-            >
-                Cancel
-            </button>
-        </>
-    )}
-/</form>
-
+    <button
+        className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700"
+        type="button"
+        onClick={resetForm}
+    >
+        Cancel
+    </button>
 </div>
-
-
-
-    );
+                </>
+            )}
+        </form>
+    </div>
+);
 }
 
 export default Cashier;

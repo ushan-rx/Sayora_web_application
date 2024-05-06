@@ -1,4 +1,5 @@
 const AppointmentModel = require('../models/Appoinment')
+const mail = require('./SendEmail')
 
 async function findID(accNo){
     const existinAccount = await AppointmentModel.findOne({App_Id:accNo});
@@ -11,7 +12,7 @@ async function findID(accNo){
 
 function generateID() {
 
-    let chars = '1000'; // Characters to use for ID
+    let chars = '1234'; // Characters to use for ID
     let accID = 'app';
     for (let i = 0; i < 4; i++) { 
       accID += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -30,7 +31,7 @@ function generateID() {
   }
 
 
-async function addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail, patientId){
+async function addAppoinment(App_date , App_time , App_reason , doctorID , patientName , patientAddress , patientContact , patientGender , patientemail){
     const App_Id = generateID();
     const newAppoinment = new AppointmentModel({
         App_Id,
@@ -43,7 +44,6 @@ async function addAppoinment(App_date , App_time , App_reason , doctorID , patie
         patientContact,
         patientGender,
         patientemail,
-        patientId,         // newly added
     });
     await newAppoinment.save();
     return newAppoinment;
@@ -58,6 +58,15 @@ async function getAppoinmentByID(id){
 }
 
 async function updateAppoinment(status, id){
+
+        const data = await AppointmentModel.findOne({App_Id: id});
+        const emailAdd = data.patientemail;
+        try{
+          mail.sendmail(emailAdd , "Appoinment Status Updated" , `Your Appoinment Status has been updated to ${status}. Thank you for connecting with us.` );
+        }catch(err){
+          console.log(err);
+        }
+        
         await AppointmentModel.findOneAndUpdate({App_Id: id}, {status});
         return AppointmentModel.findOne({App_Id: id});
 }

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import awarenessSession from "./awarenessSession.png";
-import physicalTraining from "./physicalTraining.png";
 import homeVisits from "./homeVisits.png";
 
 
@@ -11,11 +10,17 @@ const navigateToAwarenessProgramHome = () => {
   navigate("/awarenessProgramHome");
 
   };
+
+
+  const navigateToHomeVisits = () => {
+    navigate("/homeVisits");
+
+    };
   
 
   return (
-    <div className="relative">
-    <div className=" flex flex-col md:flex-row items-center justify-center h-screen space-y-6 md:space-y-0 md:space-x-6">
+    <div className="my-16 mt-[20vh]">
+    <div className=" flex flex-col md:flex-row  justify-center  space-y-6 md:space-y-0 md:space-x-6">
       <div className="bg-blue-50 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-200 w-full md:w-1/4 hover:shadow-lg transition duration-200">
         <img src={awarenessSession} alt="Awareness" className="mx-auto"/>
         <h2 className="text-xl font-bold text-center mt-4">Awareness Programs</h2>
@@ -26,7 +31,7 @@ const navigateToAwarenessProgramHome = () => {
           Navigate
         </button>
       </div>
-      <div className="bg-blue-100 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-300 w-full md:w-1/4 hover:shadow-lg transition duration-200">
+      {/* <div className="bg-blue-100 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-300 w-full md:w-1/4 hover:shadow-lg transition duration-200">
         <img src={physicalTraining} alt="Card 2" className="mx-auto"/>
         <h2 className="text-xl font-bold text-center mt-4">Physical Training Programs</h2>
         <p className="text-sm md:text-base text-center mt-2">
@@ -35,14 +40,14 @@ const navigateToAwarenessProgramHome = () => {
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mx-auto block">
           Navigate
         </button>
-      </div>
-      <div className="bg-blue-200 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-400 w-full md:w-1/4 hover:shadow-lg transition duration-200">
+      </div> */}
+      <div className="bg-blue-50 hover:bg-blue-300 p-6 rounded-lg shadow-md border-2 border-blue-200 w-full md:w-1/4 hover:shadow-lg transition duration-200">
         <img src={homeVisits} alt="Card 3" className="mx-auto"/>
         <h2 className="text-xl font-bold text-center mt-4">Home Visits</h2>
         <p className="text-sm md:text-base text-center mt-2">
-        Home Home visits service offers personalized healthcare assistance in the comfort of one's own residence. A qualified healthcare professional conducts comprehensive assessments, administers treatments, and provides medical care tailored to the individual's needs. This convenient service ensures continuity of care for those unable to visit a medical facility, promoting comfort and convenience. With a focus on patient comfort and convenience, home visits service brings quality healthcare directly.
+        Home visits service offers personalized healthcare assistance in the comfort of one's own residence. A qualified healthcare professional conducts comprehensive assessments, administers treatments, and provides medical care tailored to the individual's needs. This convenient service ensures continuity of care for those unable to visit a medical facility, promoting comfort and convenience. With a focus on patient comfort and convenience, home visits service brings quality healthcare directly.
         </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mx-auto block">
+        <button onClick={navigateToHomeVisits} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mx-auto block">
           Navigate
         </button>
       </div>

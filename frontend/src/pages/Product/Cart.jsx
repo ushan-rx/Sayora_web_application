@@ -11,7 +11,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems]  = useState(location.state.cartItems || { cartItems: [] });
   console.log(cartItems);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState();
   const [customerDetails, setCustomerDetails] = useState({
     CustomerName: '',
     CustomerEmail: '',
@@ -40,8 +40,8 @@ const Cart = () => {
       currentItems.map(item => {
         if (item.Product_ID === itemID) {
           // Ensure quantity is a number and add delta. If quantity is undefined or null, default to 0 before adding.
-          const updatedQuantity = (item.quantity ? parseInt(item.quantity, 10) : 0) + delta;
-          return { ...item, quantity: Math.max(0, updatedQuantity) }; // Prevent negative quantities
+          const updatedQuantity = (item.quantity ? parseInt(item.quantity, 10) : 1) + delta;
+          return { ...item, quantity: Math.max(1, updatedQuantity) }; // Prevent negative quantities
         }
         return item;
       })
@@ -86,7 +86,8 @@ const Cart = () => {
       CustomerAddress: customerAddress,
       ProductArray: cartItems.map(item => ({
         productId: item.Product_ID,
-        productName: item.productName
+        productName: item.productName,
+        productQuantity:item.quantity
       }))
     };
 

@@ -39,41 +39,40 @@ const ProductOrdersTable = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
+    // Centering the title on the page
+    const title = 'Order Report';
+    const pageWidth = doc.internal.pageSize.width;
+    const txtWidth = doc.getStringUnitWidth(title) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+    const x = (pageWidth - txtWidth) / 2;
+    doc.setFontSize(18); // Set title font size
+    doc.text(title, x, 20); // Adjust y coordinate for spacing
 
-// Centering the title on the page
-const title = 'Order Report';
-const pageWidth = doc.internal.pageSize.width;
-const txtWidth = doc.getStringUnitWidth(title) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-const x = (pageWidth - txtWidth) / 2;
-doc.setFontSize(18); // Set title font size
-doc.text(title, x, 20); // Adjust y coordinate for spacing
+    doc.autoTable({
+      startY: 40, // Start Y coordinate for the table, adjust for title spacing
+      theme: 'grid',
+      headStyles: { fillColor: [76, 188, 210], textColor: 255, fontStyle: 'bold' }, // Header style
+      bodyStyles: { textColor: 50 }, // Body text color
+      alternateRowStyles: { fillColor: 245 }, // Alternate row color
+      head: [['Order ID', 'Date', 'Ordered Products', 'Quantity', 'Total', 'Status']], // Added 'Quantity' header
+      body: filteredOrders.map(order => [
+        order.ProductOrder_ID,
+        { content: new Date(order.OrderDate).toLocaleDateString(), fontStyle: 'italic' }, // Date in italic
+        { content: order.ProductArray.map(product => product.productName).join(', '), fontStyle: 'bold' }, // Products in bold
+        { content: order.ProductArray.map(product => product.productQuantity || 1).join(', ') }, // Displaying quantities
+        { content: `$${order.Total_price}`, fontStyle: 'bold' }, // Total in bold
+        order.status
+      ]),
+      styles: { fontSize: 10, cellPadding: 4, overflow: 'linebreak' }, // Common cell styles
+      columnStyles: { text: { cellWidth: 'auto' } } // Auto adjust column width
+    });
 
-doc.autoTable({
-  startY: 40, // Start Y coordinate for the table, adjust for title spacing
-  theme: 'grid',
-  headStyles: { fillColor: [76, 188, 210], textColor: 255, fontStyle: 'bold' }, // Header style
-  bodyStyles: { textColor: 50 }, // Body text color
-  alternateRowStyles: { fillColor: 245 }, // Alternate row color
-  head: [['Order ID', 'Date', 'Ordered Products', 'Total', 'Status']],
-  body: filteredOrders.map(order => [
-    order.ProductOrder_ID,
-    { content: new Date(order.OrderDate).toLocaleDateString(), fontStyle: 'italic' }, // Date in italic
-    { content: order.ProductArray.map(product => product.productName).join(', '), fontStyle: 'bold' }, // Products in bold
-    { content: `$${order.Total_price}`, fontStyle: 'bold' }, // Total in bold
-    order.status
-  ]),
-  styles: { fontSize: 10, cellPadding: 4, overflow: 'linebreak' }, // Common cell styles
-  columnStyles: { text: { cellWidth: 'auto' } } // Auto adjust column width
-});
-
-doc.save('Orders_report.pdf');
-
+    doc.save('Orders_report.pdf');
   };
 
   const getStatusStyle = (status) => {
     return statusStyles[status] || 'bg-cyan-500';
-  }; 
-  
+  };
+
   const statusStyles = {
     'Pending': 'bg-yellow-300',
     'Processing': 'bg-blue-800',
@@ -121,6 +120,7 @@ doc.save('Orders_report.pdf');
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Order ID</th>
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Date</th>
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Ordered Products</th>
+                <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Quantity</th> {/* New column for Quantity */}
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Total</th>
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Status</th>
                 <th className="text-left py-3 px-4 border border-cyan-300 uppercase font-semibold text-sm">Actions</th>
@@ -133,6 +133,9 @@ doc.save('Orders_report.pdf');
                   <td className="text-left py-3 px-4 border border-cyan-300">{new Date(order.OrderDate).toLocaleDateString()}</td>
                   <td className="text-left py-3 px-4 border border-cyan-300">
                     {order.ProductArray.map(product => product.productName).join(', ')}
+                  </td>
+                  <td className="text-left py-3 px-4 border border-cyan-300">
+                    {order.ProductArray.map(product => `${product.productName} (${product.productQuantity || 1})`).join(', ')}
                   </td>
                   <td className="text-left py-3 px-4 border border-cyan-300">${order.Total_price}</td>
                   <td className="text-left py-3 px-4 border border-cyan-300">

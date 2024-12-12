@@ -82,10 +82,10 @@ const Sidebar = ({role}) => {
 
 
   return (
-    <div className="fixed">
+    <div className="fixed md:relative">
       <div
         onClick={() => setOpen(false)}
-        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
+        className={`md:hidden fixed inset-0 max-h-screen z-[40] bg-black/50 ${
           open ? "block" : "hidden"
         } `}
       ></div>
@@ -94,7 +94,7 @@ const Sidebar = ({role}) => {
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className=" bg-[#e0eff1] text-[#324054] shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
+        className=" bg-[#e0eff1] text-[#324054] shadow-xl z-[50] max-w-[16rem]  w-[16rem] 
             overflow-hidden md:relative fixed
          h-screen "
       >
@@ -104,7 +104,7 @@ const Sidebar = ({role}) => {
             width={45}
             alt=""
           />
-          <span className="text-xl whitespace-pre"> Sayora Web</span>
+          {/* <span className="text-xl whitespace-pre"> Sayora Web</span> */}
         </div>
 
         <div className="flex flex-col h-full">
@@ -121,12 +121,12 @@ const Sidebar = ({role}) => {
           }
 
             {/* common navigation items */} 
-              <li>
+              {/* <li>
                 <NavLink to={"/settings"} className="link">
                   <SlSettings size={23} className="min-w-max" />
-                  Topic 4
+                  Settings
                 </NavLink>
-              </li>
+              </li> */}
 
         </ul>
           {open && (
@@ -136,7 +136,7 @@ const Sidebar = ({role}) => {
                   <p>Lorem</p>
                   <small>Lrem ipsum</small>
                 </div> */}
-                <button className="text-teal-500 py-1.5 px-3 text-xs bg-teal-50 rounded-xl"
+                <button className="text-white ml-4 py-1.5 px-3 text-md bg-red-500 rounded-xl"
                 onClick={() => {logOutBtn()}}
                 >
                   Logout

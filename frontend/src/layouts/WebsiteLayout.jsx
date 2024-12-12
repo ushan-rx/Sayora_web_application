@@ -11,7 +11,7 @@ function WebsiteLayout(){
 
     return(
         <div className="flex">
-            <main className="flex-1 py-0 mx-auto max-w-8xl">
+            <main className="flex-1 py-0 mx-auto overflow-scroll h-screen max-w-8xl">
             <Navbar/>
             <Outlet/>
             <Footer/>

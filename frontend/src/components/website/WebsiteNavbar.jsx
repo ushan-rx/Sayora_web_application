@@ -8,8 +8,10 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
 	{ name: "Home", href: "home" },
 	{ name: "Appointments", href: "/appointment" },
-	{ name: "Marketplace", href: "#" },
+	// { name: "Marketplace", href: "#" },
+  { name: "Treatments", href: "/treatments" },
 	{ name: "Services", href: "/service" },
+  
 ];
 
 
@@ -18,7 +20,7 @@ function websiteNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="absolute inset-x-0 top-0 z-50 backdrop-blur-2xl bg-white/10">
     <nav
       className="flex items-center justify-between p-6 lg:px-8"
       aria-label="Global"
@@ -30,7 +32,7 @@ function websiteNavbar() {
         >
           <span className="sr-only">sayora wellness center</span>
           <img
-            className="h-14 w-auto"
+            className="w-auto h-14"
             src="https://sayora.lk/wp-content/uploads/2023/04/SAYORA-LOGO-NEW.png"
             alt=""
           />
@@ -44,7 +46,7 @@ function websiteNavbar() {
         >
           <span className="sr-only">Open main menu</span>
           <Bars3Icon
-            className="h-6 w-6"
+            className="w-6 h-6"
             aria-hidden="true"
           />
         </button>
@@ -61,7 +63,7 @@ function websiteNavbar() {
         ))}
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 rounded-lg">
+        <button className="px-4 font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-500">
           <NavLink
             to="/login"
             className="text-sm font-semibold leading-9"
@@ -79,7 +81,7 @@ function websiteNavbar() {
       onClose={setMobileMenuOpen}
     >
       <div className="fixed inset-0 z-50" />
-      <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full px-6 py-6 overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div className="flex items-center justify-between">
           <a
             href="#"
@@ -89,7 +91,7 @@ function websiteNavbar() {
               sayora wellness center
             </span>
             <img
-              className="h-14 w-auto"
+              className="w-auto h-14"
               src="https://sayora.lk/wp-content/uploads/2023/04/SAYORA-LOGO-NEW.png"
               alt=""
             />
@@ -101,26 +103,26 @@ function websiteNavbar() {
           >
             <span className="sr-only">Close menu</span>
             <XMarkIcon
-              className="h-6 w-6"
+              className="w-6 h-6"
               aria-hidden="true"
             />
           </button>
         </div>
-        <div className="mt-6 flow-root">
+        <div className="flow-root mt-6">
           <div className="-my-6 divide-y divide-gray-500/10">
-            <div className="space-y-2 py-6">
+            <div className="py-6 space-y-2">
               {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50"
                 >
                   {item.name}
                 </a>
               ))}
             </div>
             <div className="py-6">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                 <NavLink to="/login">Login</NavLink>
               </button>
             </div>

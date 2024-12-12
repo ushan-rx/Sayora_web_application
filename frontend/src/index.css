@@ -11,10 +11,12 @@
     }
     body {
       background: white;
+      overflow: hidden;
     }
     h1 {
       @apply text-xl font-medium capitalize;
     }
+    
   }
   
   .link {
@@ -24,3 +26,20 @@
   .active {
     @apply text-blue-600 bg-blue-100;
   }
+
+  .desktop-view-only {
+    display: none; /* Hide by default */
+  }
+
+  .hidden-space {
+    width: 50px; /* Adjust the width as needed */
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  @media (min-width: 768px) {
+    .desktop-view-only {
+      display: block; /* Show on desktop (screen width >= 768px) */
+    }
+  }
+  
